@@ -259,3 +259,11 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/bla
+/DSDBA
+/DSDBS
+/output
+/output2
+/output3
+/test
+/ui_keyboard_icon_076.img
