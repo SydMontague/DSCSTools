@@ -3,11 +3,9 @@
 SET(SOURCE_FILES
 		DSCSTools.cpp
 		DSCSTools.h
-		
-		
-		
+		MDB1.cpp
+		MDB1.h
 		)
-
 
 # Add source to this project's executable.
 add_executable (DSCSTools ${SOURCE_FILES})
