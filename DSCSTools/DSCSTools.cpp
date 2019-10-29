@@ -276,6 +276,34 @@ void extractMDB1(boost::filesystem::path source, boost::filesystem::path target)
 
 	--!> bitwise compressed trie! <!--
 */
+inline Node findFirstBitMismatch(const int16_t first, const std::vector<std::string>& nodeless, const std::vector<std::string>& withNode) {
+	if (withNode.size() == 0)
+		return { first, 0, 0, nodeless[0] };
+
+	for (int16_t i = first; i < 512; i++) {
+		bool set = false;
+		bool unset = false;
+
+		for (auto file : withNode) {
+			if ((file[i >> 3] >> (i & 7)) & 1)
+				set = true;
+			else
+				unset = true;
+
+			if (set && unset)
+				return { i, 0, 0, nodeless[0] };
+		}
+
+		// 
+		auto itr = std::find_if(nodeless.begin(), nodeless.end(), [set, unset, i](const std::string &file) {
+			bool val = (file[i >> 3] >> (i & 7)) & 1;
+			return val && unset || !val && set;
+		});
+
+		if (itr != nodeless.end())
+			return { i, 0, 0, *itr };
+	}
+}
 
 
 std::vector<Node> generateTree(boost::filesystem::path path) {
@@ -283,6 +311,7 @@ std::vector<Node> generateTree(boost::filesystem::path path) {
 
 	boost::filesystem::recursive_directory_iterator itr(path);
 
+	// TODO quite slow?
 	for (auto i : itr) {
 		if (boost::filesystem::is_regular_file(i)) {
 			std::string ext = i.path().extension().string().substr(1, 5);
@@ -305,6 +334,7 @@ std::vector<Node> generateTree(boost::filesystem::path path) {
 		uint16_t parentNode;
 		int16_t val1;
 		std::vector<std::string> list;
+		std::vector<std::string> nodeList;
 		bool left;
 	};
 
@@ -314,7 +344,7 @@ std::vector<Node> generateTree(boost::filesystem::path path) {
 	Node n = { 0xFFFF, 0, 0, "" };
 
 	nodes.push_back(n);
-	queue.push_front({ 0, -1, fileNames, false });
+	queue.push_front({ 0, -1, fileNames, std::vector<std::string>(), false });
 
 	while (!queue.empty()) {
 		QueueEntry entry = queue.front();
@@ -322,64 +352,30 @@ std::vector<Node> generateTree(boost::filesystem::path path) {
 		std::vector<std::string> f = entry.list;
 		Node &parent = nodes[entry.parentNode];
 
-		int16_t i = entry.val1 + 1;
-		std::string breaking = "";
-
 		std::vector <std::string> nodeless;
 		std::vector <std::string> withNode;
 
 		for (auto file : f) {
-			bool hasNode = false;
-
-			for (auto node : nodes)
-				if (node.name == file) {
-					hasNode = true;
-					break;
-				}
-
-			if (hasNode)
-				withNode.push_back(file);
-			else
+			if (std::find(entry.nodeList.begin(), entry.nodeList.end(), file) == entry.nodeList.end())
 				nodeless.push_back(file);
+			else
+				withNode.push_back(file);
 		}
 
 		if (nodeless.size() == 0) {
-			int i = 0;
-			for (; i < nodes.size(); i++)
-				if (nodes[i].name == f[0])
-					break;
+			auto firstFile = f[0];
+			auto itr = std::find_if(nodes.begin(), nodes.end(), [firstFile](const Node &node) { return node.name == firstFile; });
+			int offset = std::distance(nodes.begin(), itr);
 
 			if (entry.left)
-				parent.left = i;
+				parent.left = offset;
 			else
-				parent.right = i;
+				parent.right = offset;
 
 			continue;
 		}
 
-		for (; i < 512; i++) {
-			for (auto file : nodeless) {
-				if (withNode.size() == 0)
-					breaking = file;
-
-				for (auto node : withNode) {
-					if ((((node[i >> 3] >> (i & 7)) & 1) != ((file[i >> 3] >> (i & 7)) & 1))) {
-						breaking = file;
-						break;
-					}
-				}
-
-				if (breaking != "")
-					break;
-			}
-
-			if (breaking != "")
-				break;
-		}
-
-		Node child;
-		child.val1 = i;
-		child.name = breaking;
+		Node child = findFirstBitMismatch(entry.val1 + 1, nodeless, withNode);
 
 		if (entry.left)
 			parent.left = nodes.size();
@@ -390,14 +386,17 @@ std::vector<Node> generateTree(boost::filesystem::path path) {
 		std::vector<std::string> right;
 
 		for (auto file : f) {
-			if ((file[i >> 3] >> (i & 7)) & 1)
+			if ((file[child.val1 >> 3] >> (child.val1 & 7)) & 1)
 				right.push_back(file);
 			else
 				left.push_back(file);
 		}
 
-		if (left.size() > 0) queue.push_front({ static_cast<uint16_t>(nodes.size()), i, left, true });
-		if (right.size() > 0) queue.push_front({ static_cast<uint16_t>(nodes.size()), i, right, false });
+		std::vector<std::string> newNodeList = entry.nodeList;
+		newNodeList.push_back(child.name);
+
+		if (left.size() > 0) queue.push_front({ static_cast<uint16_t>(nodes.size()), child.val1, left, newNodeList, true });
+		if (right.size() > 0) queue.push_front({ static_cast<uint16_t>(nodes.size()), child.val1, right, newNodeList, false });
 		nodes.push_back(child);
 	}
 
@@ -536,7 +535,19 @@ void packMDB1(const boost::filesystem::path source, boost::filesystem::path targ
 	output.close();
 }
 
+bool isAccessible(std::vector<Node> nodes, std::string path) {
+	Node currentNode = nodes[1];
 
+	while(true) {
+		bool isSet = ((path[currentNode.val1 >> 3]) >> (currentNode.val1 & 7)) & 1;
+		Node nextNode = nodes[isSet ? currentNode.right : currentNode.left];
+
+		if (nextNode.val1 <= currentNode.val1)
+			return nextNode.name == path;
+
+		currentNode = nextNode;
+	};
+}
 
 void outputTree(boost::filesystem::path path) {
 	std::vector<Node> nodes = generateTree(path);
@@ -570,10 +581,10 @@ void outputTree(boost::filesystem::path path) {
 
 int main()
 {
-	
-	//outputTree("E:\\CS Hacking\\data\\DSDBse");
+	generateTree("E:\\CS Hacking\\data\\DSDB");
+	//outputTree("E:\\CS Hacking\\data\\DSDBS");
 
-	packMDB1("E:\\CS Hacking\\DSCSTool\\DSDBS\\", "E:\\CS Hacking\\DSCSTool\\DSDBS.steam.mvgl.decrypt");
+	//packMDB1("E:\\CS Hacking\\DSCSTool\\DSDBS\\", "E:\\CS Hacking\\DSCSTool\\DSDBS.steam.mvgl.decrypt");
 	//packMDB1("C:\\Users\\Syd\\Projects\\DSCSTools\\DSDBS", "E:\\CS Hacking\\DSCSTool\\DSDBS.steam.mvgl.decrypt");
 	//dumpMDB1("E:\\CS Hacking\\original\\DSDBse.decrypt.bin", "C:\\Users\\Syd\\Projects\\DSCSTools\\output2\\");
 	//dumpMDB1("E:\\CS Hacking\\DSCSTool\\DSDBS.steam.mvgl.decrypt", "C:\\Users\\Syd\\Projects\\DSCSTools\\output2\\");
