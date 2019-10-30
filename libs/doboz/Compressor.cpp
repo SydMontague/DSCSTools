@@ -354,7 +354,7 @@ void Compressor::encodeHeader(const Header& header, uint64_t maxCompressedSize, 
 uint64_t Compressor::getMaxCompressedSize(uint64_t size)
 {
 	// The header + the original uncompressed data
-	return getHeaderSize(size) + size;
+	return getHeaderSize(UINT64_MAX) + size;
 }
 
 } // namespace doboz
