@@ -99,7 +99,7 @@ void extractMDB1(const boost::filesystem::path source, const boost::filesystem::
 
 		DataEntry data = entry3[e1.dataId];
 
-		boost::filesystem::path path(target.string() + name.toString());
+		boost::filesystem::path path(target / name.toString());
 		boost::filesystem::create_directories(path.parent_path());
 		boost::filesystem::ofstream output(path, std::ios::out | std::ios::binary);
 
