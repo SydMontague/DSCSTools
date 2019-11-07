@@ -2,10 +2,8 @@
 //
 
 #include "DSCSTools.h"
-#include "EXPA.h"
 #include "MDB1.h"
 #include "SaveFile.h"
-#include <iomanip>
 
 void printUse() {
 	std::cout << "Modes:" << std::endl;
