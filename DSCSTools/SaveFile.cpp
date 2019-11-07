@@ -118,6 +118,7 @@ void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 	output.write(buffer, size);
 	input.close();
 	output.close();
+	delete buffer;
 }
 
 void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path target) {
@@ -208,4 +209,5 @@ void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 	output.write(buffer, size);
 	input.close();
 	output.close();
+	delete buffer;
 }
