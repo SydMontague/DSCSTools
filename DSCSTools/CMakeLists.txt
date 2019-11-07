@@ -5,6 +5,8 @@ SET(SOURCE_FILES
 		DSCSTools.h
 		MDB1.cpp
 		MDB1.h
+		SaveFile.cpp
+		SaveFile.h
 		)
 
 # Add source to this project's executable.

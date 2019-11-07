@@ -2,7 +2,10 @@
 //
 
 #include "DSCSTools.h"
+#include "EXPA.h"
 #include "MDB1.h"
+#include "SaveFile.h"
+#include <iomanip>
 
 void printUse() {
 	std::cout << "Modes:" << std::endl;
@@ -12,7 +15,11 @@ void printUse() {
 	std::cout << "		Repacks the given folder into a decrypted MDB1." << std::endl;
 	std::cout << "		Optional --disable-compression. Don't use for archives >= 4GiB!" << std::endl;
 	std::cout << "	--crypt <sourceFile> <targetFolder>" << std::endl;
-	std::cout << "		De- and Encrypts a file using the keys from DSCS." << std::endl;
+	std::cout << "		De- and Encrypts a mvgl file using the keys from DSCS." << std::endl;
+	std::cout << "	--savedecrypt <sourceFile> <targetFolder>" << std::endl;
+	std::cout << "		Decrypts a savefile (system_data.bin, 000X.bin, slot_000X.bin)." << std::endl;
+	std::cout << "	--saveencrypt <sourceFile> <targetFolder>" << std::endl;
+	std::cout << "		Encrypts a savefile (system_data.bin, 000X.bin, slot_000X.bin)." << std::endl;
 }
 
 int main(int argc, char** argv)
@@ -36,6 +43,14 @@ int main(int argc, char** argv)
 	}
 	else if (strncmp("--crypt", argv[1], 8) == 0) {
 		cryptFile(source, target);
+		std::cout << "Done" << std::endl;
+	}
+	else if (strncmp("--savedecrypt", argv[1], 14) == 0) {
+		decryptSaveFile(source, target);
+		std::cout << "Done" << std::endl;
+	}
+	else if (strncmp("--saveencrypt", argv[1], 14) == 0) {
+		encryptSaveFile(source, target);
 		std::cout << "Done" << std::endl;
 	}
 	else {

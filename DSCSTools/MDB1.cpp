@@ -6,7 +6,6 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <boost/filesystem.hpp>
 #include "../libs/doboz/Compressor.h"
 #include "../libs/doboz/Decompressor.h"
 
