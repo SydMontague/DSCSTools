@@ -5,6 +5,8 @@ SET(SOURCE_FILES
 		DSCSTools.h
 		MDB1.cpp
 		MDB1.h
+		EXPA.cpp
+		EXPA.h
 		SaveFile.cpp
 		SaveFile.h
 		)

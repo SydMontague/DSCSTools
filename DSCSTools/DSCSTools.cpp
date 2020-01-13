@@ -4,6 +4,7 @@
 #include "DSCSTools.h"
 #include "MDB1.h"
 #include "SaveFile.h"
+#include "EXPA.h"
 
 void printUse() {
 	std::cout << "Modes:" << std::endl;
@@ -18,17 +19,18 @@ void printUse() {
 	std::cout << "		Decrypts a savefile (system_data.bin, 000X.bin, slot_000X.bin)." << std::endl;
 	std::cout << "	--saveencrypt <sourceFile> <targetFolder>" << std::endl;
 	std::cout << "		Encrypts a savefile (system_data.bin, 000X.bin, slot_000X.bin)." << std::endl;
+	std::cout << "	--mbeextract <sourceFile> <targetFile>" << std::endl;
+	std::cout << "		Extracts a .mbe file into CSV, as long as it's structure is defined in the structure.json file." << std::endl;
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
 	if (argc < 4) {
 		printUse();
 		return 0;
 	}
 	
-	boost::filesystem::path source = boost::filesystem::current_path().append(argv[2]);
-	boost::filesystem::path target = boost::filesystem::current_path().append(argv[3]);
+	boost::filesystem::path source = boost::filesystem::is_regular_file(argv[2]) ? argv[2] : boost::filesystem::current_path().append(argv[2]);
+	boost::filesystem::path target = boost::filesystem::is_regular_file(argv[3]) ? argv[3] : boost::filesystem::current_path().append(argv[3]);
 
 	if (strncmp("--extract", argv[1], 10) == 0) {
 		extractMDB1(source, target);
@@ -49,6 +51,10 @@ int main(int argc, char** argv)
 	}
 	else if (strncmp("--saveencrypt", argv[1], 14) == 0) {
 		encryptSaveFile(source, target);
+		std::cout << "Done" << std::endl;
+	}
+	else if (strncmp("--mbeextract", argv[1], 13) == 0) {
+		extractMBE(source, target);
 		std::cout << "Done" << std::endl;
 	}
 	else {
