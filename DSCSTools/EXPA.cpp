@@ -136,7 +136,7 @@ void extractMBEFile(boost::filesystem::path source, boost::filesystem::path targ
 	}
 
 	std::string formatFile;
-	for each (auto var in structure) {
+	for (auto var : structure) {
 		if (boost::regex_search(source.string(), boost::regex{ var.first })) {
 			formatFile = var.second.data();
 			break;
