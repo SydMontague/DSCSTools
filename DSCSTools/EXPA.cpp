@@ -78,10 +78,16 @@ void writeEXPAEntry(std::ofstream &output, char* &ptr, std::string type) {
 	}
 }
 
-void extractMBE(boost::filesystem::path source, boost::filesystem::path target) {
+void extractMBEFile(boost::filesystem::path source, boost::filesystem::path target) {
 	boost::filesystem::ifstream input(source, std::ios::in | std::ios::binary);
-	boost::filesystem::ofstream output(target, std::ios::out);
 	
+	if (!boost::filesystem::exists(target))
+		boost::filesystem::create_directories(target);
+	else if(!boost::filesystem::is_directory(target)) {
+		std::cout << "Error: target path is not a directory." << std::endl;
+		return;
+	}
+
 	input.seekg(0, std::ios::end);
 	std::streamoff length = input.tellg();
 	input.seekg(0, std::ios::beg);
@@ -94,7 +100,7 @@ void extractMBE(boost::filesystem::path source, boost::filesystem::path target) 
 
 	uint64_t offset = 8;
 
-	for (int i = 0; i < header->numTables; i++) {
+	for (uint32_t i = 0; i < header->numTables; i++) {
 		EXPATable table = { data + offset };
 		tables.push_back(table);
 
@@ -109,7 +115,7 @@ void extractMBE(boost::filesystem::path source, boost::filesystem::path target) 
 	CHNKHeader* chunkHeader = reinterpret_cast<CHNKHeader*>(data + offset);
 	offset += 8;
 
-	for (int i = 0; i < chunkHeader->numEntry; i++) {
+	for (uint32_t i = 0; i < chunkHeader->numEntry; i++) {
 		uint32_t dataOffset = *reinterpret_cast<uint32_t*>(data + offset);
 		uint32_t size = *reinterpret_cast<uint32_t*>(data + offset + 4);
 		uint64_t ptr = reinterpret_cast<uint64_t>(data + offset);
@@ -121,7 +127,13 @@ void extractMBE(boost::filesystem::path source, boost::filesystem::path target) 
 	std::vector<std::pair<std::string, void*>> map;
 
 	boost::property_tree::ptree structure;
-	boost::property_tree::read_json(std::string("structure.json"), structure);
+	try {
+		boost::property_tree::read_json(std::string("structure.json"), structure);
+	}
+	catch (const boost::property_tree::json_parser_error &error) {
+		std::cout << "Error while reading structure.json | " << error.message() << " in line " << error.line() << "." << std::endl;
+		return;
+	}
 
 	std::string formatFile;
 	for each (auto var in structure) {
@@ -135,19 +147,29 @@ void extractMBE(boost::filesystem::path source, boost::filesystem::path target) 
 		return;
 
 	boost::property_tree::ptree format;
-	boost::property_tree::read_json(formatFile, format);
+	try {
+		boost::property_tree::read_json(formatFile, format);
+	}
+	catch (const boost::property_tree::json_parser_error &error) {
+		std::cout << "Error while reading "<< error.filename() << " | " << error.message() << " in line " << error.line() << "." << std::endl;
+		return;
+	}
 
 	if (format.size() != tables.size())
-		std::cout << "Warning: number of tables doesn't match expected values.";
+		std::cout << "Warning: number of tables doesn't match expected values. " << source.filename() << std::endl;
 
 	for (auto table : tables) {
 		uint32_t tableHeaderSize = 0x0C + table.nameSize() + (table.nameSize() + 4) % 8;
 		auto formatValue = format.get_child_optional(table.name());
 
 		if (!formatValue.has_value()) {
-			std::cout << "Error: no definition for table " << table.name() << " found." << std::endl;
+			std::cout << "Error: no definition for table " << table.name() << " found. " << source.filename() << std::endl;
 			continue;
 		}
+
+		boost::filesystem::path outputPath = target / source.filename() / (table.name() + std::string(".csv"));
+		boost::filesystem::create_directories(outputPath.parent_path());
+		boost::filesystem::ofstream output(outputPath, std::ios::out);
 
 		// write header
 		bool first = true;
@@ -162,7 +184,7 @@ void extractMBE(boost::filesystem::path source, boost::filesystem::path target) 
 		output << std::endl;
 
 		// write data
-		for (int i = 0; i < table.entryCount(); i++) {
+		for (uint32_t i = 0; i < table.entryCount(); i++) {
 			bool first = true;
 			char* localOffset = table.tablePtr + i * table.entrySize() + tableHeaderSize;
 
@@ -206,4 +228,21 @@ void extractMBE(boost::filesystem::path source, boost::filesystem::path target) 
 			}
 		}
 	*/
+}
+
+void extractMBE(boost::filesystem::path source, boost::filesystem::path target) {
+	if (boost::filesystem::equivalent(source, target)) {
+		std::cout << "Error: input and output path must be different!" << std::endl;
+		return;
+	}
+
+	if (boost::filesystem::is_directory(source))
+		for (auto file : boost::filesystem::directory_iterator(source))
+			extractMBEFile(file, target); // TODO make parallel? (test if execution time is actually a concern)
+	else if (boost::filesystem::is_regular_file(source))
+		extractMBEFile(source, target);
+	else {
+		std::cout << "Error: input is neither directory nor file." << std::endl;
+		return;
+	}
 }

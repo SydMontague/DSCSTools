@@ -30,11 +30,17 @@ std::pair<std::array<char, 11>, uint64_t> calculateFileKey(boost::filesystem::pa
 }
 
 void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path target) {
+	if (boost::filesystem::equivalent(source, target)) {
+		std::cout << "Error: input and output path must be different!" << std::endl;
+		return;
+	}
 	if (!boost::filesystem::is_regular_file(source)) {
 		std::cout << "Error: source path is not a regular file." << std::endl;
 		return;
 	}
-	if (!boost::filesystem::is_regular_file(target) && boost::filesystem::exists(target)) {
+	if (!boost::filesystem::exists(target))
+		boost::filesystem::create_directories(target.parent_path());
+	else if (!boost::filesystem::is_regular_file(target)) {
 		std::cout << "Error: target path is not a regular file." << std::endl;
 		return;
 	}
@@ -50,7 +56,7 @@ void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 	std::streamoff length = input.tellg();
 	input.seekg(0, std::ios::beg);
 
-	uint32_t size = length;
+	uint32_t size = (uint32_t) length;
 	uint32_t offset = 0;
 	uint32_t remaining = size;
 
@@ -60,7 +66,7 @@ void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 	{ // rotate bits step
 		boost::multiprecision::uint128_t magic = 0x801302D26B3BEAE5;
 		uint64_t initialVector = (uint64_t) ((magic * val) >> 0x4E);
-		uint32_t rotateParameter = ((uint32_t) val) - initialVector * 0x7FED;
+		uint32_t rotateParameter = (uint32_t) (((uint32_t) val) - initialVector * 0x7FED);
 
 		while (remaining) {
 			uint32_t read = remaining < 16 ? remaining : 16;
@@ -79,7 +85,7 @@ void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 			}
 
 			uint64_t tmp = ((uint64_t) 0x72C62A25 * valueSum) >> 0x28;
-			tmp2 = (rotateParameter * 0x10DCD + 1) + (valueSum - (tmp * 0x23B)) * 2;
+			tmp2 = (uint32_t) ((rotateParameter * 0x10DCD + 1) + (valueSum - (tmp * 0x23B)) * 2);
 			rotateParameter = tmp2 - (((uint64_t) 0x40004001 * tmp2) >> 0x3D) * 0x7FFF7FFF;
 
 			offset += 0x10;
@@ -111,7 +117,7 @@ void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 			charSum += value;
 
 			uint64_t tmp2 = init * 0x10DCD + 0x0D;
-			init = tmp2 - (((tmp2 * 0x40004001) >> 0x3D) * 0x7FFF7FFF);
+			init = (uint32_t) tmp2 - (((tmp2 * 0x40004001) >> 0x3D) * 0x7FFF7FFF);
 		}
 	}
 
@@ -122,11 +128,17 @@ void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 }
 
 void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path target) {
+	if (boost::filesystem::equivalent(source, target)) {
+		std::cout << "Error: input and output path must be different!" << std::endl;
+		return;
+	}
 	if (!boost::filesystem::is_regular_file(source)) {
 		std::cout << "Error: source path is not a regular file." << std::endl;
 		return;
 	}
-	if (!boost::filesystem::is_regular_file(target) && boost::filesystem::exists(target)) {
+	if (!boost::filesystem::exists(target))
+		boost::filesystem::create_directories(target.parent_path());
+	else if (!boost::filesystem::is_regular_file(target)) {
 		std::cout << "Error: target path is not a regular file." << std::endl;
 		return;
 	}
@@ -142,7 +154,7 @@ void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 	std::streamoff length = input.tellg();
 	input.seekg(0, std::ios::beg);
 
-	uint32_t size = length;
+	uint32_t size = (uint32_t) length;
 	uint32_t offset = 0;
 	uint32_t remaining = size;
 
@@ -172,13 +184,13 @@ void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 			buffer[i] = value;
 
 			uint64_t tmp2 = init * 0x10DCD + 0x0D;
-			init = tmp2 - (((tmp2 * 0x40004001) >> 0x3D) * 0x7FFF7FFF);
+			init = (uint32_t) tmp2 - (((tmp2 * 0x40004001) >> 0x3D) * 0x7FFF7FFF);
 		}
 	}
 	{ // rotate bits step
 		boost::multiprecision::uint128_t magic = 0x801302D26B3BEAE5;
 		uint64_t initialVector = (uint64_t) ((magic * val) >> 0x4E);
-		uint32_t rotateParameter = ((uint32_t) val) - initialVector * 0x7FED;
+		uint32_t rotateParameter = (uint32_t) (((uint32_t) val) - initialVector * 0x7FED);
 
 		while (remaining) {
 			uint32_t read = remaining < 16 ? remaining : 16;
@@ -198,7 +210,7 @@ void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 			}
 
 			uint64_t tmp = ((uint64_t) 0x72C62A25 * valueSum) >> 0x28;
-			tmp2 = (rotateParameter * 0x10DCD + 1) + (valueSum - (tmp * 0x23B)) * 2;
+			tmp2 = (uint32_t) ((rotateParameter * 0x10DCD + 1) + (valueSum - (tmp * 0x23B)) * 2);
 			rotateParameter = tmp2 - (((uint64_t) 0x40004001 * tmp2) >> 0x3D) * 0x7FFF7FFF;
 
 			offset += 0x10;

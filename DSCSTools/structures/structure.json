@@ -1,0 +1,11 @@
+{
+  "text\\\\eden_group_text.mbe": "text_para.json",
+  "text\\\\eden_text.mbe$": "text_para.json",
+  "text\\\\mirror_dungeon_text.mbe$": "text_para.json",
+  "text\\\\multi_select_text.mbe$": "text_para.json",
+  "text\\\\tutorial_title.mbe$": "text_para.json",
+  "text\\\\yes_no_message.mbe$": "text_para.json",
+  "text\\\\tournament_name.mbe$": "tournament_name.json",
+  "text\\\\[a-zA-Z0-9_]*\\.mbe$": "text.json",
+  "message\\\\[a-zA-Z0-9_]*\\.mbe$": "text.json"
+}
