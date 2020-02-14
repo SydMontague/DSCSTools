@@ -67,7 +67,7 @@ void extractMDB1(const boost::filesystem::path source, const boost::filesystem::
 		std::cout << "Error: Target path exists and is not a directory, aborting." << std::endl;
 		return;
 	}
-	if (boost::filesystem::is_regular_file(source)) {
+	if (!boost::filesystem::is_regular_file(source)) {
 		std::cout << "Error: Source path doesn't point to a file, aborting." << std::endl;
 		return;
 	}
