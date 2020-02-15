@@ -6,11 +6,11 @@ std::pair<std::array<char, 11>, uint64_t> calculateFileKey(boost::filesystem::pa
 	uint64_t dynamicKey;
 
 	if (filename.filename().string().substr(0, 5) == "slot_")
-		dynamicKey = *reinterpret_cast<uint64_t*>("@Tokomon");
+		dynamicKey = *reinterpret_cast<const uint64_t*>("@Tokomon");
 	else if (filename.filename().string() == "system_data.bin")
-		dynamicKey = *reinterpret_cast<uint64_t*>("@Dagomon");
+		dynamicKey = *reinterpret_cast<const uint64_t*>("@Dagomon");
 	else
-		dynamicKey = *reinterpret_cast<uint64_t*>("@Lilimon");
+		dynamicKey = *reinterpret_cast<const uint64_t*>("@Lilimon");
 
 	uint64_t val = dynamicKey ^ staticKey;
 	std::array<char, 11> key1;
