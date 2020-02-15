@@ -2,11 +2,11 @@
   "Sheet1": 
   {
     "ID": "int",
-    "Lang1": "string",
-    "Lang2": "string",
-    "Lang3": "string",
-    "Lang4": "string",
-    "Lang5": "string",
-    "Lang6": "string"
+    "Unknown1": "string",
+    "English": "string",
+    "Chinese": "string",
+    "Unknown2": "string",
+    "Korean": "string",
+    "German": "string"
   }
 }

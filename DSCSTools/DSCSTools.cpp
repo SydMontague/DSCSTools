@@ -19,7 +19,7 @@ void printUse() {
 	std::cout << "		Decrypts a savefile (system_data.bin, 000X.bin, slot_000X.bin)." << std::endl;
 	std::cout << "	--saveencrypt <sourceFile> <targetFolder>" << std::endl;
 	std::cout << "		Encrypts a savefile (system_data.bin, 000X.bin, slot_000X.bin)." << std::endl;
-	std::cout << "	--mbeextract <source> <targetFile>" << std::endl;
+	std::cout << "	--mbeextract <source> <targetFolder>" << std::endl;
 	std::cout << "		Extracts a .mbe file or a directory of them into CSV, " << std::endl;
 	std::cout << "		as long as it's structure is defined in the structure.json file." << std::endl;
 }
