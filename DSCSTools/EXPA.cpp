@@ -162,7 +162,7 @@ void extractMBEFile(boost::filesystem::path source, boost::filesystem::path targ
 		uint32_t tableHeaderSize = 0x0C + table.nameSize() + (table.nameSize() + 4) % 8;
 		auto formatValue = format.get_child_optional(table.name());
 
-		if (!formatValue.has_value()) {
+		if (!formatValue) {
 			std::cout << "Error: no definition for table " << table.name() << " found. " << source.filename() << std::endl;
 			continue;
 		}
