@@ -4,10 +4,12 @@
 *CMakeFiles/
 CMakeCache.txt
 *.cmake
-MakeFile
+Makefile
+install_manifest.txt
 
 # Build files
 *.o
 *.a
 /DSCSTools/DSCSTools
 /DSCSTools/DSCSTools.exe
+/target/
