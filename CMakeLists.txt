@@ -18,3 +18,5 @@ INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 # Include sub-projects.
 add_subdirectory ("DSCSTools")
+
+install (FILES LICENSE THIRD-PARTY-NOTICE DESTINATION ${CMAKE_BINARY_DIR}/target/license)

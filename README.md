@@ -34,7 +34,7 @@ MBE Extract:  DSCSTools --mbeextract <source> <targetFolder>
 ```
 
 ## MBE Structure files
-In order for the MBE functions to work it need to assume a data structure. For this a `structure.json` must be present in the root folder of the tool.
+In order for the MBE functions to work it need to assume a data structure. For this a `structure.json` must be present in the `structures` folder of the tool.
 It contains simple `regexPattern: structureDefinition.json` associations. The tool match the currently handled file path with the patterns in the structure.json and pick the first match.
 
 The structure definition is another JSON file following this format:

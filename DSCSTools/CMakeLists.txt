@@ -16,4 +16,4 @@ add_executable (DSCSTools ${SOURCE_FILES})
 target_link_libraries(DSCSTools PUBLIC doboz ${Boost_LIBRARIES})
 
 install (TARGETS DSCSTools DESTINATION ${CMAKE_BINARY_DIR}/target)
-install (DIRECTORY structures/ DESTINATION ${CMAKE_BINARY_DIR}/target)
+install (DIRECTORY structures/ DESTINATION ${CMAKE_BINARY_DIR}/target/structures)

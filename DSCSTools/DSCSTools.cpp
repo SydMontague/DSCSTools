@@ -22,6 +22,9 @@ void printUse() {
 	std::cout << "	--mbeextract <source> <targetFolder>" << std::endl;
 	std::cout << "		Extracts a .mbe file or a directory of them into CSV, " << std::endl;
 	std::cout << "		as long as it's structure is defined in the structure.json file." << std::endl;
+	std::cout << "	--mbepack <sourceFolder> <targetFile>" << std::endl;
+	std::cout << "		Repacks an .mbe folder containing CSV files back into a .mbe file " << std::endl;
+	std::cout << "		as long as it's structure is found and defined in the structure.json file." << std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -56,6 +59,10 @@ int main(int argc, char** argv) {
 	}
 	else if (strncmp("--mbeextract", argv[1], 13) == 0) {
 		extractMBE(source, target);
+		std::cout << "Done" << std::endl;
+	}
+	else if (strncmp("--mbepack", argv[1], 10) == 0) {
+		packMBE(source, target);
 		std::cout << "Done" << std::endl;
 	}
 	else {
