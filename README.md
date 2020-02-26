@@ -31,6 +31,7 @@ Repack:       DSCSTools --pack <sourceDirectory> <targetFile> [--disable-compres
 Save Decrypt: DSCSTools --savedecrypt <sourceFile> <targetFile>
 Save Encrypt: DSCSTools --saveencrypt <sourceFile> <targetFile>
 MBE Extract:  DSCSTools --mbeextract <source> <targetFolder>
+MBE Repack:   DSCSTools --mbepack <sourceFolder> <targetFile>
 ```
 
 ## MBE Structure files
