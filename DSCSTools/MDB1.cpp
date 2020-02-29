@@ -323,7 +323,7 @@ void packMDB1(const boost::filesystem::path source, const boost::filesystem::pat
 		return;
 	}
 
-	if (!boost::filesystem::exists(target.parent_path()))
+	if (!boost::filesystem::exists(target))
 		boost::filesystem::create_directories(target.parent_path());
 	else if (!boost::filesystem::is_regular_file(target)) {
 		std::cout << "Error: target path already exists and is not a file." << std::endl;
