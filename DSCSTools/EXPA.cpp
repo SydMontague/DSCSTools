@@ -350,13 +350,13 @@ void packMBE(boost::filesystem::path source, boost::filesystem::path target) {
 		bool first = true;
 
 		for (auto &row : parser) {
-			if (first) {
-				if (localFormat.size() != row.size()) {
-					std::cout << "Error: structure element count differs from input element count. The wrong structure may be used?" << std::endl;
-					std::cout << "Expected: " << localFormat.size() << " | Found: " << row.size() << std::endl;
-					return;
-				}
+			if (localFormat.size() != row.size()) {
+				std::cout << "Error: structure element count differs from input element count. The wrong structure may be used?" << std::endl;
+				std::cout << "Expected: " << localFormat.size() << " | Found: " << row.size() << std::endl;
+				return;
+			}
 
+			if (first) {
 				first = false;
 				continue;
 			}
