@@ -58,6 +58,8 @@ uint32_t getEntrySize(const std::string &type, uint32_t currentSize) {
 		return 2 + ((uint32_t) currentSize % 2);
 	if (type == "int")
 		return 4 + ((uint32_t) currentSize % 4);
+	if (type == "float")
+		return 4 + ((uint32_t) currentSize % 4);
 	else if (type == "string")
 		return 8 + ((uint32_t) currentSize % 8);
 	else if (type == "int array")
@@ -71,6 +73,11 @@ void writeEXPAEntry(std::ofstream &output, char* &ptr, const std::string &type) 
 	if (type == "int") {
 		ptr = ptr + ((std::size_t) ptr % 4);
 		output << *reinterpret_cast<int32_t*>(ptr);
+		ptr += 4;
+	}
+	else if (type == "float") {
+		ptr = ptr + ((std::size_t) ptr % 4);
+		output << *reinterpret_cast<float*>(ptr);
 		ptr += 4;
 	}
 	else if (type == "string") {
@@ -388,6 +395,15 @@ void packMBE(boost::filesystem::path source, boost::filesystem::path target) {
 					output.write(padding.data(), paddingSize);
 
 					int32_t value = std::stoi(col);
+					output.write(reinterpret_cast<char*>(&value), 4);
+					entrySize += 4 + paddingSize;
+				}
+				else if (type == "float") {
+					uint32_t paddingSize = entrySize % 4;
+					std::vector<char> padding(paddingSize, 0xCC);
+					output.write(padding.data(), paddingSize);
+
+					int32_t value = std::stof(col);
 					output.write(reinterpret_cast<char*>(&value), 4);
 					entrySize += 4 + paddingSize;
 				}
