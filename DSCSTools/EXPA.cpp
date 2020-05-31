@@ -123,8 +123,10 @@ boost::property_tree::ptree getStructureFile(boost::filesystem::path source) {
 		}
 	}
 
-	if (formatFile.empty())
+	if (formatFile.empty()) {
+		std::cout << "Error: No fitting structure file found. " << source << std::endl;
 		return format;
+	}
 
 	boost::property_tree::read_json("structures/" + formatFile, format);
 
@@ -266,6 +268,10 @@ void extractMBEFile(boost::filesystem::path source, boost::filesystem::path targ
 }
 
 void extractMBE(boost::filesystem::path source, boost::filesystem::path target) {
+	if (!boost::filesystem::exists(source)) {
+		std::cout << "Error: input path does not exist." << std::endl;
+		return;
+	}
 	if (boost::filesystem::equivalent(source, target)) {
 		std::cout << "Error: input and output path must be different!" << std::endl;
 		return;
@@ -284,6 +290,10 @@ void extractMBE(boost::filesystem::path source, boost::filesystem::path target) 
 
 // folder input, file output
 void packMBE(boost::filesystem::path source, boost::filesystem::path target) {
+	if (!boost::filesystem::exists(source)) {
+		std::cout << "Error: input path does not exist." << std::endl;
+		return;
+	}
 	if (boost::filesystem::equivalent(source, target)) {
 		std::cout << "Error: input and output path must be different!" << std::endl;
 		return;
