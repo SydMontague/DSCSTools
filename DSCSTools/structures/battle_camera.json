@@ -1,0 +1,11 @@
+{
+  "camera": {
+    "ID": "int",
+    "Name": "string",
+    "unk1": "string",
+    "unk3": "int",
+    "unk4": "int",
+    "unk5": "int",
+    "unk6": "int"
+  }
+}

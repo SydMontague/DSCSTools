@@ -1,0 +1,16 @@
+{
+  "para": {
+    "id": "int",
+    "NameID": "int",
+    "MapID": "string",
+    "CategoryId": "int",
+    "unk4": "int",
+    "Sort Value": "int",
+    "unk6": "int",
+    "unk7": "int",
+    "unk8": "int",
+    "Category Icon ID": "int",
+    "Icon ID": "int",
+    "Initial Rotation": "float"
+  }
+}

@@ -1,4 +1,11 @@
 {
+  "animation_loop_data.mbe": "animation_loop_data.json",
+  "battle_bgm.mbe": "battle_bgm.json",
+  "battle_camera.mbe": "battle_camera.json",
+  "battle_command.mbe": "battle_command.json",
+  "eden_text_para(_add)?.mbe": "eden_text_para.json",
+  "field_npc_para_add.mbe": "field_npc_para_add.json",
+  "battle_ai.mbe": "battle_ai.json",
   "colosseum_event_battle.mbe": "colosseum_event_battle.json",
   "farm_development.mbe":  "farm_development.json",
   "text\\\\eden_group_text.mbe$": "text_para.json",
