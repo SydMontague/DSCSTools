@@ -1,4 +1,9 @@
 {
+  "digimon_market_para.mbe": "digimon_market_para.json",
+  "digimon_common_para.mbe": "digimon_common_para.json",
+  "experience_table.mbe": "experience_table.json",
+  "evolution_next_para.mbe": "evolution_next_para.json",
+  "evolution_condition_para.mbe": "evolution_condition.json",
   "animation_loop_data.mbe": "animation_loop_data.json",
   "battle_bgm.mbe": "battle_bgm.json",
   "battle_camera.mbe": "battle_camera.json",

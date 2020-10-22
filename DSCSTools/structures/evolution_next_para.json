@@ -1,0 +1,11 @@
+{
+  "digimon": {
+    "id": "int",
+    "digi1": "int",
+    "digi2": "int",
+    "digi3": "int",
+    "digi4": "int",
+    "digi5": "int",
+    "digi6": "int"
+  }
+}
