@@ -9,13 +9,11 @@ DSCSTools are modding tools for the Steam release of "Digimon Story Cyber Sleuth
   * archives get recreated from scratch, files can be added, removed and modified at will
   * optionally without compressing the file (faster, larger file size) as long as the final file size is less than 4GiB
 * Decrypt and Encrypt PC save files
-* Extract basic MBE files
-  * currently supports uint32 and string field types, more to come
+* Extract and import basic MBE files
+  * currently supports int8, int16, int32, float, int32 array and string field types
 
 ## Planned Features
-* Advanced MBE support
-  * support for all used field types
-  * import/repack support
+* more MBE structure files
 
 # Usage
 Currently only a command line interface is available. It is recommended to use a Windows system, due to the MDB1 format using Windows file separator.
@@ -23,6 +21,8 @@ The tool *should* work on *nix systems, but is not as well tested.
 
 In order to use the repack function for large archives (-> DSDB) it is recommended that you have at least 16 GiB of RAM installed.
 An alternative is to use the DSDBA archive for any modified files, since it's contents have a higher priority than the main DSDB.
+
+**Do not use Microsoft Excel to modify extracted CSV files, it does *not* create RFC 4180 compliant CSV.** Use LibreOffice/OpenOffice as an alternative.
 
 ```
 En/Decrypt:   DSCSTools --crypt <sourceFile> <targetFile>
@@ -35,11 +35,12 @@ MBE Repack:   DSCSTools --mbepack <sourceFolder> <targetFile>
 ```
 
 ## MBE Structure files
-In order for the MBE functions to work it need to assume a data structure. For this a `structure.json` must be present in the `structures` folder of the tool.
+In order for the MBE functions to work it needs to assume a data structure. For this a `structure.json` must be present in the `structures` folder of the tool.
 It contains simple `regexPattern: structureDefinition.json` associations. The tool match the currently handled file path with the patterns in the structure.json and pick the first match.
+You may need to maintain the folder structure of the files (most notably text and message files) for the tool to detect them properly.
 
 The structure definition is another JSON file following this format:
-Currently supported field types are "string" and "int".
+Currently supported field types are `byte` (int8), `short` (int16), `int` (int32), `float`, `int array` and `string`.
 
 ```
 {
