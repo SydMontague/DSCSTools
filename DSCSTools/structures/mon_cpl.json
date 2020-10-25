@@ -1,0 +1,19 @@
+{
+  "Coupling": {
+    "id": "int",
+	"digi1": "short",
+	"digi2": "short",
+	"digi3": "short",
+	"digi4": "short",
+	"digi5": "short",
+	"digi6": "short",
+	"unk1": "short",
+	"unk2": "short",
+	"unk3": "short",
+	"unk4": "short",
+	"unk5": "short",
+	"unk6": "short",
+	"unk7": "int",
+	"unk8": "int"
+  }
+}
