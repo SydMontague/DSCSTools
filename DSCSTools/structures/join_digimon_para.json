@@ -1,0 +1,23 @@
+{
+  "guest": {
+    "id": "int",
+	"digimon_id": "int",
+	"unk1": "int",
+	"unk2": "int",
+	"unk3": "int",
+	"unk4": "int",
+	"unk5": "int",
+	"unk6": "int"
+  },
+  "party": {
+    "id": "int",
+	"digimon_id": "int",
+	"unk1": "int",
+	"unk2": "int",
+	"unk3": "int",
+	"unk4": "int",
+	"unk5": "int",
+	"unk6": "int",
+	"unk7": "int"
+  }
+}
