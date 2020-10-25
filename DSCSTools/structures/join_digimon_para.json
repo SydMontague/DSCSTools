@@ -8,7 +8,7 @@
 	"unk4": "int",
 	"unk5": "int",
 	"unk6": "int"
-  }
+  },
   "party": {
     "id": "int",
 	"digimon_id": "int",
