@@ -1,0 +1,13 @@
+{
+  "Monster": {
+    "unk1": "int",
+    "unk2": "int",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "float",
+    "unk6": "float",
+    "unk7": "float",
+    "unk8": "int",
+    "unk9": "float"
+  }
+}

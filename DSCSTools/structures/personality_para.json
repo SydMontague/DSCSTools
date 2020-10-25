@@ -1,11 +1,11 @@
 {
   "table": {
     "id": "int",
-	"HP_growth_rate": "int",
-	"SP_growth_rate": "int",
-	"ATK_growth_rate": "int",
-	"DEF_growth_rate": "int",
-	"INT_growth_rate": "int",
-	"SPD_growth_rate": "int"
+    "HP_growth_rate": "int",
+    "SP_growth_rate": "int",
+    "ATK_growth_rate": "int",
+    "DEF_growth_rate": "int",
+    "INT_growth_rate": "int",
+    "SPD_growth_rate": "int"
   }
 }

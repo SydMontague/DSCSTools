@@ -1,0 +1,17 @@
+Evo Conditions - Types (condType):
+0 - None
+1 - Level
+2 - Max HP
+3 - Max SP
+4 - ATK
+5 - DEF
+6 - INT
+7 - SPD
+8 - ABI
+9 - CAM
+10 - Unused (similar to 15?)
+11 - Item Held
+12 - CAM 100% is your friend
+13 - Mode Change
+14 - Unused
+15 - Cleared X (uses condUnk as value)

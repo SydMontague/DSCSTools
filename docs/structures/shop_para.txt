@@ -1,0 +1,5 @@
+shopType
+0 -> regular shop, lineup -> items
+1 -> shirt shop, lineup -> items
+2 -> DigiMarket, lineup -> digimon (see digimon_market_para)
+3 -> Coin Shop, lineup -> network items + limit_lineup (based on month?)
