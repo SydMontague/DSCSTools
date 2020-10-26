@@ -1,0 +1,15 @@
+{
+  "Sheet1": {
+    "id": "int",
+    "dateId": "int",
+    "comment1Avatar": "string",
+    "comment1Author": "int",
+    "comment1Text": "int",
+    "comment2Avatar": "string",
+    "comment2Author": "int",
+    "comment2Text": "int",
+    "unk10": "int",
+    "unk11": "int",
+    "innerThoughtText": "int"
+  }
+}

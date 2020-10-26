@@ -1,0 +1,11 @@
+{
+  "table": {
+    "id": "int",
+    "HP": "int",
+    "SP": "int",
+    "ATK": "int",
+    "DEF": "int",
+    "INT": "int",
+    "SPD": "int"
+  }
+}

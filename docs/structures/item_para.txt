@@ -1,0 +1,53 @@
+itemType (doesn't seem to change anything ingame)
+0 -> regular item
+2 -> farm equipment
+3 -> key item
+4 -> medal
+
+effectType
+-1 -> none
+ 0 -> heal HP
+ 1 -> heal SP
+ 2 -> give EXP (value / 10)
+ 3 -> give CAM
+ 4 -> Home Gate
+ 5 -> give Memory
+ 6 -> heal HP+SP in %
+ 7 -> heal HP in %
+ 8 -> heal SP in %
+ 9 -> Export (dungeon entrance)
+10 -> Personality: Durable
+11 -> Personality: Lively
+12 -> Personality: Fighter
+13 -> Personality: Defender
+14 -> Personality: Brainy
+15 -> Personality: Numble
+16 -> Personality: Developer
+17 -> Personality: Searcher
+20 -> reduce HP
+21 -> reduce SP
+22 -> reduce ATK
+23 -> reduce DEF
+24 -> reduce INT
+25 -> reduce SPD
+
+farmEffect
+-1 -> none
+ 0 -> Flame Boost
+ 1 -> Water Boost
+ 2 -> Plant Boost
+ 3 -> Earth Boost
+ 4 -> Electric Boost
+ 5 -> Wind Boost
+ 6 -> Holy Boost
+ 7 -> Dark Boost
+ 8 -> Neutral Boost
+10 -> HP Boost
+11 -> SP Boost
+12 -> ATK Boost
+13 -> DEF Boost
+14 -> INT Boost
+15 -> SPD Boost
+20 -> Development Boost
+21 -> Research Boost
+

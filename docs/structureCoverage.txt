@@ -11,7 +11,7 @@
 	battle_support_skill.mbe
 	battle_voice.mbe
 	battle_voice_add.mbe
-	bbs_post_para.mbe
+✓	bbs_post_para.mbe
 ✓	colosseum_event_battle.mbe
 	colosseum_item.mbe
 	custom_sound_bgm_para.mbe
@@ -22,7 +22,7 @@
 	digiline_para.mbe
 	digiline_para_add.mbe
 ✓	digimon_common_para.mbe
-	digimon_farm_para.mbe
+✓	digimon_farm_para.mbe
 ✓	digimon_list.mbe
 ✓	digimon_market_para.mbe
 	digital_space_para.mbe
@@ -41,10 +41,10 @@
 	farm_investigation_add.mbe
 	farm_talk.mbe
 	farm_training.mbe
-	field_ap_para.mbe
-	field_ap_para_add.mbe
-	field_area_para.mbe
-	field_area_para_add.mbe
+✓	field_ap_para.mbe
+✓	field_ap_para_add.mbe
+✓	field_area_para.mbe
+✓	field_area_para_add.mbe
 	field_common_param.mbe
 	field_cp_para.mbe
 	field_cp_para_add.mbe
@@ -65,7 +65,7 @@
 	hacking_skill_conditions.mbe
 	hacking_skill_para.mbe
 	help_icon.mbe
-	item_para.mbe
+✓	item_para.mbe
 ✓	join_digimon_para.mbe
 ✓	join_digimon_para_add.mbe
 	keyword_message_para.mbe
@@ -75,7 +75,7 @@
 	keyword_para.mbe
 	keyword_para_add.mbe
 	learn_hacking_skill.mbe
-	lvup_para.mbe
+✓	lvup_para.mbe
 	map_encount_param.mbe
 	map_encount_param_add.mbe
 	map_select.mbe
@@ -107,105 +107,105 @@
 	selectmapparam.mbe
 ✓	shop_para.mbe
 	skill_use_group_set.mbe
-	subtitle_m00_d02_0602.mbe
-	subtitle_m00_d02_0704_01.mbe
-	subtitle_m00_d02_0704_02.mbe
-	subtitle_m00_d02_1001.mbe
-	subtitle_m00_d02_1401.mbe
-	subtitle_m00_e00_0001_01.mbe
-	subtitle_m00_e00_0001_02.mbe
-	subtitle_m00_e00_0001_03.mbe
-	subtitle_m00_e00_0002_01.mbe
-	subtitle_m00_e00_0003_01.mbe
-	subtitle_m00_e00_0004_01.mbe
-	subtitle_m01_t04_1003.mbe
-	subtitle_m01_t05_1701.mbe
-	subtitle_m03_d05_0701.mbe
-	subtitle_m04_d01_0801.mbe
-	subtitle_m07_d09_1301.mbe
-	subtitle_m10_d03_0101_01.mbe
-	subtitle_m10_d03_0101_02.mbe
-	subtitle_m10_d03_0101_03.mbe
-	subtitle_m10_d20_1401.mbe
-	subtitle_m11_d17_0501.mbe
-	subtitle_m12_d22_0401.mbe
-	subtitle_m12_e00_0101.mbe
-	subtitle_m12_e00_0601.mbe
-	subtitle_m14_e00_2101.mbe
-	subtitle_m15_d01_2002.mbe
-	subtitle_m15_d01_2101.mbe
-	subtitle_m15_d15_3001.mbe
-	subtitle_m15_t30_1701.mbe
-	subtitle_m17_d08_0901.mbe
-	subtitle_m18_d22_0601_01.mbe
-	subtitle_m18_d22_0601_02.mbe
-	subtitle_m18_t05_0501.mbe
-	subtitle_m19_d14_0501.mbe
-	subtitle_m19_d14_0901.mbe
-	subtitle_m19_d14_1501.mbe
-	subtitle_m19_d14_1701.mbe
-	subtitle_m19_d14_1801.mbe
-	subtitle_m19_d14_1801_02.mbe
-	subtitle_m19_d14_2201.mbe
-	subtitle_m19_d24_1401.mbe
-	subtitle_m19_t22_0201.mbe
-	subtitle_m20_d22_1701.mbe
-	subtitle_m20_d23_1103_01.mbe
-	subtitle_m20_d23_1103_02.mbe
-	subtitle_m20_d23_1103_03.mbe
-	subtitle_m20_d23_1110.mbe
-	subtitle_m20_d24_0801.mbe
-	subtitle_m20_d24_1001.mbe
-	subtitle_m20_e03_1901.mbe
-	subtitle_m21_t01_0105.mbe
-	subtitle_m21_t01_0501.mbe
-	subtitle_m21_t02_0102.mbe
-	subtitle_m21_t03_0101.mbe
-	subtitle_m21_t04_0201.mbe
-	subtitle_m21_t05_0103.mbe
-	subtitle_m21_t06_0104.mbe
-	subtitle_m21_t10_0107.mbe
-	subtitle_m51_d122_1001_01.mbe
-	subtitle_m51_e00_0000.mbe
-	subtitle_m51_e00_0000_02.mbe
-	subtitle_m52_t50_0301_01.mbe
-	subtitle_m54_d02_1901_01.mbe
-	subtitle_m57_d09_0401_01.mbe
-	subtitle_m59_d03_0601_01.mbe
-	subtitle_m59_d03_0601_02.mbe
-	subtitle_m60_d20_2301_01.mbe
-	subtitle_m61_d14_0901_01.mbe
-	subtitle_m61_d14_0902.mbe
-	subtitle_m62_d20_0101_01.mbe
-	subtitle_m64_d130_1501_01.mbe
-	subtitle_m66_d13_0501_01.mbe
-	subtitle_m66_d13_0501_02.mbe
-	subtitle_m66_d13_0601_02.mbe
-	subtitle_m67_d16_0801.mbe
-	subtitle_m67_d16_0901_01.mbe
-	subtitle_m68_d02_1501.mbe
-	subtitle_m68_d127_1303_01.mbe
-	subtitle_m68_d127_1303_02.mbe
-	subtitle_m68_d127_1303_03.mbe
-	subtitle_m68_d127_1303_04.mbe
-	subtitle_m68_d127_1304_01.mbe
-	subtitle_m69_t50_0101_01.mbe
-	subtitle_s01.mbe
-	subtitle_s02.mbe
-	subtitle_s03.mbe
-	subtitle_s05.mbe
-	subtitle_s06.mbe
-	subtitle_s07.mbe
-	subtitle_s11.mbe
-	subtitle_s12.mbe
-	subtitle_s14.mbe
-	subtitle_s21.mbe
-	subtitle_s408_t05_1401_01.mbe
-	subtitle_s408_t05_1401_02.mbe
-	subtitle_s51.mbe
-	subtitle_s52.mbe
-	subtitle_s62.mbe
-	subtitle_s65.mbe
+✓	subtitle_m00_d02_0602.mbe
+✓	subtitle_m00_d02_0704_01.mbe
+✓	subtitle_m00_d02_0704_02.mbe
+✓	subtitle_m00_d02_1001.mbe
+✓	subtitle_m00_d02_1401.mbe
+✓	subtitle_m00_e00_0001_01.mbe
+✓	subtitle_m00_e00_0001_02.mbe
+✓	subtitle_m00_e00_0001_03.mbe
+✓	subtitle_m00_e00_0002_01.mbe
+✓	subtitle_m00_e00_0003_01.mbe
+✓	subtitle_m00_e00_0004_01.mbe
+✓	subtitle_m01_t04_1003.mbe
+✓	subtitle_m01_t05_1701.mbe
+✓	subtitle_m03_d05_0701.mbe
+✓	subtitle_m04_d01_0801.mbe
+✓	subtitle_m07_d09_1301.mbe
+✓	subtitle_m10_d03_0101_01.mbe
+✓	subtitle_m10_d03_0101_02.mbe
+✓	subtitle_m10_d03_0101_03.mbe
+✓	subtitle_m10_d20_1401.mbe
+✓	subtitle_m11_d17_0501.mbe
+✓	subtitle_m12_d22_0401.mbe
+✓	subtitle_m12_e00_0101.mbe
+✓	subtitle_m12_e00_0601.mbe
+✓	subtitle_m14_e00_2101.mbe
+✓	subtitle_m15_d01_2002.mbe
+✓	subtitle_m15_d01_2101.mbe
+✓	subtitle_m15_d15_3001.mbe
+✓	subtitle_m15_t30_1701.mbe
+✓	subtitle_m17_d08_0901.mbe
+✓	subtitle_m18_d22_0601_01.mbe
+✓	subtitle_m18_d22_0601_02.mbe
+✓	subtitle_m18_t05_0501.mbe
+✓	subtitle_m19_d14_0501.mbe
+✓	subtitle_m19_d14_0901.mbe
+✓	subtitle_m19_d14_1501.mbe
+✓	subtitle_m19_d14_1701.mbe
+✓	subtitle_m19_d14_1801.mbe
+✓	subtitle_m19_d14_1801_02.mbe
+✓	subtitle_m19_d14_2201.mbe
+✓	subtitle_m19_d24_1401.mbe
+✓	subtitle_m19_t22_0201.mbe
+✓	subtitle_m20_d22_1701.mbe
+✓	subtitle_m20_d23_1103_01.mbe
+✓	subtitle_m20_d23_1103_02.mbe
+✓	subtitle_m20_d23_1103_03.mbe
+✓	subtitle_m20_d23_1110.mbe
+✓	subtitle_m20_d24_0801.mbe
+✓	subtitle_m20_d24_1001.mbe
+✓	subtitle_m20_e03_1901.mbe
+✓	subtitle_m21_t01_0105.mbe
+✓	subtitle_m21_t01_0501.mbe
+✓	subtitle_m21_t02_0102.mbe
+✓	subtitle_m21_t03_0101.mbe
+✓	subtitle_m21_t04_0201.mbe
+✓	subtitle_m21_t05_0103.mbe
+✓	subtitle_m21_t06_0104.mbe
+✓	subtitle_m21_t10_0107.mbe
+✓	subtitle_m51_d122_1001_01.mbe
+✓	subtitle_m51_e00_0000.mbe
+✓	subtitle_m51_e00_0000_02.mbe
+✓	subtitle_m52_t50_0301_01.mbe
+✓	subtitle_m54_d02_1901_01.mbe
+✓	subtitle_m57_d09_0401_01.mbe
+✓	subtitle_m59_d03_0601_01.mbe
+✓	subtitle_m59_d03_0601_02.mbe
+✓	subtitle_m60_d20_2301_01.mbe
+✓	subtitle_m61_d14_0901_01.mbe
+✓	subtitle_m61_d14_0902.mbe
+✓	subtitle_m62_d20_0101_01.mbe
+✓	subtitle_m64_d130_1501_01.mbe
+✓	subtitle_m66_d13_0501_01.mbe
+✓	subtitle_m66_d13_0501_02.mbe
+✓	subtitle_m66_d13_0601_02.mbe
+✓	subtitle_m67_d16_0801.mbe
+✓	subtitle_m67_d16_0901_01.mbe
+✓	subtitle_m68_d02_1501.mbe
+✓	subtitle_m68_d127_1303_01.mbe
+✓	subtitle_m68_d127_1303_02.mbe
+✓	subtitle_m68_d127_1303_03.mbe
+✓	subtitle_m68_d127_1303_04.mbe
+✓	subtitle_m68_d127_1304_01.mbe
+✓	subtitle_m69_t50_0101_01.mbe
+✓	subtitle_s01.mbe
+✓	subtitle_s02.mbe
+✓	subtitle_s03.mbe
+✓	subtitle_s05.mbe
+✓	subtitle_s06.mbe
+✓	subtitle_s07.mbe
+✓	subtitle_s11.mbe
+✓	subtitle_s12.mbe
+✓	subtitle_s14.mbe
+✓	subtitle_s21.mbe
+✓	subtitle_s408_t05_1401_01.mbe
+✓	subtitle_s408_t05_1401_02.mbe
+✓	subtitle_s51.mbe
+✓	subtitle_s52.mbe
+✓	subtitle_s62.mbe
+✓	subtitle_s65.mbe
 	talk_position.mbe
 	tp_table.mbe
 	tutorial_para.mbe

@@ -1,0 +1,35 @@
+{
+  "table": {
+    "id": "int",
+    "nameId": "int",
+    "itemType?": "int",
+    "sortValue": "int",
+    "buyPrice": "int",
+    "sellPrice": "int",
+    "inBattle": "int",
+    "inOverworld": "int",
+    "unk8": "int",
+    "effectType": "int",
+    "effectValue": "int",
+    "farmEffect": "int",
+    "farmValue": "int",
+    "farmUnk1": "int",
+    "empty1?": "int",
+    "medalId?": "int",
+    "medalRarity": "short",
+    "medalUnk1": "short",
+    "medalPrice": "int",
+    "empty2?": "int",
+    "keisukeSkin": "string",
+    "takumiSkin": "string",
+    "amiSkin": "string",
+    "skinUnk1": "int",
+    "descriptionId": "int",
+    "iconId": "int",
+    "unk29": "int"
+  },
+  "medal_price": {
+    "id": "int",
+    "price": "int"
+  }
+}

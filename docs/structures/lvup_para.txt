@@ -1,0 +1,2 @@
+Values are stats gained after 100 level ups. 
+Since level start at 0 and end at 99 this means only 98 level ups are possible!
