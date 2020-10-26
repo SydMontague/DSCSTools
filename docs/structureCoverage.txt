@@ -104,9 +104,9 @@
 	quest_para_add.mbe
 	same_animation_data.mbe
 	save_icon0.png
-	selectmapparam.mbe
+✓	selectmapparam.mbe
 ✓	shop_para.mbe
-	skill_use_group_set.mbe
+✓	skill_use_group_set.mbe
 ✓	subtitle_m00_d02_0602.mbe
 ✓	subtitle_m00_d02_0704_01.mbe
 ✓	subtitle_m00_d02_0704_02.mbe
