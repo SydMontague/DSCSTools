@@ -15,3 +15,36 @@ Evo Conditions - Types (condType):
 13 - Mode Change
 14 - Unused
 15 - Cleared X (uses condUnk as value)
+
+Evo Conditions - Unk (condUnk):
+0 - None
+1 - Case Solved: Facing Lust
+2 - Case Solved: Confrontation with Gluttony
+3 - Case Solved: Reunion with Greed
+4 - Case Solved: Chance meeting with Envy
+5 - Case Solved: Encountering Wrath
+6 - Case Solved: Greeting Pride
+7 - Case Solved: Greeting Pride
+8 - Case Solved: Witnessing Sloth
+9 - Case Solved: Great Challenge 7
+10 - Case Solved: Greeting Pride
+11 - Case Solved: Great Challenge 3
+12 - Case Solved: Great Challenge 7
+13 - Case Solved: Great Challenge 7
+14 - Case Solved: Great Challenge 5
+15 - Case Solved: Great Challenge 1
+16 - Case Solved: Great Challenge 7
+17 - Case Solved: Rina Shinomiya Challenge
+18 - Case Solved: Great Challenge 8
+19 - Case Solved: Great Challenge 6
+20 - Case Solved: Great Challenge 6
+21 - Case Solved: Great Challenge 4
+22 - Case Solved: Great Challenge 3
+23 - Case Solved: Great Challenge 4
+24 - Case Solved: Great Challenge 2
+25 - The door to another dimension opened.
+26 - Case Solved: Great Challenge 6
+27 - Case Solved: Great Challenge 7
+28 - DLC: Obtained 1st edition-exclusive Digimon!
+29 - DLC: Saved a punished Digimon!
+30 - Cleared Hacker's Memory
