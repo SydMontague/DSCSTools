@@ -94,8 +94,8 @@
 ✓	mon_design_para.mbe
 ✓	mon_para.mbe
 ✓	mon_para_hard.mbe
-	multi_select_para.mbe
-	multi_select_para_add.mbe
+✓	multi_select_para.mbe
+✓	multi_select_para_add.mbe
 	network_dungeon_offset.mbe
 	newgame_para.mbe
 	ng_word.mbe
@@ -206,11 +206,11 @@
 ✓	subtitle_s52.mbe
 ✓	subtitle_s62.mbe
 ✓	subtitle_s65.mbe
-	talk_position.mbe
-	tp_table.mbe
-	tutorial_para.mbe
-	tutorial_para_add.mbe
-	ui_mon_param_info.mbe
-	warp_item_disable_para.mbe
-	warp_item_disable_para_add.mbe
-	yes_no_window_para.mbe
+✓	talk_position.mbe
+✓	tp_table.mbe
+✓	tutorial_para.mbe
+✓	tutorial_para_add.mbe
+✓	ui_mon_param_info.mbe
+✓	warp_item_disable_para.mbe
+✓	warp_item_disable_para_add.mbe
+✓	yes_no_window_para.mbe

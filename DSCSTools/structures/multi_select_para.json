@@ -1,0 +1,21 @@
+{
+  "para": 
+  {
+    "entryID": "int",
+    "questionID": "int",
+    "initialOption": "short",
+    "unknown": "short",
+    "ans1": "int",
+    "ans1Enabled": "int",
+    "ans2": "int",
+    "ans2Enabled": "int",
+    "ans3": "int",
+    "ans3Enabled": "int",
+    "ans4": "int",
+    "ans4Enabled": "int",
+    "ans5": "int",
+    "ans5Enabled": "int",
+    "ans6": "int",
+    "ans6Enabled": "int"
+  }
+}
