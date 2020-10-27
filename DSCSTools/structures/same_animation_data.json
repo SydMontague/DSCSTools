@@ -1,0 +1,22 @@
+{
+  "digimon": 
+  {
+    "ID": "int",
+    "model": "string"
+  },
+  "pc": 
+  {
+    "ID": "int",
+    "model": "string"
+  },
+  "npc": 
+  {
+    "ID": "int",
+    "model": "string"
+  },
+  "mob": 
+  {
+    "ID": "int",
+    "model": "string"
+  }
+}
