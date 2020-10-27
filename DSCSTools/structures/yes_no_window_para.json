@@ -1,0 +1,11 @@
+{
+  "para": 
+  {
+    "ID": "int",
+    "textID": "int",
+    "Unk2": "int",
+    "Unk3": "int",
+    "Unk4": "int",
+    "Unk5": "int"
+  }
+}
