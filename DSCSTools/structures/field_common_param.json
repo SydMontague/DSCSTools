@@ -1,0 +1,92 @@
+{
+  "Field": {
+    "unk1": "int",
+    "unk2": "float",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "float",
+    "unk6": "int",
+    "unk7": "float",
+    "unk8": "float",
+    "unk9": "float",
+    "unk10": "float",
+    "unk11": "float",
+    "unk12": "float",
+    "unk13": "float",
+    "unk14": "float",
+    "unk15": "int",
+    "unk16": "int",
+    "unk17": "int",
+    "unk18": "float",
+    "unk19": "float",
+    "unk20": "float"
+  },
+  "Network": {
+    "unk1": "int",
+    "unk2": "float",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "float",
+    "unk6": "float",
+    "unk7": "float",
+    "unk8": "float",
+    "unk9": "float",
+    "unk10": "float",
+    "unk11": "float",
+    "unk12": "float",
+    "unk13": "float",
+    "unk14": "float"
+  },
+  "digimon": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "float",
+    "unk3": "float",
+    "unk4": "float"
+  },
+  "movie_bg": {
+    "unk1": "int",
+    "unk2": "int",
+    "unk3": "string"
+  },
+  "minimap": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "int",
+    "unk3": "float"
+  },
+  "minimap_dlc": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "int",
+    "unk3": "float"
+  },
+  "digimon_hide": {
+    "unk1": "int",
+    "unk2": "int"
+  },
+  "real_dungeon": {
+    "unk1": "int"
+  },
+  "no_running": {
+    "unk1": "int"
+  },
+  "dof": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "float",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "float"
+  },
+  "ui_field_name": {
+    "unk1": "int",
+    "areaName": "string",
+    "areaSubId": "int",
+    "imageName": "string"
+  },
+  "ray_test": {
+    "unk1": "int",
+    "unk2": "float"
+  }
+}
