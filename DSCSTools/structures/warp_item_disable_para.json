@@ -1,0 +1,16 @@
+{
+  "flag": 
+  {
+    "ID": "int",
+    "Unk1": "int",
+    "Unk2": "int",
+    "Unk3": "int"
+  },
+  "field": 
+  {
+    "ID": "int",
+    "Unk1": "string",
+    "Unk2": "int",
+    "Unk3": "int"
+  }
+}

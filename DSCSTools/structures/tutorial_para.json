@@ -1,0 +1,16 @@
+{
+  "filename": 
+  {
+    "ID": "int",
+    "Unk1": "string",
+    "Unk2": "string",
+    "Unk3": "string",
+    "tutorialTitle?": "int",
+    "Unk4": "int",
+    "Unk5": "int",
+    "Unk6": "string",
+    "Unk7": "string",
+    "Unk8": "string",
+    "Unk9": "int"
+  }
+}

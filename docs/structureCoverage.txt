@@ -106,7 +106,7 @@
 	save_icon0.png
 ✓	selectmapparam.mbe
 ✓	shop_para.mbe
-	skill_use_group_set.mbe
+✓	skill_use_group_set.mbe
 ✓	subtitle_m00_d02_0602.mbe
 ✓	subtitle_m00_d02_0704_01.mbe
 ✓	subtitle_m00_d02_0704_02.mbe
@@ -207,10 +207,10 @@
 ✓	subtitle_s62.mbe
 ✓	subtitle_s65.mbe
 ✓	talk_position.mbe
-	tp_table.mbe
-	tutorial_para.mbe
-	tutorial_para_add.mbe
+✓	tp_table.mbe
+✓	tutorial_para.mbe
+✓	tutorial_para_add.mbe
 ✓	ui_mon_param_info.mbe
-	warp_item_disable_para.mbe
-	warp_item_disable_para_add.mbe
+✓	warp_item_disable_para.mbe
+✓	warp_item_disable_para_add.mbe
 ✓	yes_no_window_para.mbe
