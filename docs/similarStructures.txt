@@ -1,5 +1,0 @@
-The following archives have very similar formats - comparing these may yield insights:
-
--skill_use_group_set
--tp_table
--tutorial_para
