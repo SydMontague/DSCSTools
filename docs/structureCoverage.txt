@@ -87,8 +87,8 @@
 	mirror_dungeon_para_add.mbe
 	model_attach_para.mbe
 	model_default_effect.mbe
-	model_default_scale.mbe
-	model_position_offset.mbe
+✓	model_default_scale.mbe
+✓	model_position_offset.mbe
 ✓	mon_cpl.mbe
 ✓	mon_design_para.mbe
 ✓	mon_para.mbe
