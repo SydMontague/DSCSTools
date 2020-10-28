@@ -1,0 +1,29 @@
+{
+  "t0201": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string",
+    "unk3": "float",
+    "unk4": "int",
+    "unk5": "int",
+    "unk6": "float"
+  },
+  "t0511": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string",
+    "unk3": "float",
+    "unk4": "int",
+    "unk5": "int",
+    "unk6": "float"
+  },
+  "d1601": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string",
+    "unk3": "float",
+    "unk4": "int",
+    "unk5": "int",
+    "unk6": "float"
+  }
+}

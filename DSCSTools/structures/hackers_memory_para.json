@@ -1,0 +1,11 @@
+{
+  "table": {
+    "unk1": "int",
+    "unk2": "int",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "string",
+    "unk6": "int",
+    "unk7": "int"
+  }
+}

@@ -13,7 +13,7 @@
   "t01": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -21,7 +21,7 @@
   "t02": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -29,7 +29,7 @@
   "t03": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -37,7 +37,7 @@
   "t04": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -45,7 +45,7 @@
   "t05": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -53,7 +53,7 @@
   "t06": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -61,7 +61,7 @@
   "t08": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -69,7 +69,7 @@
   "t09": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -77,7 +77,7 @@
   "t10": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -85,7 +85,7 @@
   "t11": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -93,7 +93,7 @@
   "t12": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -101,7 +101,7 @@
   "t20": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -109,7 +109,7 @@
   "t21": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -117,7 +117,7 @@
   "t22": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -125,7 +125,7 @@
   "t23": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -133,7 +133,7 @@
   "t24": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -141,7 +141,7 @@
   "t25": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -149,7 +149,7 @@
   "t30": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -157,7 +157,7 @@
   "d01": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -165,7 +165,7 @@
   "d02": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -173,7 +173,7 @@
   "d03": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -181,7 +181,7 @@
   "d04": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -189,7 +189,7 @@
   "d05": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -197,7 +197,7 @@
   "d06": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -205,7 +205,7 @@
   "d07": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -213,7 +213,7 @@
   "d08": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -221,7 +221,7 @@
   "d09": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -229,7 +229,7 @@
   "d11": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -237,7 +237,7 @@
   "d12": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -245,7 +245,7 @@
   "d13": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -253,7 +253,7 @@
   "d14": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -261,7 +261,7 @@
   "d15": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -269,7 +269,7 @@
   "d16": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -277,7 +277,7 @@
   "d17": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -285,7 +285,7 @@
   "d18": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -293,7 +293,7 @@
   "d20": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -301,7 +301,7 @@
   "d21": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -309,7 +309,7 @@
   "d22": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -317,7 +317,7 @@
   "d23": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -325,7 +325,7 @@
   "d24": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -333,7 +333,7 @@
   "d30": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -341,7 +341,7 @@
   "d35": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -349,7 +349,7 @@
   "d36": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -357,7 +357,7 @@
   "d37": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -365,7 +365,7 @@
   "d38": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -373,7 +373,7 @@
   "d39": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -381,7 +381,7 @@
   "d40": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -389,7 +389,7 @@
   "d41": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -397,7 +397,7 @@
   "d42": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -405,7 +405,7 @@
   "d43": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -413,7 +413,7 @@
   "d44": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -421,7 +421,7 @@
   "d45": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -429,7 +429,7 @@
   "d61": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -437,7 +437,7 @@
   "d62": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -445,7 +445,7 @@
   "d64": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -453,7 +453,7 @@
   "d65": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -461,7 +461,7 @@
   "d70": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -469,7 +469,7 @@
   "d71": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -477,7 +477,7 @@
   "d72": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -485,7 +485,7 @@
   "d73": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -493,7 +493,7 @@
   "d74": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -501,7 +501,7 @@
   "d75": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -509,7 +509,7 @@
   "d76": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -517,7 +517,7 @@
   "d90": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -525,7 +525,7 @@
   "d91": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -533,7 +533,7 @@
   "d92": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -541,7 +541,7 @@
   "d93": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"
@@ -549,7 +549,7 @@
   "d94": {
     "id": "int",
     "unk1": "string",
-    "unk2": "float",
+    "unk2": "int",
     "unk3": "float",
     "unk4": "float",
     "unk5": "string"

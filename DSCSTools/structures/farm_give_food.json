@@ -1,0 +1,27 @@
+{
+  "table": {
+    "id": "int",
+    "chanceRefuse": "int",
+    "chance #1": "int",
+    "chance #2": "int",
+    "HP #1": "int",
+    "HP #2": "int",
+    "SP #1": "int",
+    "SP #2": "int",
+    "ATK #1": "int",
+    "ATK #2": "int",
+    "DEF #1": "int",
+    "DEF #2": "int",
+    "INT #1": "int",
+    "INT #2": "int",
+    "SPD #1": "int",
+    "SPD #2": "int",
+    "CAM #1": "int",
+    "CAM #2": "int",
+    "ABI #1": "int",
+    "ABI #2": "int",
+    "unk21": "int",
+    "unk22": "int",
+    "model": "string"
+  }
+}
