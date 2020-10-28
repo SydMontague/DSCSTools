@@ -1,0 +1,36 @@
+{
+  "digimon": 
+  {
+    "digimonID": "int",
+    "Unk1": "int",
+    "Unk2": "int",
+    "Unk3": "int",
+    "Unk4": "int",
+    "Unk5": "int",
+    "Unk6": "int",
+    "Unk7": "int",
+    "Unk8": "int",
+    "Unk9": "int",
+    "Unk10": "int",
+    "Unk11": "int",
+    "Unk12": "int",
+    "Unk13": "int",
+    "Unk14": "int",
+    "Unk15": "int",
+    "Unk16": "int",
+    "Unk17": "int",
+    "Unk18": "int",
+    "Unk19": "int",
+    "Unk20": "int",
+    "pad1?": "int",
+    "pad2?": "int",
+    "pad3?": "int",
+    "pad4?": "int",
+    "pad5?": "int",
+    "pad6?": "int",
+    "pad7?": "int",
+    "pad8?": "int",
+    "pad9?": "int",
+    "pad10?": "int"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "ENGLISH_US": 
+  {
+    "ID": "int",
+    "text": "string"
+  },
+  "GERMAN": 
+  {
+    "ID": "int",
+    "text": "string"
+  },
+  "CHINESE_T": 
+  {
+    "ID": "int",
+    "text": "string"
+  },
+  "KOREAN": 
+  {
+    "ID": "int",
+    "text": "string"
+  }
+}
