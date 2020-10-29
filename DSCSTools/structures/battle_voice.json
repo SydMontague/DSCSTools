@@ -1,0 +1,15 @@
+{
+  "voice": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "short",
+    "unk3": "short",
+    "unk4": "short",
+    "unk5": "short",
+    "unk6": "short",
+    "unk7": "short",
+    "unk8": "short",
+    "unk9": "short",
+    "unk10": "int"
+  }
+}

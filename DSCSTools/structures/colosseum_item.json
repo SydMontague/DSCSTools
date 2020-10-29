@@ -1,0 +1,22 @@
+{
+  "table": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "int",
+    "unk3": "string",
+    "unk4": "int",
+    "unk5": "short",
+    "unk6": "short",
+    "unk7": "short",
+    "unk8": "short",
+    "unk9": "short",
+    "unk10": "short"
+  },
+  "ranking_reward": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "int",
+    "unk3": "int",
+    "unk4": "int"
+  }
+}

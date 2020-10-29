@@ -1,0 +1,16 @@
+{
+  "effect": {
+    "id": "int",
+    "unk1": "int array",
+    "unk2": "int",
+    "unk2": "int",
+    "unk3": "int",
+    "unk4": "int",
+    "unk5": "int array",
+    "unk6": "int array"
+  },
+  "item": {
+    "unk1": "string",
+    "unk2": "int"
+  }
+}

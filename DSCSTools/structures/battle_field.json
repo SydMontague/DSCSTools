@@ -1,0 +1,18 @@
+{
+  "BattleField": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "float",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "float",
+    "unk6": "int",
+    "unk7": "int",
+    "unk8": "float",
+    "unk9": "float",
+    "unk10": "float",
+    "unk11": "float",
+    "unk12": "float",
+    "unk13": "float"
+  }
+}

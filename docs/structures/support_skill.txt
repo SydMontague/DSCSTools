@@ -1,0 +1,12 @@
+Condition Types:
+0 - None
+1 - HP below %
+2 - HP above %
+3 - % Chance
+4 - Physical Attack
+5 - Magic Attack
+6 - Bad Type Match
+7 - Good Type Match
+8 - Target is >= Mega
+9 - Target is < Ultimate
+10 - Target is Royal Knight (Digimon listed in table target10)

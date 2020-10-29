@@ -1,0 +1,72 @@
+{
+  "HM_main": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "HM_sub": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "CS_main": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "CS_sub": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free02": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free03": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free04": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free05": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free06": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free07": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free08": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free09": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free10": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  },
+  "Free01": {
+    "id": "int",
+    "unk1": "string",
+    "unk2": "string"
+  }
+}
