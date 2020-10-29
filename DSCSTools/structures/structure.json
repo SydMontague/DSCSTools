@@ -59,6 +59,8 @@
   "item_para.mbe": "item_para.json",
   "join_digimon_para(_add)?.mbe": "join_digimon_para.json",
   "lvup_para.mbe": "lvup_para.json",
+  "model_attach_para.mbe": "model_attach_para.mbe",
+  "model_default_effect.mbe": "model_default_effect.json",
   "model_default_scale.mbe": "model_default_scale.json",
   "model_position_offset.mbe": "model_position_offset.json",
   "mon_cpl.mbe": "mon_cpl.json",
