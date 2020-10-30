@@ -152,7 +152,7 @@ void extractMBEFile(boost::filesystem::path source, boost::filesystem::path targ
 	EXPAHeader* header = reinterpret_cast<EXPAHeader*>(data.get());
 
 	if (header->magicValue != 0x41505845) { // "EXPA"
-		std::cout << "Error: source file is not in EXPA format." << std::endl;
+		std::cout << "Error: source file " << source.filename() << " is not in EXPA format." << std::endl;
 		return;
 	}
 
@@ -188,7 +188,7 @@ void extractMBEFile(boost::filesystem::path source, boost::filesystem::path targ
 		format = getStructureFile(source);
 	}
 	catch (const boost::property_tree::json_parser_error &error) {
-		std::cout << "Error while reading structure.json | " << error.message() << " in line " << error.line() << "." << std::endl;
+		std::cout << "Error while reading structure.json for " << source.filename() << " | " << error.message() << " in line " << error.line() << "." << std::endl;
 		return;
 	}
 
