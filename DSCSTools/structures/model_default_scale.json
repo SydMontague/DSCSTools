@@ -1,6 +1,5 @@
 {
-  "digimon": 
-  {
+  "digimon": {
     "digimonID": "int",
     "fieldGuideScale": "float",
     "battleScale": "float",
@@ -8,28 +7,25 @@
     "Uk4": "float",
     "Uk5": "float"
   },
-  "pc": 
-  {
+  "pc": {
     "ID": "int",
     "Unk1": "float",
     "Unk2": "float",
     "Unk3": "float",
-    "Uk4": "float",
+    "Uk4": "float"
   },
-  "npc": 
-  {
+  "npc": {
     "ID": "int",
     "Unk1": "float",
     "Unk2": "float",
     "Unk3": "float",
-    "Unk4": "float",
+    "Unk4": "float"
   },
-  "mob": 
-  {
+  "mob": {
     "ID": "int",
     "Unk1": "float",
     "Unk2": "float",
     "Unk3": "float",
-    "Unk4": "float",
+    "Unk4": "float"
   }
 }
