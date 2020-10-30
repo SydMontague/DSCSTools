@@ -96,11 +96,11 @@
 ✓	multi_select_para.mbe
 ✓	multi_select_para_add.mbe
 ✓	network_dungeon_offset.mbe
-	newgame_para.mbe
+✓	newgame_para.mbe
 ✓	ng_word.mbe
 ✓	personality_para.mbe
-	quest_para.mbe
-	quest_para_add.mbe
+✓	quest_para.mbe
+✓	quest_para_add.mbe
 ✓	same_animation_data.mbe
 ✓	selectmapparam.mbe
 ✓	shop_para.mbe
