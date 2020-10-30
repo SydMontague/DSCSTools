@@ -1,0 +1,9 @@
+{
+  "offset": 
+  {
+    "digimonID": "int",
+    "Unk1": "float",
+    "Unk2": "float",
+    "Unk3": "float"
+  }
+}

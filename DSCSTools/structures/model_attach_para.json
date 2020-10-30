@@ -1,0 +1,59 @@
+{
+  "digimon01": 
+  {
+    "ID": "digimonID",
+    "boneName": "string",
+    "unk1": "float",
+    "unk2": "float",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "float",
+    "unk6": "float",
+    "unk7": "float"
+  },
+  "digimon02": 
+  {
+    "ID": "digimonID",
+    "boneName": "string",
+    "unk1": "float",
+    "unk2": "float",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "float",
+    "unk6": "float",
+    "unk7": "float"
+  },
+  "digimon03": 
+  {
+    "ID": "digimonID",
+    "boneName": "string",
+    "unk1": "float",
+    "unk2": "float",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "float",
+    "unk6": "float",
+    "unk7": "float"
+  },
+  "event": 
+  {
+    "model": "string",
+    "attachModel?": "string",
+    "boneName": "string",
+    "unk1": "float",
+    "unk2": "float",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "float",
+    "unk6": "float",
+    "unk7": "float"
+  },
+  "npc": 
+  {
+    "model": "string",
+    "boneIdx?": "int",
+    "unk1": "int",
+    "attachModel?": "string",
+    "unk2": "string"
+  }
+}
