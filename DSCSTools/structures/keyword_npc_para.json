@@ -1,0 +1,236 @@
+{
+  "100": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "120": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "121": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "130": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "131": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "132": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "133": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "134": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "150": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "160": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "161": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "240": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "300": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "400": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "401": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "500": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "800": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "801": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "802": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "1400": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "2500": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "2800": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "2801": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "2802": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "3000": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  },
+  "3100": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "string",
+    "unk3": "int",
+    "unk4": "string",
+    "unk5": "int",
+    "unk6": "int"
+  }
+}

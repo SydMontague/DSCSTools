@@ -1,0 +1,20 @@
+{
+  "Field": {
+    "id": "int",
+    "unk1": "int",
+    "unk2": "int",
+    "unk3": "float",
+    "unk4": "float",
+    "unk5": "int",
+    "unk6": "int array",
+    "unk7": "int array",
+    "unk8": "int array",
+    "unk9": "int array",
+    "unk10": "int array",
+    "unk11": "int array",
+    "unk12": "int array",
+    "unk13": "int array",
+    "unk14": "int array",
+    "unk15": "int array"
+  }
+}
