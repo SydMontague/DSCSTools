@@ -62,7 +62,7 @@
   "keyword_message_para_add.mbe": "keyword_message_para_add.json",
   "keyword_npc_para.mbe": "keyword_npc_para.json",
   "keyword_npc_para_add.mbe": "keyword_npc_para_add.json",
-  "keyword_para.mbe": "keyword_para.json",
+  "keyword_para(_add)?.mbe": "keyword_para.json",
   "learn_hacking_skill.mbe": "learn_hacking_skill.json",
   "lvup_para.mbe": "lvup_para.json",
   "map_encount_param(_add)?.mbe": "map_encount_param.json",
