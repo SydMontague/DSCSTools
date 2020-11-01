@@ -38,9 +38,6 @@ int main(int argc, char** argv) {
 	if(!target.has_root_directory())
 		target = boost::filesystem::current_path().append(argv[3]);
 	
-	std::cout << source << std::endl;
-	std::cout << target << std::endl;
-
 	if (strncmp("--extract", argv[1], 10) == 0) {
 		extractMDB1(source, target);
 		std::cout << "Done" << std::endl;
