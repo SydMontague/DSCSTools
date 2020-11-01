@@ -32,10 +32,15 @@ int main(int argc, char** argv) {
 		printUse();
 		return 0;
 	}
-
 	boost::filesystem::path source = boost::filesystem::exists(argv[2]) ? argv[2] : boost::filesystem::current_path().append(argv[2]);
-	boost::filesystem::path target = boost::filesystem::exists(argv[3]) ? argv[3] : boost::filesystem::current_path().append(argv[3]);
+	boost::filesystem::path target = argv[3];
 	
+	if(!target.has_root_directory())
+		target = boost::filesystem::current_path().append(argv[3]);
+	
+	std::cout << source << std::endl;
+	std::cout << target << std::endl;
+
 	if (strncmp("--extract", argv[1], 10) == 0) {
 		extractMDB1(source, target);
 		std::cout << "Done" << std::endl;
