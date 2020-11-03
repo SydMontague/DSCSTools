@@ -1,0 +1,64 @@
+Icon
+ 0 - Neutral
+ 1 - Neutral
+ 2 - Fire
+ 3 - Water
+ 4 - Plant
+ 5 - Electro
+ 6 - Earth
+ 7 - Wind
+ 8 - Holy
+ 9 - Dark
+10 - Heal
+11 - Support
+
+Attack Type
+ 0 - None
+ 1 - Fire
+ 2 - Water
+ 3 - Plant
+ 4 - Electro
+ 5 - Earth
+ 6 - Wind
+ 7 - Holy
+ 8 - Dark
+
+Damage Type
+ 0 - Nothing
+ 1 - Physical
+ 2 - Magic
+ 3 - Pierhing ATK
+ 4 - Piercing INT
+ 5 - HP % Damage
+ 6 - SP % Damage
+ 7 - Fixed Damage
+ 8 - Heal HP (2 per INT?)
+ 9 - Heal HP %
+10 - Heal SP %
+11 - Heal HP+SP %
+12 - Heal HP Fixed
+13 - Heal SP Fixed
+14 - Revive
+15 - Force 1 HP
+
+Target Type
+ 0 - None
+ 1 - Self
+ 2 - Single Ally
+ 3 - All Ally
+ 4 - Single Foe
+ 5 - All Foes
+ 6 - unused (behaves weird)
+ 7 - unused (behaves weird)
+ 8 - Dead? (Revive)
+ 9 - Dead? (Revive DX)
+
+Status Type // TODO
+ 1 - 
+
+Xros Type
+ 0 - 
+ 1 - Chain Attack
+ 2 - Damage up
+ 3 - Heal Up
+ 4 - Skill Up
