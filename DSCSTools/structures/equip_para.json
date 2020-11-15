@@ -3,7 +3,7 @@
     "id": "int",
     "nameId": "int",
     "unk3": "int",
-    "unk4": "int",
+    "sortValue": "int",
     "buyPrice": "int",
     "sellPrice": "int",
     "delta_HP": "int",
