@@ -42,7 +42,7 @@
     "descId": "int",
     "icon_id": "int",
     "coinPrice": "int",
-    "unk43": "int",
-    "unk44": "int"
+    "variationId": "int",
+    "attackPoint": "int"
   }
 }

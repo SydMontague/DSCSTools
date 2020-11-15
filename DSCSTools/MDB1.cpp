@@ -331,6 +331,7 @@ void packMDB1(const boost::filesystem::path source, const boost::filesystem::pat
 		return;
 	}
 
+	std::cout << "Generating file tree..." << std::endl;
 	std::vector<boost::filesystem::path> files;
 	std::vector<TreeNode> nodes = generateTree(source);
 
@@ -340,6 +341,7 @@ void packMDB1(const boost::filesystem::path source, const boost::filesystem::pat
 
 	std::map<std::string, std::future<CompressionResult>> futureMap;
 
+	std::cout << "Start compressing files..." << std::endl;
 	// start compressing files
 	// this may have to be replaced with a thread pool in the future, since std::async may not use one in all cases
 	for (auto file : files)
@@ -358,8 +360,15 @@ void packMDB1(const boost::filesystem::path source, const boost::filesystem::pat
 	header1[0] = root;
 	header2[0] = FileNameEntry();
 
+	uint32_t fileCount = 0;
+	uint32_t numFiles = files.size();
+	std::cout << "Start writing " << numFiles << " files..." << std::endl;
+
 	uint32_t offset = 0;
 	for (auto file : files) {
+		if (++fileCount % 200 == 0)
+			std::cout << "File " << fileCount << " of " << numFiles << std::endl;
+
 		// fill in name
 		FileNameEntry entry2;
 
@@ -394,6 +403,8 @@ void packMDB1(const boost::filesystem::path source, const boost::filesystem::pat
 		header3.push_back({ offset, data.originalSize, data.size });
 		offset += data.size;
 	}
+
+	std::cout << "Writing and compressing files complete." << std::endl;
 
 	// write file table and header
 	output.seekp(0x14);
