@@ -19,6 +19,8 @@
 
 #include "../libs/csv-parser/parser.hpp"
 
+#define PADDING_BYTE (unsigned char) 0xCC
+
 struct EXPAHeader {
 	uint32_t magicValue;
 	uint32_t numTables;
@@ -392,7 +394,7 @@ void packMBE(boost::filesystem::path source, boost::filesystem::path target) {
 				}
 				else if (type == "short") {
 					uint32_t paddingSize = entrySize % 2;
-					std::vector<char> padding(paddingSize, 0xCC);
+					std::vector<char> padding(paddingSize, PADDING_BYTE);
 					output.write(padding.data(), paddingSize);
 
 					int16_t value = std::stoi(col);
@@ -401,7 +403,7 @@ void packMBE(boost::filesystem::path source, boost::filesystem::path target) {
 				}
 				else if (type == "int") {
 					uint32_t paddingSize = entrySize % 4;
-					std::vector<char> padding(paddingSize, 0xCC);
+					std::vector<char> padding(paddingSize, PADDING_BYTE);
 					output.write(padding.data(), paddingSize);
 
 					int32_t value = std::stoi(col);
@@ -410,19 +412,19 @@ void packMBE(boost::filesystem::path source, boost::filesystem::path target) {
 				}
 				else if (type == "float") {
 					uint32_t paddingSize = entrySize % 4;
-					std::vector<char> padding(paddingSize, 0xCC);
+					std::vector<char> padding(paddingSize, PADDING_BYTE);
 					output.write(padding.data(), paddingSize);
 
-					int32_t value = std::stof(col);
+					float value = std::stof(col);
 					output.write(reinterpret_cast<char*>(&value), 4);
 					entrySize += 4 + paddingSize;
 				}
 				else if (type == "string") {
 					if (!col.empty())
-						chnkData.push_back({ type, col, (uint32_t) output.tellp() });
+						chnkData.push_back({ type, col, (uint32_t) output.tellp() + entrySize % 8 });
 
 					uint32_t paddingSize = entrySize % 8;
-					std::vector<char> padding(paddingSize, 0xCC);
+					std::vector<char> padding(paddingSize, PADDING_BYTE);
 					output.write(padding.data(), paddingSize);
 
 					output.write("\0\0\0\0\0\0\0\0", 8);
@@ -433,7 +435,7 @@ void packMBE(boost::filesystem::path source, boost::filesystem::path target) {
 						chnkData.push_back({ type, col, (uint32_t) output.tellp() + 8 + entrySize % 8 });
 
 					uint32_t paddingSize = entrySize % 8;
-					std::vector<char> padding(8, 0xCC);
+					std::vector<char> padding(8, PADDING_BYTE);
 					output.write(padding.data(), paddingSize);
 
 					uint32_t arraySize = (uint32_t) std::count(col.begin(), col.end(), ' ') + 1;
@@ -446,7 +448,7 @@ void packMBE(boost::filesystem::path source, boost::filesystem::path target) {
 			}
 
 			if (entrySize % 8 != 0) {
-				std::vector<char> padding(entrySize % 8, 0xCC);
+				std::vector<char> padding(entrySize % 8, PADDING_BYTE);
 				output.write(padding.data(), entrySize % 8);
 				entrySize += entrySize % 8;
 			}

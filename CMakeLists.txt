@@ -2,6 +2,8 @@
 
 project ("DSCSTools")
 
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
 if(NOT MSVC)
 	set(CMAKE_CXX_FLAGS -pthread)
 endif()
@@ -12,9 +14,15 @@ add_subdirectory("libs/doboz")
 
 # boost
 set(Boost_USE_STATIC_LIBS ON) 
-
-FIND_PACKAGE( Boost 1.65 REQUIRED COMPONENTS filesystem regex)
+FIND_PACKAGE(Boost 1.65 REQUIRED COMPONENTS filesystem regex)
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+
+# Qt5
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+FIND_PACKAGE(Qt5 COMPONENTS Core Widgets REQUIRED)
 
 # Include sub-projects.
 add_subdirectory ("DSCSTools")

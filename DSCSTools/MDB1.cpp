@@ -361,7 +361,7 @@ void packMDB1(const boost::filesystem::path source, const boost::filesystem::pat
 	header2[0] = FileNameEntry();
 
 	uint32_t fileCount = 0;
-	uint32_t numFiles = files.size();
+	size_t numFiles = files.size();
 	std::cout << "Start writing " << numFiles << " files..." << std::endl;
 
 	uint32_t offset = 0;

@@ -15,5 +15,12 @@ SET(SOURCE_FILES
 add_executable (DSCSTools ${SOURCE_FILES})
 target_link_libraries(DSCSTools PUBLIC doboz ${Boost_LIBRARIES})
 
+# Install into /target/ folder
 install (TARGETS DSCSTools DESTINATION ${CMAKE_BINARY_DIR}/target)
 install (DIRECTORY structures/ DESTINATION ${CMAKE_BINARY_DIR}/target/structures)
+
+# Install Qt5 dependencies on Windows
+if(WIN32)
+	#include(DeployQt)
+	#windeployqt(DSCSTools ${CMAKE_BINARY_DIR}/target)
+endif()
