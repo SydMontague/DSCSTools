@@ -1,0 +1,2 @@
+this.Quake.Start(int, float, float, float)
+this.Quake.Stop()

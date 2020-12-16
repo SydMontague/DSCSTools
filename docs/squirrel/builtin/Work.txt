@@ -1,0 +1,3 @@
+this.Work.Get(int dataId)
+this.Work.IsPushKey(string) // known good values "DECIDE", "ANY" | assumed good values: "UP", "DOWN", "LEFT", "RIGHT", "CANCEL"
+this.Work.Set(int dataId, int value)

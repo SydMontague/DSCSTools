@@ -1,0 +1,2 @@
+this.Debug.ClearLog()
+this.Debug.Log(string msg)

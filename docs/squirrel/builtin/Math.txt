@@ -1,0 +1,1 @@
+this.Math.Rand(int lower, int upper)

@@ -35,10 +35,10 @@
     "EXPx2": "int",
     "YEN": "int",
     "YENx2": "int",
-    "itemChance1": "short",
     "itemId1": "short",
-    "itemChance2": "short",
+    "itemChance1": "short",
     "itemId2": "short",
+    "itemChance2": "short",
     "scanRate": "int",
     "unk32": "int",
     "unk33": "int array"

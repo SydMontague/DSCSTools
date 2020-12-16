@@ -1,0 +1,2 @@
+this.Digiline.Send(int)
+this.Digiline.SetEnable(bool)

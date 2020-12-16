@@ -6,6 +6,7 @@
 #include "SaveFile.h"
 #include "EXPA.h"
 
+// TODO extract specific files from archive
 void printUse() {
 	std::cout << "Modes:" << std::endl;
 	std::cout << "	--extract <sourceFile> <targetFolder>" << std::endl;

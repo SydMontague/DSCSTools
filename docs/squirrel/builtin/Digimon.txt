@@ -1,0 +1,3 @@
+this.Digimon.GetMemory(int digimonId)
+this.Digimon.IsFullHpSpAllParty()
+this.Digimon.RestoreAllParty()

@@ -18,11 +18,14 @@ FIND_PACKAGE(Boost 1.65 REQUIRED COMPONENTS filesystem regex)
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 # Qt5
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
 
-FIND_PACKAGE(Qt5 COMPONENTS Core Widgets REQUIRED)
+FIND_PACKAGE(Qt5 COMPONENTS Core Widgets)
+
+if(Qt5_FOUND)
+	set(CMAKE_AUTOMOC ON)
+	set(CMAKE_AUTORCC ON)
+	set(CMAKE_AUTOUIC ON)
+endif()
 
 # Include sub-projects.
 add_subdirectory ("DSCSTools")
