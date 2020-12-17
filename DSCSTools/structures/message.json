@@ -2,10 +2,10 @@
   "Sheet1": {
     "ID": "int",
     "Speaker": "int",
-    "Unknown1": "string",
+    "Japanese": "string",
     "English": "string",
     "Chinese": "string",
-    "Unknown2": "string",
+    "EnglishCensored": "string",
     "Korean": "string",
     "German": "string"
   }
