@@ -14,7 +14,8 @@ add_subdirectory("libs/doboz")
 
 # boost
 set(Boost_USE_STATIC_LIBS ON) 
-FIND_PACKAGE(Boost 1.65 REQUIRED COMPONENTS filesystem regex)
+FIND_PACKAGE(Boost 1.66 REQUIRED COMPONENTS filesystem system date_time regex)
+
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 # Qt5

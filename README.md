@@ -16,11 +16,10 @@ DSCSTools are modding tools for the Steam release of "Digimon Story Cyber Sleuth
 * more MBE structure files
 
 # Usage
-Currently only a command line interface is available. It is recommended to use a Windows system, due to the MDB1 format using Windows file separator.
+Currently only a command line interface is available. It is recommended to use a Windows system, due to the MDB1 format using Windows file separators.
 The tool *should* work on *nix systems, but is not as well tested.
 
-In order to use the repack function for large archives (-> DSDB) it is recommended that you have at least 16 GiB of RAM installed.
-An alternative is to use the DSDBA archive for any modified files, since it's contents have a higher priority than the main DSDB.
+To create mods it is strong recommended to use Pherakki's [SimpleDSCSModManager](https://github.com/Pherakki/SimpleDSCSModManager).
 
 **Do not use Microsoft Excel to modify extracted CSV files, it does *not* create RFC 4180 compliant CSV.** Use LibreOffice/OpenOffice as an alternative.
 
@@ -78,7 +77,7 @@ $ make install
 With the binary being located in /DSCSTools/
 
 ## Requirements
-* Boost 1.65 or higher
+* Boost 1.66 or higher
 * CMake 3.10 or higher
 * A C++ compiler
 
@@ -89,6 +88,12 @@ The tool uses the [doboz compression library](https://voxelium.wordpress.com/201
 * directly on GitHub
 * E-Mail: sydmontague@web.de
 * Reddit: [/u/Sydmontague](https://reddit.com/u/sydmontague)
+
+# Other DSCS Modding Projects/Tools
+* [SimpleDSCSModManager](https://github.com/Pherakki/SimpleDSCSModManager) by Pherakki
+* [Blender-Tools-for-DSCS](https://github.com/Pherakki/Blender-Tools-for-DSCS/) by Pherakki
+* [NutCracker](https://github.com/SydMontague/NutCracker)
+  * a decompiler for the game's Squirrel script files
 
 # Disclaimer
 This project is work-in-progress and I'm still learning how to properly use C++ and CMake, so excuse me if I make some nooby mistakes. :)
