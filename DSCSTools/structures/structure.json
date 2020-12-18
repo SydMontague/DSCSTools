@@ -93,6 +93,7 @@
   "selectmapparam.mbe": "selectmapparam.json",
   "shop_para.mbe": "shop_para.json",
   "skill_use_group_set.mbe": "skill_use_group_set.json",
+  "subtitle_text.mbe": "text.json",
   "subtitle[a-zA-Z0-9_]*\\.mbe": "subtitle.json",
   "talk_position.mbe": "talk_position.json",
   "tp_table.mbe": "tp_table.json",
