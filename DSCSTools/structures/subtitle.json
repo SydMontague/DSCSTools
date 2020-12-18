@@ -1,9 +1,9 @@
 {
   "Sheet1": {
     "id": "int",
-    "unk1": "int",
-    "unk2": "int",
-    "unk3": "int",
-    "unk4": "string"
+    "StartTime": "int",
+    "EndTime": "int",
+    "SubtitleTextID": "int",
+    "SubtitleCode": "string"
   }
 }
