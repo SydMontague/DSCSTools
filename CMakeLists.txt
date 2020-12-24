@@ -28,6 +28,10 @@ if(Qt5_FOUND)
 	set(CMAKE_AUTOUIC ON)
 endif()
 
+if (WIN32)
+	add_definitions("-D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0601") # Windows 7
+endif()
+
 # Include sub-projects.
 add_subdirectory ("DSCSTools")
 
