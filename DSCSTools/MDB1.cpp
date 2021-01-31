@@ -307,16 +307,19 @@ CompressionResult getFileData(const boost::filesystem::path path, const bool com
 		size_t destSize;
 		char* outputData = new char[comp.getMaxCompressedSize(length)];
 		doboz::Result res = comp.compress(data, length, outputData, comp.getMaxCompressedSize(length), destSize);
-		delete data;
-
+		
 		if (res != doboz::RESULT_OK)
 			std::cout << "Error: something went wrong while compressing, doboz error code: " << res << std::endl;
 
-		return { (uint32_t) length, (uint32_t) destSize, outputData };
+		if (destSize + 4 < length) {
+			delete data;
+			return { (uint32_t) length, (uint32_t) destSize, outputData };
+		}
+		else
+			delete outputData;
 	}
-	else {
-		return { (uint32_t) length, (uint32_t) length, data };
-	}
+
+	return { (uint32_t) length, (uint32_t) length, data };
 }
 
 void packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, const bool compress) {
