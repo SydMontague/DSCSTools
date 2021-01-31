@@ -54,7 +54,34 @@ Target Type
  9 - Dead? (Revive DX)
 
 Status Type // TODO
- 1 - 
+ 0 - None
+ 1 - Poison
+ 2 - Panic
+ 3 - Paralyze
+ 4 - Sleep
+ 5 - Stun
+ 6 - Dot
+ 7 - Bug
+ 8 - Death
+ 9 - ATK Up
+10 - DEF Up
+11 - INT Up
+12 - SPD Up
+13 - HIT Up X
+14 - AGL Up
+15 - CRT Up
+16 - ATK Down
+17 - DEF Down
+18 - INT Down
+19 - SPD Down
+20 - Counter All X
+21 - Counter Physical
+22 - Counter Magic
+23 - Status Barrier
+24 - Helpless
+25 - Safety Guard
+26 - Accel Boost 
+27 - Nulls Damage
 
 Xros Type
  0 - 
