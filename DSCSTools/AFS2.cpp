@@ -30,7 +30,7 @@ void extractAFS2(const boost::filesystem::path source, const boost::filesystem::
 	input.read((char*) &header, 0x10);
 
 	if (header.magic!= AFS2_MAGIC_VALUE) {
-		std::cout << "Error: not a MDB1 file. Value: " << header.magic<< std::endl;
+		std::cout << "Error: not an AFS2 file. Value: " << header.magic<< std::endl;
 		return;
 	}
 
