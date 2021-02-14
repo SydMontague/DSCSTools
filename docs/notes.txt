@@ -1,21 +1,21 @@
 General notes about the asset structure of Digimon Story Cyber Sleuth: Complete Edition.
 This may be guesses and are not guaranteed to be accurate.
 
-File								Format			Content
-app_digister\*.dll					Library			various third party software components (Nvidia Cg Toolkit, freetype, Steam)
-app_digister\*.exe					Executable		the game code
-resources\media\.*mvgl				OpenType		Font files, encrypted
-resources\text\*					Text			Privacy/Analytics Notice
-resources\*.usm						CRID			VP90 encoded video files, cutscenes
-resources\DSDB.steam.mvgl			MDB1			main archive, encrypted
-resources\DSDBA.steam.mvgl			MDB1			Sistermon Ciel skin, Tower Records -> Shibuya Records change, encrypted
-resources\DSDBbgm.steam.mvgl		AFS2			background music?
-resources\DSDBP.steam.mvgl			MDB1			patch, DLC? contains Ouryumon line, some script stuff and changes to Hudie?, encrypted
-resources\DSDBPDSEbgm.steam.mvgl	AFS2			some background music?
-resources\DSDBPse.steam.mvgl		MDB1			some sound files, encrypted
-resources\DSDBPvo.steam.mvgl		AFS2			some voice over?
-resources\DSDBPvous.steam.mvgl		AFS2			some voice over, US?!
-resources\DSDBS.steam.mvgl			MDB1			Steam data using XBox controller, encrypted
-resources\DSDBse.stea.mvgl			MDB1			sound effects?, encrypted
-resources\DSDBSP.steam.mvgl			MDB1			Steam data using PS4 controller, encrypted
-resources\DSDBvo.steam.mvgl			AFS2			voice over?
+File                                Format          Content
+app_digister\*.dll                  Library         various third party software components (Nvidia Cg Toolkit, freetype, Steam)
+app_digister\*.exe                  Executable      the game code
+resources\media\.*mvgl              OpenType        Font files, encrypted
+resources\text\*                    Text            Privacy/Analytics Notice
+resources\*.usm                     CRID            VP90 encoded video files, cutscenes
+resources\DSDB.steam.mvgl           MDB1            main archive, encrypted
+resources\DSDBA.steam.mvgl          MDB1            Sistermon Ciel skin, Tower Records -> Shibuya Records change, encrypted
+resources\DSDBbgm.steam.mvgl        AFS2            background music?
+resources\DSDBP.steam.mvgl          MDB1            patch, DLC? contains Ouryumon line, some script stuff and changes to Hudie?, encrypted
+resources\DSDBPDSEbgm.steam.mvgl    AFS2            some background music?
+resources\DSDBPse.steam.mvgl        MDB1            some sound files, encrypted
+resources\DSDBPvo.steam.mvgl        AFS2            some voice over?
+resources\DSDBPvous.steam.mvgl      AFS2            some voice over, US?!
+resources\DSDBS.steam.mvgl          MDB1            Steam data using XBox controller, encrypted
+resources\DSDBse.stea.mvgl          MDB1            sound effects?, encrypted
+resources\DSDBSP.steam.mvgl         MDB1            Steam data using PS4 controller, encrypted
+resources\DSDBvo.steam.mvgl         AFS2            voice over?

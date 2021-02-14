@@ -5,6 +5,7 @@
 #include "MDB1.h"
 #include "SaveFile.h"
 #include "EXPA.h"
+#include "AFS2.h"
 
 // TODO extract specific files from archive
 void printUse() {
@@ -26,6 +27,11 @@ void printUse() {
 	std::cout << "	--mbepack <sourceFolder> <targetFile>" << std::endl;
 	std::cout << "		Repacks an .mbe folder containing CSV files back into a .mbe file " << std::endl;
 	std::cout << "		as long as it's structure is found and defined in the structure.json file." << std::endl;
+	std::cout << "	--afs2extract <source> <targetFolder>" << std::endl;
+	std::cout << "		Extracts the given AFS2 formatted archive info a folder." << std::endl;
+	std::cout << "	--afs2pack <sourceFolder> <targetFile>" << std::endl;
+	std::cout << "		Repacks the given folder info the AFS2 format." << std::endl;
+	std::cout << "		File order is alphabetical and relevant, filenames themselves are lost." << std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -66,6 +72,14 @@ int main(int argc, char** argv) {
 	}
 	else if (strncmp("--mbepack", argv[1], 10) == 0) {
 		packMBE(source, target);
+		std::cout << "Done" << std::endl;
+	}
+	else if (strncmp("--afs2extract", argv[1], 14) == 0) {
+		extractAFS2(source, target);
+		std::cout << "Done" << std::endl;
+	}
+	else if (strncmp("--afs2pack", argv[1], 11) == 0) {
+		packAFS2(source, target);
 		std::cout << "Done" << std::endl;
 	}
 	else {

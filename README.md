@@ -8,12 +8,14 @@ DSCSTools are modding tools for the Steam release of "Digimon Story Cyber Sleuth
 * Repack/Create MDB1 archives
   * archives get recreated from scratch, files can be added, removed and modified at will
   * optionally without compressing the file (faster, larger file size) as long as the final file size is less than 4GiB
+* Extract and Rebuild AFS2 archives
+  * The resulting files are, like all sound files in the HCA format. You can use [vgmstream](https://github.com/vgmstream/vgmstream) to convert them.
 * Decrypt and Encrypt PC save files
 * Extract and import basic MBE files
   * currently supports int8, int16, int32, float, int32 array and string field types
 
 ## Planned Features
-* more MBE structure files
+* a user friendly GUI
 
 # Usage
 Currently only a command line interface is available. It is recommended to use a Windows system, due to the MDB1 format using Windows file separators.
@@ -31,6 +33,8 @@ Save Decrypt: DSCSTools --savedecrypt <sourceFile> <targetFile>
 Save Encrypt: DSCSTools --saveencrypt <sourceFile> <targetFile>
 MBE Extract:  DSCSTools --mbeextract <source> <targetFolder>
 MBE Repack:   DSCSTools --mbepack <sourceFolder> <targetFile>
+AFS2 Extract: DSCSTools --afs2extract <source> <targetFolder>
+AFS2 Repackk: DSCSTools --afs2pack <sourceFolder> <targetFile>
 ```
 
 ## MBE Structure files

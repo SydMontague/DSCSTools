@@ -9,6 +9,8 @@ SET(SOURCE_FILES
 		EXPA.h
 		SaveFile.cpp
 		SaveFile.h
+		AFS2.cpp
+		AFS2.h
 		)
 
 # Add source to this project's executable.
