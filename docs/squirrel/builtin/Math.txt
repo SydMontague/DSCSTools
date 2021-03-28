@@ -1,1 +1,5 @@
+/*
+ * Generates a random number within the given lower (inclusive) and upper (exclusive) bound.
+ * The RNG is seeded at game start with the time since boot in seconds.
+ */
 this.Math.Rand(int lower, int upper)

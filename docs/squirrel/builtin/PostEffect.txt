@@ -5,3 +5,6 @@ this.PostEffect.SetEnableSpecialBlur(bool)
 this.PostEffect.SetMonoFilter(bool, int, bool, bool)
 this.PostEffect.SetNegaFilter(bool, bool)
 this.PostEffect.SetSepiaFilter(bool, int, bool, bool)
+
+this.PostEffect.IsEnableRadialBlur()
+this.PostEffect.IsEnableSpecialBlur()

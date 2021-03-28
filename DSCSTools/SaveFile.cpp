@@ -60,8 +60,8 @@ void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 	uint32_t offset = 0;
 	uint32_t remaining = size;
 
-	char* buffer = new char[size];
-	input.read(buffer, size);
+	auto buffer = std::make_unique<char[]>(size);
+	input.read(buffer.get(), size);
 
 	{ // rotate bits step
 		boost::multiprecision::uint128_t magic = 0x801302D26B3BEAE5;
@@ -71,7 +71,7 @@ void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 		while (remaining) {
 			uint32_t read = remaining < 16 ? remaining : 16;
 
-			uint32_t tmp2 = (rotateParameter * (uint64_t) 0x24924925) >> 32;
+			uint32_t tmp2 = (rotateParameter * (uint64_t) 0x24924925) >> 32; // optimized form of rotateParamater / 7
 			int32_t rotateCount = (((((rotateParameter - tmp2) >> 1) + tmp2) >> 2) * 7) - rotateParameter - 1;
 
 			uint64_t valueSum = 0;
@@ -121,10 +121,7 @@ void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 		}
 	}
 
-	output.write(buffer, size);
-	input.close();
-	output.close();
-	delete buffer;
+	output.write(buffer.get(), size);
 }
 
 void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path target) {
@@ -158,8 +155,8 @@ void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 	uint32_t offset = 0;
 	uint32_t remaining = size;
 
-	char* buffer = new char[size];
-	input.read(buffer, size);
+	auto buffer = std::make_unique<char[]>(size);
+	input.read(buffer.get(), size);
 
 	{ // xor and math step
 		boost::multiprecision::uint128_t magic2 = 0x3B2153E7529FE1FF;
@@ -195,7 +192,7 @@ void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 		while (remaining) {
 			uint32_t read = remaining < 16 ? remaining : 16;
 
-			uint32_t tmp2 = (rotateParameter * (uint64_t) 0x24924925) >> 32;
+			uint32_t tmp2 = (rotateParameter * (uint64_t) 0x24924925) >> 32; // optimized form of / 7
 			int32_t rotateCount = (((((rotateParameter - tmp2) >> 1) + tmp2) >> 2) * 7) - rotateParameter - 1;
 
 			uint64_t valueSum = 0;
@@ -218,8 +215,5 @@ void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path tar
 		}
 	}
 
-	output.write(buffer, size);
-	input.close();
-	output.close();
-	delete buffer;
+	output.write(buffer.get(), size);
 }

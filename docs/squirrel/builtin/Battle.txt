@@ -36,3 +36,7 @@ this.Battle.SetSkill(int, int)
 this.Battle.SetSlotBAnimationNextCommand(string anim)
 this.Battle.SetTurnStartActionBuff(int, int, int)
 this.Battle.SetTurnStartActionCommand(int, int, int)
+
+this.Battle.SetStatus
+this.Battle.SetCombo
+this.Battle.AttachAlwaysHit

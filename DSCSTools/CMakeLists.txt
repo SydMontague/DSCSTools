@@ -1,8 +1,11 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
-SET(SOURCE_FILES
+SET(EXE_SOURCE_FILES
 		DSCSTools.cpp
 		DSCSTools.h
+        )
+
+SET(SOURCE_FILES
 		MDB1.cpp
 		MDB1.h
 		EXPA.cpp
@@ -14,7 +17,7 @@ SET(SOURCE_FILES
 		)
 
 # Add source to this project's executable.
-add_executable (DSCSTools ${SOURCE_FILES})
+add_executable (DSCSTools ${EXE_SOURCE_FILES} ${SOURCE_FILES})
 target_link_libraries(DSCSTools PUBLIC doboz ${Boost_LIBRARIES})
 
 # Install into /target/ folder
