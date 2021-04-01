@@ -16,9 +16,11 @@
 void printUse() {
 	std::cout << "Modes:" << std::endl;
 	std::cout << "	--extract <sourceFile> <targetFolder>" << std::endl;
-	std::cout << "		Extracts the given decrypted MDB1 into a folder." << std::endl;
+	std::cout << "		Extracts the given MDB1 into a folder." << std::endl;
+	std::cout << "	--extractFile <sourceFile> <targetFolder> <filePath>" << std::endl;
+	std::cout << "		Extracts a file from a given MDB1 into a folder." << std::endl;
 	std::cout << "	--pack <sourceFolder> <targetFile> [--disable-compression]" << std::endl;
-	std::cout << "		Repacks the given folder into a decrypted MDB1." << std::endl;
+	std::cout << "		Repacks the given folder into an encrypted MDB1." << std::endl;
 	std::cout << "		Optional --disable-compression. Don't use for archives >= 4GiB!" << std::endl;
 	std::cout << "	--crypt <sourceFile> <targetFolder>" << std::endl;
 	std::cout << "		De- and Encrypts a mvgl file using the keys from DSCS." << std::endl;
