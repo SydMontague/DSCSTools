@@ -1,13 +1,18 @@
-﻿// DSCSTools.cpp : Defines the entry point for the application.
-//
-
-#include "DSCSTools.h"
+﻿#include "DSCSTools.h"
 #include "MDB1.h"
 #include "SaveFile.h"
 #include "EXPA.h"
 #include "AFS2.h"
 
 // TODO extract specific files from archive
+// TODO expose advanced compression mode
+// TODO Boost.Python
+// TODO non-MDB1 stuff
+// TODO GitHub Actions
+// TODO update README
+// TODO split off executable
+// TODO build as library
+
 void printUse() {
 	std::cout << "Modes:" << std::endl;
 	std::cout << "	--extract <sourceFile> <targetFolder>" << std::endl;
@@ -45,45 +50,54 @@ int main(int argc, char** argv) {
 	if(!target.has_root_directory())
 		target = boost::filesystem::current_path().append(argv[3]);
 	
-	if (strncmp("--extract", argv[1], 10) == 0) {
-		extractMDB1(source, target);
-		std::cout << "Done" << std::endl;
+	try {
+		if (strncmp("--extractFile", argv[1], 14) == 0 && argc >= 5) {
+			dscstools::extractMDB1File(source, target, argv[4]);
+			std::cout << "Done" << std::endl;
+		}
+		else if (strncmp("--extract", argv[1], 10) == 0) {
+			dscstools::extractMDB1(source, target);
+			std::cout << "Done" << std::endl;
+		}
+		else if (strncmp("--pack", argv[1], 7) == 0) {
+			bool compress = argc < 5 || (strncmp("--disable-compression", argv[4], 22) != 0);
+			dscstools::packMDB1(source, target, compress ? dscstools::CompressMode::normal : dscstools::CompressMode::none, std::cout);
+			std::cout << "Done" << std::endl;
+		}
+		else if (strncmp("--crypt", argv[1], 8) == 0) {
+			dscstools::cryptFile(source, target);
+			std::cout << "Done" << std::endl;
+		}
+		else if (strncmp("--savedecrypt", argv[1], 14) == 0) {
+			decryptSaveFile(source, target);
+			std::cout << "Done" << std::endl;
+		}
+		else if (strncmp("--saveencrypt", argv[1], 14) == 0) {
+			encryptSaveFile(source, target);
+			std::cout << "Done" << std::endl;
+		}
+		else if (strncmp("--mbeextract", argv[1], 13) == 0) {
+			extractMBE(source, target);
+			std::cout << "Done" << std::endl;
+		}
+		else if (strncmp("--mbepack", argv[1], 10) == 0) {
+			packMBE(source, target);
+			std::cout << "Done" << std::endl;
+		}
+		else if (strncmp("--afs2extract", argv[1], 14) == 0) {
+			extractAFS2(source, target);
+			std::cout << "Done" << std::endl;
+		}
+		else if (strncmp("--afs2pack", argv[1], 11) == 0) {
+			packAFS2(source, target);
+			std::cout << "Done" << std::endl;
+		}
+		else {
+			printUse();
+		}
 	}
-	else if (strncmp("--pack", argv[1], 7) == 0) {
-		bool compress = argc < 5 || (argv[4] == "--disable-compression");
-		packMDB1(source, target, compress);
-		std::cout << "Done" << std::endl;
-	}
-	else if (strncmp("--crypt", argv[1], 8) == 0) {
-		cryptFile(source, target);
-		std::cout << "Done" << std::endl;
-	}
-	else if (strncmp("--savedecrypt", argv[1], 14) == 0) {
-		decryptSaveFile(source, target);
-		std::cout << "Done" << std::endl;
-	}
-	else if (strncmp("--saveencrypt", argv[1], 14) == 0) {
-		encryptSaveFile(source, target);
-		std::cout << "Done" << std::endl;
-	}
-	else if (strncmp("--mbeextract", argv[1], 13) == 0) {
-		extractMBE(source, target);
-		std::cout << "Done" << std::endl;
-	}
-	else if (strncmp("--mbepack", argv[1], 10) == 0) {
-		packMBE(source, target);
-		std::cout << "Done" << std::endl;
-	}
-	else if (strncmp("--afs2extract", argv[1], 14) == 0) {
-		extractAFS2(source, target);
-		std::cout << "Done" << std::endl;
-	}
-	else if (strncmp("--afs2pack", argv[1], 11) == 0) {
-		packAFS2(source, target);
-		std::cout << "Done" << std::endl;
-	}
-	else {
-		printUse();
+	catch (std::exception& ex) {
+		std::cout << ex.what() << std::endl;
 	}
 
 	return 0;

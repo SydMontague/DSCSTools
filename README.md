@@ -98,8 +98,3 @@ The tool uses the [doboz compression library](https://voxelium.wordpress.com/201
 * [Blender-Tools-for-DSCS](https://github.com/Pherakki/Blender-Tools-for-DSCS/) by Pherakki
 * [NutCracker](https://github.com/SydMontague/NutCracker)
   * a decompiler for the game's Squirrel script files
-
-# Disclaimer
-This project is work-in-progress and I'm still learning how to properly use C++ and CMake, so excuse me if I make some nooby mistakes. :)
-
-
