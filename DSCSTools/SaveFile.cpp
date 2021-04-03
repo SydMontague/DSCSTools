@@ -36,8 +36,10 @@ namespace dscstools {
 				throw std::invalid_argument("Error: input and output path must be different!");
 			if (!boost::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: source path is not a regular file.");
-			if (!boost::filesystem::exists(target))
-				boost::filesystem::create_directories(target.parent_path());
+			if (!boost::filesystem::exists(target)) {
+				if (target.has_parent_path())
+					boost::filesystem::create_directories(target.parent_path());
+			}
 			else if (!boost::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path is not a regular file.");
 
@@ -125,8 +127,10 @@ namespace dscstools {
 				throw std::invalid_argument("Error: input and output path must be different!");
 			if (!boost::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: source path is not a regular file.");
-			if (!boost::filesystem::exists(target))
-				boost::filesystem::create_directories(target.parent_path());
+			if (!boost::filesystem::exists(target)) {
+				if (target.has_parent_path())
+					boost::filesystem::create_directories(target.parent_path());
+			}
 			else if (!boost::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path is not a regular file.");
 

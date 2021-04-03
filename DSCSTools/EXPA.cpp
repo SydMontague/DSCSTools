@@ -136,8 +136,10 @@ namespace dscstools {
 		}
 
 		void extractMBEFile(boost::filesystem::path source, boost::filesystem::path target) {
-			if (!boost::filesystem::exists(target))
-				boost::filesystem::create_directories(target);
+			if (!boost::filesystem::exists(target)) {
+				if (target.has_parent_path())
+					boost::filesystem::create_directories(target);
+			}
 			else if (!boost::filesystem::is_directory(target))
 				throw std::invalid_argument("Error: target path is not a directory.");
 
@@ -194,7 +196,8 @@ namespace dscstools {
 					throw std::runtime_error("Error: no definition for table " + std::string(table.name()) + " found. " + source.filename().string());
 
 				boost::filesystem::path outputPath = target / source.filename() / (table.name() + std::string(".csv"));
-				boost::filesystem::create_directories(outputPath.parent_path());
+				if (outputPath.has_parent_path())
+					boost::filesystem::create_directories(outputPath.parent_path());
 				boost::filesystem::ofstream output(outputPath, std::ios::out);
 
 				// write header
@@ -250,8 +253,10 @@ namespace dscstools {
 				throw std::invalid_argument("Error: input and output path must be different!");
 			if (!boost::filesystem::is_directory(source))
 				throw std::invalid_argument("Error: input path is not a directory.");
-			if (!boost::filesystem::exists(target))
-				boost::filesystem::create_directories(target.parent_path());
+			if (!boost::filesystem::exists(target)) {
+				if(target.has_parent_path())
+					boost::filesystem::create_directories(target.parent_path());
+			}
 			else if (!boost::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 

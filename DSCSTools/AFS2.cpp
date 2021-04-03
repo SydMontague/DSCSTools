@@ -39,7 +39,8 @@ namespace dscstools {
 			if (input.tellg() != offsets[0])
 				throw std::invalid_argument("AFS2: Didn't reach expected end of header.");
 
-			boost::filesystem::create_directories(target);
+			if(target.has_parent_path())
+				boost::filesystem::create_directories(target);
 
 			for (size_t i = 0; i < header.numFiles; i++) {
 				input.seekg((std::streampos) ((uint32_t)input.tellg() + header.blockSize - 1) & -header.blockSize);
@@ -62,8 +63,10 @@ namespace dscstools {
 			if (!boost::filesystem::is_directory(source)) 
 				throw std::invalid_argument("Error: source path is not a directory.");
 
-			if (!boost::filesystem::exists(target))
-				boost::filesystem::create_directories(target.parent_path());
+			if (!boost::filesystem::exists(target)) {
+				if (target.has_parent_path())
+					boost::filesystem::create_directories(target.parent_path());
+			}
 			else if (!boost::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 

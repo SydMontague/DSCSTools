@@ -182,7 +182,8 @@ namespace dscstools {
 			DataEntry data = fileInfo.data;
 
 			boost::filesystem::path path(targetDir / fileInfo.name.toPath());
-			boost::filesystem::create_directories(path.parent_path());
+			if (path.has_parent_path())
+				boost::filesystem::create_directories(path.parent_path());
 			mdb1_ofstream output(path, false);
 
 			auto outputArr = std::make_unique<char[]>(data.size);
@@ -392,8 +393,10 @@ namespace dscstools {
 			if (!boost::filesystem::is_directory(source))
 				throw std::invalid_argument("Error: source path is not a directory.");
 
-			if (!boost::filesystem::exists(target))
-				boost::filesystem::create_directories(target.parent_path());
+			if (!boost::filesystem::exists(target)) {
+				if (target.has_parent_path())
+					boost::filesystem::create_directories(target.parent_path());
+			}
 			else if (!boost::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 
@@ -517,8 +520,10 @@ namespace dscstools {
 			if (!boost::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: input path is not a file.");
 
-			if (!boost::filesystem::exists(target))
-				boost::filesystem::create_directories(target.parent_path());
+			if (!boost::filesystem::exists(target)) {
+				if (target.has_parent_path())
+					boost::filesystem::create_directories(target.parent_path());
+			}
 			else if (!boost::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 

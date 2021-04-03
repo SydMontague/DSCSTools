@@ -3,6 +3,7 @@
 #include <ostream>
 #include <vector>
 #include <string>
+#include "shared_export.h"
 
 namespace dscstools {
 	namespace mdb1 {
@@ -45,6 +46,10 @@ namespace dscstools {
 			FileEntry file;
 			FileNameEntry name;
 			DataEntry data;
+
+			bool operator==(const FileInfo& other) {
+				return false;
+			}
 		};
 
 		struct ArchiveInfo {
@@ -57,14 +62,14 @@ namespace dscstools {
 
 		static std::ostream nullStream(nullptr);
 
-		ArchiveInfo getArchiveInfo(const boost::filesystem::path source);
+		ArchiveInfo SHARED_EXPORT getArchiveInfo(const boost::filesystem::path source);
 
-		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, std::string fileName);
+		void SHARED_EXPORT extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, std::string fileName);
 
-		void extractMDB1(const boost::filesystem::path source, const boost::filesystem::path target);
+		void SHARED_EXPORT extractMDB1(const boost::filesystem::path source, const boost::filesystem::path target);
 
-		void packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, CompressMode compress = normal, std::ostream& progressStream = nullStream);
+		void SHARED_EXPORT packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, CompressMode compress = normal, std::ostream& progressStream = nullStream);
 
-		void cryptFile(const boost::filesystem::path source, const boost::filesystem::path target);
+		void SHARED_EXPORT cryptFile(const boost::filesystem::path source, const boost::filesystem::path target);
 	}
 }

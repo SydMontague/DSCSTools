@@ -1,15 +1,13 @@
-﻿#include "DSCSTools.h"
+﻿#include <iostream>
+
 #include "MDB1.h"
 #include "SaveFile.h"
 #include "EXPA.h"
 #include "AFS2.h"
-#include <boost/program_options.hpp>
+
 
 // TODO Boost.Python
 // TODO GitHub Actions
-// TODO update README
-// TODO split off executable
-// TODO build as library
 
 void printUse() {
 	std::cout << "DSCSTools v1.0.0-dev by SydMontague | https://github.com/SydMontague/DSCSTools/" << std::endl;
@@ -42,8 +40,6 @@ void printUse() {
 }
 
 int main(int argc, char** argv) {
-	std::cout << argv[0] << std::endl;
-
 	if (argc < 4) {
 		printUse();
 		return 0;
@@ -51,7 +47,6 @@ int main(int argc, char** argv) {
 	boost::filesystem::path source = boost::filesystem::exists(argv[2]) ? argv[2] : boost::filesystem::current_path().append(argv[2]);
 	boost::filesystem::path target = argv[3];
 	
-
 	if(!target.has_root_directory())
 		target = boost::filesystem::current_path().append(argv[3]);
 	
