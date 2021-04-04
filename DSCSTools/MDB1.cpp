@@ -227,16 +227,11 @@ namespace dscstools {
 				throw std::invalid_argument("Error: Source path doesn't point to a file, aborting.");
 
 			ArchiveInfo info = getArchiveInfo(source);
-			mdb1_ifstream input(source);
-
 			if (info.status == invalid)
 				throw std::invalid_argument("Error: not a MDB1 file. Value: " + info.magicValue);
 
 			for (FileInfo fileInfo : info.fileInfo)
 				extractMDB1File(source, target, fileInfo, info.dataStart);
-
-			if (!input.good())
-				throw std::runtime_error("Error: something went wrong while reading " + source.string());
 		}
 
 		TreeNode findFirstBitMismatch(const int16_t first, const std::vector<std::string>& nodeless, const std::vector<std::string>& withNode) {
