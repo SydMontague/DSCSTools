@@ -5,8 +5,6 @@
 #include "EXPA.h"
 #include "AFS2.h"
 
-
-// TODO Boost.Python
 // TODO GitHub Actions
 
 void printUse() {

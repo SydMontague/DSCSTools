@@ -7,7 +7,9 @@ project ("DSCSTools"
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-if(NOT MSVC)
+if (MSVC)
+	add_definitions("-D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0601") # Windows 7
+else()
 	set(CMAKE_CXX_FLAGS -pthread)
 endif()
 
@@ -19,17 +21,18 @@ add_subdirectory("libs/doboz")
 
 # python
 FIND_PACKAGE(Python3)
-FIND_PACKAGE(PythonLibs 3.6 REQUIRED)
+FIND_PACKAGE(PythonLibs REQUIRED)
 
 # boost
-set(Boost_USE_STATIC_LIBS ON) 
+if(WIN32)
+    set(Boost_USE_STATIC_LIBS ON) 
+elseif(BUILD_SHARED)
+    set(Boost_USE_STATIC_LIBS OFF) 
+endif()
+
 FIND_PACKAGE(Boost 1.66 REQUIRED COMPONENTS filesystem system date_time regex python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR})
 
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} ${PYTHON_INCLUDE_DIRS} )
-
-if (WIN32)
-	add_definitions("-D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0601") # Windows 7
-endif()
 
 # Include sub-projects.
 add_subdirectory ("DSCSTools")
