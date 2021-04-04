@@ -13,6 +13,9 @@ SET(SOURCE_FILES
 		include/AFS2.h
         python.cpp
 		)
+        
+set(CMAKE_SHARED_LIBRARY_PREFIX "")
+set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
 # Add source to this project's executable.
 if(BUILD_SHARED)
