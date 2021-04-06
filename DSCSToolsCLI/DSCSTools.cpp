@@ -5,10 +5,8 @@
 #include "EXPA.h"
 #include "AFS2.h"
 
-// TODO GitHub Actions
-
 void printUse() {
-	std::cout << "DSCSTools v1.0.0-dev by SydMontague | https://github.com/SydMontague/DSCSTools/" << std::endl;
+	std::cout << "DSCSTools v1.0.0 by SydMontague | https://github.com/SydMontague/DSCSTools/" << std::endl;
 	std::cout << "Modes:" << std::endl;
 	std::cout << "	--extract <sourceFile> <targetFolder>" << std::endl;
 	std::cout << "		Extracts the given MDB1 into a folder." << std::endl;
@@ -109,4 +107,3 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
-

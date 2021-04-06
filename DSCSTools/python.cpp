@@ -99,10 +99,10 @@ namespace dscstools {
 				.def_readonly("Files", &mdb1::ArchiveInfo::fileInfo);
 
 			class_<mdb1::FileInfo>("FileInfo", no_init)
-				.def("FileName", make_function([](mdb1::FileInfo& a) { return a.name.toString(); }, default_call_policies(), boost::mpl::vector<std::string, mdb1::FileInfo&>()))
-				.def("DataOffset", make_function([](mdb1::FileInfo& a) { return a.data.offset; }, default_call_policies(), boost::mpl::vector<int, mdb1::FileInfo&>()))
-				.def("DataSize", make_function([](mdb1::FileInfo& a) { return a.data.size; }, default_call_policies(), boost::mpl::vector<int, mdb1::FileInfo&>()))
-				.def("DataCompressedSize", make_function([](mdb1::FileInfo& a) { return a.data.compSize; }, default_call_policies(), boost::mpl::vector<int, mdb1::FileInfo&>()));
+				.add_property("FileName", make_function([](mdb1::FileInfo& a) { return a.name.toString(); }, default_call_policies(), boost::mpl::vector<std::string, mdb1::FileInfo&>()))
+				.add_property("DataOffset", make_function([](mdb1::FileInfo& a) { return a.data.offset; }, default_call_policies(), boost::mpl::vector<int, mdb1::FileInfo&>()))
+				.add_property("DataSize", make_function([](mdb1::FileInfo& a) { return a.data.size; }, default_call_policies(), boost::mpl::vector<int, mdb1::FileInfo&>()))
+				.add_property("DataCompressedSize", make_function([](mdb1::FileInfo& a) { return a.data.compSize; }, default_call_policies(), boost::mpl::vector<int, mdb1::FileInfo&>()));
 			
 			def("extractMDB1", _py_extractMDB1);
 			def("extractMDB1File", _py_extractMDB1File);

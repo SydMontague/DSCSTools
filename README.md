@@ -70,6 +70,14 @@ Currently supported field types are `byte` (int8), `short` (int16), `int` (int32
 }
 ```
 
+## Library
+The tool can also be used as a library by other software. You can find the shared library+documented headers in the downloads.
+
+You can also use the library as Python module. Simply install the shared library in a place your Python program searchs for modules and you should be able
+to import it via `import DSCSTools`. Note, on Windows you'll have to rename the `DSCSTools.dll` to `DSCSTools.pyd`.
+
+For Python documentation head to the [Wiki Entry](https://github.com/SydMontague/DSCSTools/wiki/Python-Interfaces)
+
 
 # Build
 The project uses CMake. On Windows you can use Visual Studio's CMake integration.

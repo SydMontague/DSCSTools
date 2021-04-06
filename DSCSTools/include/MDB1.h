@@ -62,14 +62,38 @@ namespace dscstools {
 
 		static std::ostream nullStream(nullptr);
 
+		/**
+			Returns the ArchiveInfo of an MDB1 archive given by sourceArchive. 
+			See the ArchiveInfo strcture. The encryption status of the archive doesn't matter.
+		*/
 		ArchiveInfo SHARED_EXPORT getArchiveInfo(const boost::filesystem::path source);
 
+		/**
+			Extracts a file with the internal path filePath from a MDB1 archive given by sourceArchive into targetPath. 
+			The encryption status of the archive doesn't matter.
+		*/
 		void SHARED_EXPORT extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, std::string fileName);
 
+		/**
+			Extracts a MDB1 archive given by sourceArchive and extracts it into targetPath or throws an error if something went wrong. 
+			The encryption status of the archive doesn't matter.
+		*/
 		void SHARED_EXPORT extractMDB1(const boost::filesystem::path source, const boost::filesystem::path target);
 
+		/**
+			Packs a folder given by sourcePath into an encrypted MDB1 archive saved at targetArchive. 
+			You can optionally set the compression mode and which output stream to print progress reports to. 
+			
+			Valid values for compressMode are:
+				dscstools::mdb1::CompressMode::none -> no compression at all
+				dscstools::mdb1::CompressMode::normal -> regular compression
+				dscstools::mdb1::CompressMode::advanced -> regular compression with duplicate detection
+		*/
 		void SHARED_EXPORT packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, CompressMode compress = normal, std::ostream& progressStream = nullStream);
 
+		/**
+			Performs synchronous en-/decryption of the given sourceFile and saves it into targetFile.
+		*/
 		void SHARED_EXPORT cryptFile(const boost::filesystem::path source, const boost::filesystem::path target);
 	}
 }

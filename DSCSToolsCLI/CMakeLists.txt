@@ -2,7 +2,7 @@
 
 include_directories(../DSCSTools/include)
 
-if(NOT WIN32)
+if(UNIX AND NOT APPLE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath='$ORIGIN'")
 endif()
 
