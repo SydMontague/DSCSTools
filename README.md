@@ -76,6 +76,8 @@ The tool can also be used as a library by other software. You can find the share
 You can also use the library as Python module. Simply install the shared library in a place your Python program searchs for modules and you should be able
 to import it via `import DSCSTools`. Note, on Windows you'll have to rename the `DSCSTools.dll` to `DSCSTools.pyd`.
 
+Please note, the currently prebuild binaries only work on Python 3.8. Other Python versions require the library to be recompiled.
+
 For Python documentation head to the [Wiki Entry](https://github.com/SydMontague/DSCSTools/wiki/Python-Interfaces)
 
 
