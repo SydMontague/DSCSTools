@@ -10,25 +10,48 @@
 #include "include/SaveFile.h"
 
 namespace dscstools {
+		// From https://wiki.python.org/moin/boost.python/HowTo#Multithreading_Support_for_my_function
+		class ScopedGILRelease
+		{
+		public:
+			inline ScopedGILRelease()
+			{
+				m_thread_state = PyEval_SaveThread();
+			}
+
+			inline ~ScopedGILRelease()
+			{
+				PyEval_RestoreThread(m_thread_state);
+				m_thread_state = NULL;
+			}
+
+		private:
+			PyThreadState * m_thread_state;
+		};
+
 		// MDB1
 		void _py_extractMDB1(const std::string source, const std::string target) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			mdb1::extractMDB1(_source, _target);
 		}
 
 		void _py_extractMDB1File(const std::string source, const std::string target, const std::string fileName) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			mdb1::extractMDB1File(_source, _target, fileName);
 		}
 
 		mdb1::ArchiveInfo _py_getArchiveInfo(const std::string source) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			return mdb1::getArchiveInfo(_source);
 		}
 
 		void _py_packMDB1(const std::string source, const std::string target, const mdb1::CompressMode mode = mdb1::CompressMode::normal, const bool useStdout = true) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			if(useStdout)
@@ -38,6 +61,7 @@ namespace dscstools {
 		}
 
 		void _py_crypt(const std::string source, const std::string target) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			mdb1::cryptFile(_source, _target);
@@ -45,12 +69,14 @@ namespace dscstools {
 
 		// MBE
 		void _py_extractMBE(const std::string source, const std::string target) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			mbe::extractMBE(_source, _target);
 		}
 
 		void _py_packMBE(const std::string source, const std::string target) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			mbe::packMBE(_source, _target);
@@ -58,12 +84,14 @@ namespace dscstools {
 
 		// AFS2
 		void _py_extractAFS2(const std::string source, const std::string target) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			afs2::extractAFS2(_source, _target);
 		}
 
 		void _py_packAFS2(const std::string source, const std::string target) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			afs2::packAFS2(_source, _target);
@@ -71,12 +99,14 @@ namespace dscstools {
 
 		// SaveFile
 		void _py_encryptSaveFile(const std::string source, const std::string target) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			savefile::encryptSaveFile(_source, _target);
 		}
 
 		void _py_decryptSaveFile(const std::string source, const std::string target) {
+			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			savefile::decryptSaveFile(_source, _target);
