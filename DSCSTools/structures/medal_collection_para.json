@@ -1,20 +1,20 @@
 {
   "table": {
-    "id": "int",
-    "unk1": "int",
-    "unk2": "int",
-    "unk3": "int",
-    "unk4": "int",
-    "unk5": "int",
-    "unk6": "int",
-    "unk7": "int",
-    "unk8": "int",
-    "unk9": "int",
-    "unk10": "int",
-    "unk11": "int",
-    "unk12": "int",
-    "unk13": "int",
-    "unk14": "int",
-    "unk15": "int"
+    "CollectionId": "int",
+    "MedalId01": "int",
+    "MedalId02": "int",
+    "MedalId03": "int",
+    "MedalId04": "int",
+    "MedalId05": "int",
+    "MedalId06": "int",
+    "MedalId07": "int",
+    "MedalId08": "int",
+    "MedalId09": "int",
+    "MedalId10": "int",
+    "MedalId11": "int",
+    "MedalId12": "int",
+    "MedalId13": "int",
+    "MedalId14": "int",
+    "MedalId15": "int"
   }
 }
