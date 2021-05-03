@@ -43,6 +43,6 @@
     "icon_id": "int",
     "coinPrice": "int",
     "variationId": "int",
-    "attackPoint": "int"
+    "attachPoint": "int"
   }
 }

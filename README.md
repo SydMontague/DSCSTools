@@ -16,7 +16,8 @@ A library version to be linked by other tools is also available.
 * Extract and import MBE files
   * currently supports int8, int16, int32, float, int32 array and string field types
 * Extract and Rebuild AFS2 archives
-  * The resulting files are, like all sound files, in the HCA format. You can use [vgmstream](https://github.com/vgmstream/vgmstream) to convert them.
+  * The resulting files are, like all sound files, in the HCA format. You can use [vgmstream](https://github.com/vgmstream/vgmstream) and [VGAudio](https://github.com/Thealexbarney/VGAudio) to convert them.
+  * Note: You'll need a newer version of VGAudio that supports encrypting HCA files.
 * Decrypt and Encrypt .steam.mvgl files
   * some of the assets (DSDB, DSDBA, DSDBP, DSDBPse, DSDBS, DSDBse and DSDBSP) of the PC release are encrypted, the tool can decrypt and encrypt files
 * Decrypt and Encrypt PC save files

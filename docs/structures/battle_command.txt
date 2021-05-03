@@ -53,7 +53,7 @@ Target Type
  8 - Dead? (Revive)
  9 - Dead? (Revive DX)
 
-Status Type // TODO
+Status Type
  0 - None
  1 - Poison
  2 - Panic
