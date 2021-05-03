@@ -4,6 +4,6 @@
     "StartTime": "int",
     "EndTime": "int",
     "SubtitleTextID": "int",
-    "SubtitleCode": "string"
+    "VoiceAudioID": "string"
   }
 }

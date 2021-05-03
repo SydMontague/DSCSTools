@@ -2,18 +2,18 @@
   "data": {
     "id": "int",
     "unk1": "int",
-    "unk2": "int",
+    "DialogueSteps": "int",
     "unk3": "int",
     "unk4": "string",
-    "unk5": "int",
-    "unk6": "int",
-    "unk7": "int",
-    "unk8": "int",
-    "unk9": "int",
-    "unk10": "int",
-    "unk11": "int",
-    "unk12": "int",
-    "unk13": "int"
+    "idStartMessage": "int",
+    "idPlayerReply1": "int",
+    "idPlayerReply2": "int",
+    "idPlayerReply3": "int",
+    "GameProgressFlagToNotReply?": "int",
+    "idCharacterReply1": "int",
+    "idCharacterReply2": "int",
+    "idCharacterReply3": "int",
+    "CorrectAnswer": "int"
   },
   "no_response": {
     "unk1": "int",
