@@ -59,9 +59,9 @@ int main(int argc, char** argv) {
 			dscstools::mdb1::CompressMode mode = dscstools::mdb1::CompressMode::normal;
 
 			if (argc >= 5) {
-				if (strncmp("--disable-compression", argv[4], 22) != 0)
+				if (strncmp("--disable-compression", argv[4], 22) == 0)
 					mode = dscstools::mdb1::CompressMode::none;
-				else if (strncmp("--advanced-compression", argv[4], 23) != 0)
+				else if (strncmp("--advanced-compression", argv[4], 23) == 0)
 					mode = dscstools::mdb1::CompressMode::advanced;
 			}
 
