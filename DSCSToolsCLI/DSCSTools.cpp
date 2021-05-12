@@ -65,7 +65,6 @@ int main(int argc, char** argv) {
 					mode = dscstools::mdb1::CompressMode::advanced;
 			}
 
-			bool compress = argc < 5 || (strncmp("--disable-compression", argv[4], 22) != 0);
 			dscstools::mdb1::packMDB1(source, target, mode, std::cout);
 			std::cout << "Done" << std::endl;
 		}
