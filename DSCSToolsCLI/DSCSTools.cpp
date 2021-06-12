@@ -59,13 +59,12 @@ int main(int argc, char** argv) {
 			dscstools::mdb1::CompressMode mode = dscstools::mdb1::CompressMode::normal;
 
 			if (argc >= 5) {
-				if (strncmp("--disable-compression", argv[4], 22) != 0)
+				if (strncmp("--disable-compression", argv[4], 22) == 0)
 					mode = dscstools::mdb1::CompressMode::none;
-				else if (strncmp("--advanced-compression", argv[4], 23) != 0)
+				else if (strncmp("--advanced-compression", argv[4], 23) == 0)
 					mode = dscstools::mdb1::CompressMode::advanced;
 			}
 
-			bool compress = argc < 5 || (strncmp("--disable-compression", argv[4], 22) != 0);
 			dscstools::mdb1::packMDB1(source, target, mode, std::cout);
 			std::cout << "Done" << std::endl;
 		}
