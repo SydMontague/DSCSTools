@@ -19,7 +19,12 @@ this.Battle.IsChangeGuest()
 this.Battle.LoadObject(string, string, float, float, float, float, float)
 this.Battle.PlayAnimation(int charId, string anim, bool)
 this.Battle.SetAnimationFix(int charId, bool)
-this.Battle.SetBGM(string track1, string track2)
+/*
+ * Sets the music played in battle.
+ * battleMusic -> the music played during the battle
+ * victory -> the music played after winning
+ */
+this.Battle.SetBGM(string battle, string victory)
 this.Battle.SetBackAttack()
 this.Battle.SetBackgroundMovie(string movieName)
 this.Battle.SetCommand(int commandId)

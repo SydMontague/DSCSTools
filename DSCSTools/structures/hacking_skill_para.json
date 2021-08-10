@@ -2,11 +2,11 @@
   "Sheet1": {
     "id": "int",
     "unk1": "int",
-    "unk2": "int",
-    "unk3": "int",
-    "unk4": "int",
-    "unk5": "int",
+    "nameId": "int",
+    "descriptionId": "int",
+    "explainationId": "int",
+    "conditionId": "int",
     "unk6": "int",
-    "unk7": "int"
+    "icon": "int"
   }
 }
