@@ -1,45 +1,62 @@
-this.Common.AddMoney(int money)
-this.Common.AddTP(int)
-this.Common.AdvanceStoryProgress()
-this.Common.GetCharName(int)
-this.Common.GetFieldGuest()
-this.Common.GetFieldName(int)
-this.Common.GetFreePartyMemory()
-this.Common.GetMainStoryPlayerSex()
-this.Common.GetModelNameFieldGuest()
-this.Common.GetMoney()
-this.Common.GetPartyEmptyNum()
-this.Common.GetPartyNumExhausted()
-this.Common.GetPlayerClothModelName()
-this.Common.GetPlayerModelName()
-this.Common.GetPlayerSex()
-this.Common.GetStoryMode()
-this.Common.GetTP()
-this.Common.IsDebugGuestAdd()
-this.Common.IsExistReverseStorySaveData(int)
-this.Common.IsOnMirrorDungeon()
-this.Common.IsStoryClearCyberSleuth()
-this.Common.IsStoryClearHackersMemory()
-this.Common.LearnHackingSkill(int)
-this.Common.SendNoticeStoryClearCyberSleuth()
-this.Common.SendNoticeStoryClearHackersMemory()
-this.Common.SetControlPlayerType(int)
-this.Common.SetFieldGuest(int)
-this.Common.SetOnMirrorDungeon(bool)
-
-this.Common.IsEnableHackersMemory()
-this.Common.SetProhibitedDistrict
-this.Common.GetItemName
-this.Common.IsLearnHackingSkill
-this.Common.GetPartyMaxNum
-this.Common.GetPartyNum
-this.Common.GetMaxPartyMemory
-this.Common.GetUsePartyMemory
-this.Common.GetHackerRank
-this.Common.AddClearNum
-this.Common.GetClearNum
-this.Common.GetStoryProgress
-this.Common.GetMainStoryPlayerModelName
-this.Common.SetPlayerClothModelName
-this.Common.GetControlPlayerType
-this.Common.GetControlPlayerModelName
+this.Common.AddMoney(int money) -> void
+this.Common.AddTP(int -> void
+this.Common.AdvanceStoryProgress() -> void
+this.Common.GetCharName(int) -> String
+this.Common.GetFieldGuest() -> int
+this.Common.GetFieldName(int) -> String
+this.Common.GetFreePartyMemory() -> int
+this.Common.GetMainStoryPlayerSex() -> int
+this.Common.GetModelNameFieldGuest() -> String
+this.Common.GetMoney() -> int
+this.Common.GetPartyEmptyNum() -> int
+this.Common.GetPartyNumExhausted() -> int
+this.Common.GetPlayerClothModelName() -> String
+this.Common.GetPlayerModelName() -> String
+this.Common.GetPlayerSex() -> int
+this.Common.GetStoryMode() -> int
+this.Common.GetTP() -> int
+/*
+ * Returns always 0
+ */
+this.Common.IsDebugGuestAdd() -> bool
+this.Common.IsExistReverseStorySaveData(int) -> bool
+this.Common.IsOnMirrorDungeon() -> bool
+this.Common.IsStoryClearCyberSleuth() -> bool
+this.Common.IsStoryClearHackersMemory() -> bool
+this.Common.LearnHackingSkill(int) -> void
+this.Common.SendNoticeStoryClearCyberSleuth() -> void
+this.Common.SendNoticeStoryClearHackersMemory() -> void
+this.Common.SetControlPlayerType(int) -> void
+this.Common.SetFieldGuest(int) -> void
+this.Common.SetOnMirrorDungeon(bool) -> void
+/*
+ * Returns always 1
+ */
+this.Common.IsEnableHackersMemory() -> bool
+this.Common.SetProhibitedDistrict(bool) -> void
+this.Common.GetItemName(int) -> String
+this.Common.IsLearnHackingSkill(int) -> bool
+this.Common.GetPartyMaxNum() -> int
+this.Common.GetPartyNum() -> int
+this.Common.GetMaxPartyMemory() -> int
+this.Common.GetUsePartyMemory() -> int
+this.Common.GetHackerRank() -> int
+this.Common.AddClearNum() -> void
+/*
+ * Probably gets the number of times the game has been cleared.
+ * 0 -> Cyber Sleuth
+ * 3 -> current game
+ * otherwise -> Hacker's Memory
+ */
+this.Common.GetClearNum(int) -> int
+/*
+ * Probably gets the story progress.
+ * 0 -> Cyber Sleuth
+ * 3 -> current game
+ * otherwise -> Hacker's Memory
+ */
+this.Common.GetStoryProgress(int) -> int
+this.Common.GetMainStoryPlayerModelName() -> String
+this.Common.SetPlayerClothModelName(String) -> void
+this.Common.GetControlPlayerType() -> int
+this.Common.GetControlPlayerModelName() -> String
