@@ -1,3 +1,9 @@
-this.Work.Get(int dataId)
-this.Work.IsPushKey(string) // known good values "DECIDE", "ANY" | assumed good values: "UP", "DOWN", "LEFT", "RIGHT", "CANCEL", "TAP"
-this.Work.Set(int dataId, int value)
+this.Work.Get(int dataId) -> int
+/*
+ * Gets the state of a button/key
+ * 
+ * Possible values are:
+ * DECIDE, CANCEL, UP, DOWN, LEFT, RIGHT, TAP, ANY
+ */
+this.Work.IsPushKey(string) -> bool
+this.Work.Set(int dataId, int value) -> void

@@ -1,3 +1,3 @@
-this.Item.Add(int itemId, int amount)
-this.Item.Delete(int itemId, int amount)
-this.Item.GetNum(int itemId)
+this.Item.Add(int itemId, int amount) -> void
+this.Item.Delete(int itemId, int amount) -> void
+this.Item.GetNum(int itemId) -> int

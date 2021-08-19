@@ -1,19 +1,28 @@
-this.Keyword.AdvanceProgress(int keyId)
-this.Keyword.CloseUseWindow()
-this.Keyword.Delete(int)
-this.Keyword.EventHappen(int)
-this.Keyword.GetActiveID()
-this.Keyword.GetMessageID(int keyId, int index, int messageType, int useResult, bool isProgress)
-this.Keyword.GetMessageType(int keyId, int msgId)
-this.Keyword.GetProgress(int)
-this.Keyword.GetResultUseWindow()
-this.Keyword.GetTalkDataName()
-this.Keyword.IsCompleted(int)
-this.Keyword.IsEndCloseUseWindow()
-this.Keyword.IsEventHappen(int)
-this.Keyword.IsHave(int)
-this.Keyword.IsNextUseWindow()
-this.Keyword.OpenUseWindow()
-this.Keyword.SetNpcKeywordIcon()
-this.Keyword.UnlockDirectionCorrect()
-this.Keyword.UnlockDirectionIncorrect()
+this.Keyword.AdvanceProgress(int keyId) -> void
+this.Keyword.CloseUseWindow() -> void
+this.Keyword.Delete(int) -> void
+this.Keyword.EventHappen(int) -> void
+this.Keyword.GetActiveID() -> int
+this.Keyword.GetMessageID(int keyId, int index, int messageType, int useResult, bool isProgress) -> int
+this.Keyword.GetMessageType(int keyId, int msgId) -> int
+this.Keyword.GetProgress(int) -> int
+this.Keyword.GetResultUseWindow() -> int
+this.Keyword.GetTalkDataName() ?
+this.Keyword.IsCompleted(int) -> bool
+this.Keyword.IsEndCloseUseWindow() -> bool
+this.Keyword.IsEventHappen(int) -> bool
+this.Keyword.IsHave(int) -> bool
+this.Keyword.IsNextUseWindow() -> bool
+this.Keyword.OpenUseWindow() -> void
+this.Keyword.SetNpcKeywordIcon() -> void
+this.Keyword.UnlockDirectionCorrect() -> void
+this.Keyword.UnlockDirectionIncorrect() -> void
+this.Keyword.Add(int) -> void
+/*
+ * Always false
+ */
+this.Keyword.IsCorrectAnswer() -> bool
+/*
+ * Always -1
+ */
+this.Keyword.GetUseTargetID() -> int

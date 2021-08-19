@@ -1,47 +1,45 @@
-this.Battle.AddAnimation(int charId, int)
-this.Battle.AttachAlwaysAvoid(int, bool)
-this.Battle.AttachAlwaysAvoid(int)
-this.Battle.AttachFixDamage(int, int, int)
-this.Battle.AttachNoDamage(int, bool)
-this.Battle.AttachReducePenetrate(int, int)
-this.Battle.AttachUndead(int, bool)
-this.Battle.ChangeGuest(int, int, int)
-this.Battle.Encount(int encounterId, int battleMapId)
-this.Battle.EventParty(int, int, int)
-this.Battle.ForceEnd()
-this.Battle.GetDifficulty()
-this.Battle.GetParameter(int charId, int)
-this.Battle.GetPlayerModelID(int)
-this.Battle.GetStatus(int charId, int)
-this.Battle.GetTurn(int)
-this.Battle.GetTurnCharacter()
-this.Battle.IsChangeGuest()
-this.Battle.LoadObject(string, string, float, float, float, float, float)
-this.Battle.PlayAnimation(int charId, string anim, bool)
-this.Battle.SetAnimationFix(int charId, bool)
+this.Battle.AddAnimation(int charId, int) -> void
+this.Battle.AttachAlwaysAvoid(int, bool) -> void
+this.Battle.AttachAlwaysHit(int, bool) -> void
+this.Battle.AttachFixDamage(int, int, int) -> void
+this.Battle.AttachNoDamage(int, bool) -> void
+this.Battle.AttachReducePenetrate(int, int) -> void
+this.Battle.AttachUndead(int, bool) -> void
+this.Battle.ChangeGuest(int, int, int) -> void
+this.Battle.Encount(int encounterId, int battleMapId) -> void
+this.Battle.EventParty(int, int, int) -> void
+this.Battle.ForceEnd() -> void
+this.Battle.GetDifficulty() -> int
+this.Battle.GetParameter(int charId, int paramId) -> int
+this.Battle.GetPlayerModelID(int) -> int
+this.Battle.GetStatus(int charId, int) -> int
+this.Battle.GetTurn(int) -> int
+this.Battle.GetTurnCharacter() -> void
+this.Battle.IsChangeGuest() -> void
+this.Battle.LoadObject(string, string, float, float, float, float, int) -> void
+this.Battle.PlayAnimation(int charId, string anim, bool) -> void
+this.Battle.SetAnimationFix(int charId, bool) -> void
 /*
  * Sets the music played in battle.
  * battleMusic -> the music played during the battle
  * victory -> the music played after winning
  */
-this.Battle.SetBGM(string battle, string victory)
-this.Battle.SetBackAttack()
-this.Battle.SetBackgroundMovie(string movieName)
-this.Battle.SetCommand(int commandId)
-this.Battle.SetCommandTarget(int charId)
-this.Battle.SetDispUI(bool)
-this.Battle.SetFirstAttack()
-this.Battle.SetItemDisable(bool disable)
-this.Battle.SetParameter(int charId, int paramId, int value)
-this.Battle.SetPlayerInvisible(int, bool)
-this.Battle.SetPlayerPosition(float, float, float)
-this.Battle.SetRefuseScan(bool)
-this.Battle.SetReserveDisable(bool)
-this.Battle.SetSkill(int, int)
-this.Battle.SetSlotBAnimationNextCommand(string anim)
-this.Battle.SetTurnStartActionBuff(int, int, int)
-this.Battle.SetTurnStartActionCommand(int, int, int)
-
-this.Battle.SetStatus
-this.Battle.SetCombo
-this.Battle.AttachAlwaysHit
+this.Battle.SetBGM(string battle, string victory) -> void
+this.Battle.SetBackAttack() -> void
+this.Battle.SetBackgroundMovie(string movieName) -> void
+this.Battle.SetCommand(int commandId) -> void
+this.Battle.SetCommandTarget(int charId) -> void
+this.Battle.SetDispUI(bool) -> void
+this.Battle.SetFirstAttack() -> void
+this.Battle.SetItemDisable(bool disable) -> void
+this.Battle.SetParameter(int charId, int paramId, int value) -> void
+this.Battle.SetPlayerInvisible(int, bool) -> void
+this.Battle.SetPlayerPosition(float, float, float) -> void
+this.Battle.SetRefuseScan(bool) -> void
+this.Battle.SetReserveDisable(bool) -> void
+this.Battle.SetSkill(int, int) -> void
+this.Battle.SetSlotBAnimationNextCommand(string anim) -> void
+this.Battle.SetTurnStartActionBuff(int, int, int) -> void
+this.Battle.SetTurnStartActionCommand(int, int, int) -> void
+this.Battle.SetStatus(int, int, bool) -> void
+this.Battle.SetCombo(int, bool) -> void
