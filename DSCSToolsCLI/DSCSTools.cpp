@@ -27,7 +27,7 @@ void printUse() {
 	std::cout << "	--afs2pack <sourceFolder> <targetFile>" << std::endl;
 	std::cout << "		Repacks the given folder info the AFS2 format." << std::endl;
 	std::cout << "		File order is alphabetical and relevant, filenames themselves are lost." << std::endl;
-	std::cout << "	--crypt <sourceFile> <targetFolder>" << std::endl;
+	std::cout << "	--crypt <sourceFile> <targetFile>" << std::endl;
 	std::cout << "		De- and Encrypts a mvgl file using the keys from DSCS." << std::endl;
 	std::cout << "	--savedecrypt <sourceFile> <targetFolder>" << std::endl;
 	std::cout << "		Decrypts a savefile (system_data.bin, 000X.bin, slot_000X.bin)." << std::endl;
