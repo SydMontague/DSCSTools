@@ -1,0 +1,1 @@
+this.Effect.Play(string, float, float, float) -> void

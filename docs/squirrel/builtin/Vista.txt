@@ -1,50 +1,53 @@
-this.Vista.AttachAccessory(string, string, string, int)
-this.Vista.ChangeTextureModel(string, string)
-this.Vista.EnableScenarioSelect()
-this.Vista.End()
-this.Vista.EndChapter()
-this.Vista.Exit()
-this.Vista.IsEndLoad()
-this.Vista.IsEndLoadAnotherScenario()
-this.Vista.IsEndOptionForStart()
-this.Vista.IsEndPlay(float)
-this.Vista.IsEndScenarioSelect()
-this.Vista.IsExit()
-this.Vista.IsReadyBGMovie()
-this.Vista.IsScenarioSelectReturn()
-this.Vista.LoadAccessory(string, string)
-this.Vista.LoadAndSetEffect(int, string, int, int, int, int)
-this.Vista.LoadAnimation(string, string)
-this.Vista.LoadBackGround(string)
-this.Vista.LoadCameraAnimation(string)
-this.Vista.LoadLocater(string)
-this.Vista.LoadModel(int, string, string)
-this.Vista.LoadPartySetModel(int, string, string)
-this.Vista.LoadSubtitle(string)
-this.Vista.LoadTexture(string, string)
-this.Vista.LocateModel(string, int, int)
-this.Vista.OpenLoadAnotherScenario()
-this.Vista.OpenOptionForStart()
-this.Vista.OpenScenarioSelect()
-this.Vista.Play()
-this.Vista.PlayAnimation(string, string, int, bool)
-this.Vista.PlayAnimationSlotB(string, string, bool)
-this.Vista.PlayBGMovie(string)
-this.Vista.PlaySubtitle()
-this.Vista.SetCameraAnimationTime(int, int)
-this.Vista.SetFPS(int)
-this.Vista.SetLight(string)
-this.Vista.SetLoopFrameModel(string, string, int, int)
-this.Vista.SetModelPriority(string, int)
-this.Vista.SetModelVisible(string, bool, float)
-this.Vista.SetOutlineModel(string, int)
-this.Vista.SetSE(string, float)
-this.Vista.SetScenarioSelectTextNeutral(int)
-this.Vista.SetScenarioSelectTextSelectHm(int)
-this.Vista.SetScenarioSelectTextSelectHmDisable(int)
-this.Vista.SetScenarioSelectTextSelectSc(int)
-this.Vista.SetScenarioSelectTextSelectScDisable(int)
-this.Vista.Start()
-this.Vista.StartChapter(int, int, bool)
-this.Vista.StartFrameModel(string, string, int)
-this.Vista.StopBGMovie()
+this.Vista.AttachAccessory(string, string, string, int) -> void
+this.Vista.ChangeTextureModel(string, string) -> void
+this.Vista.DetachAccessory(string, int) -> void
+this.Vista.EnableScenarioSelect() -> void
+this.Vista.End() -> void
+this.Vista.EndChapter() -> void
+this.Vista.Exit() -> void
+this.Vista.IsEndLoad() -> bool
+this.Vista.IsEndLoadAnotherScenario() -> bool
+this.Vista.IsEndOptionForStart() -> bool
+this.Vista.IsEndPlay(float) -> bool
+this.Vista.IsEndScenarioSelect() -> bool
+this.Vista.IsExit() -> bool
+this.Vista.IsReadyBGMovie() -> bool
+this.Vista.IsScenarioSelectReturn() -> bool
+this.Vista.LoadAccessory(string, string) -> void
+this.Vista.LoadAndSetEffect(int, string, float, float, float, float) -> void
+this.Vista.LoadAnimation(string, string) -> void
+this.Vista.LoadBackGround(string) -> void
+this.Vista.LoadCameraAnimation(string) -> void
+this.Vista.LoadLocater(string) -> void
+this.Vista.LoadModel(int, string, string) -> void
+this.Vista.LoadPartySetModel(int, string, string) -> void
+this.Vista.LoadSubtitle(string) -> void
+this.Vista.LoadTexture(string, string) -> void
+this.Vista.LocateModel(string, float, float) -> void
+this.Vista.OpenLoadAnotherScenario() -> void
+this.Vista.OpenOptionForStart() -> void
+this.Vista.OpenScenarioSelect() -> void
+this.Vista.Play() -> void
+this.Vista.PlayAnimation(string, string, float, bool) -> void
+this.Vista.PlayAnimationSlotB(string, string, bool) -> void
+this.Vista.PlayAnimationSlotC(string, string, bool) -> void
+this.Vista.PlayBGMovie(string) -> void
+this.Vista.PlaySubtitle() -> void
+this.Vista.SetAnimationSpeedModel(string, string, float) -> void
+this.Vista.SetCameraAnimationTime(float, float) -> void
+this.Vista.SetFPS(int) -> void
+this.Vista.SetLight(string) -> void
+this.Vista.SetLoopFrameModel(string, string, float, float) -> void
+this.Vista.SetModelPriority(string, int) -> void
+this.Vista.SetModelVisible(string, bool, float) -> void
+this.Vista.SetOutlineModel(string, int) -> void
+this.Vista.SetSE(string, float) -> void
+this.Vista.SetScenarioSelectTextNeutral(int) -> void
+this.Vista.SetScenarioSelectTextSelectHm(int) -> void
+this.Vista.SetScenarioSelectTextSelectHmDisable(int) -> void
+this.Vista.SetScenarioSelectTextSelectSc(int) -> void
+this.Vista.SetScenarioSelectTextSelectScDisable(int) -> void
+this.Vista.Start() -> void
+this.Vista.StartChapter(int, int, bool) -> void
+this.Vista.StartFrameModel(string, string, float) -> void
+this.Vista.StopBGMovie() -> void

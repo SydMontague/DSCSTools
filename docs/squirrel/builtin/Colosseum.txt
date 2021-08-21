@@ -1,0 +1,2 @@
+Open() -> void
+IsEnd() -> bool

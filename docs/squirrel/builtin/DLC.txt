@@ -1,1 +1,1 @@
-this.DLC.FlagCheck(int)
+this.DLC.FlagCheck(int) -> bool

@@ -1,10 +1,11 @@
-this.Fade.BackIn(int, float)
-this.Fade.BackInDetail(int, float, float, float)
-this.Fade.BackOut(int, float)
-this.Fade.BackOutDetail(int, float, float, float)
-this.Fade.CloseLoading()
-this.Fade.In(int type, float time)
-this.Fade.IsBackEndType(int)
-this.Fade.IsEnd()
-this.Fade.IsEndType(int type)
-this.Fade.Out(int, float)
+this.Fade.BackIn(int, float) -> void
+this.Fade.BackInDetail(int, float, float, float) -> void
+this.Fade.BackOut(int, float) -> void
+this.Fade.BackOutDetail(int, float, float, float) -> void
+this.Fade.CloseLoading() -> void
+this.Fade.In(int type, float time) -> void
+this.Fade.IsBackEnd() -> bool
+this.Fade.IsBackEndType(int) -> bool
+this.Fade.IsEnd() -> bool
+this.Fade.IsEndType(int type) -> bool
+this.Fade.Out(int, float) -> void

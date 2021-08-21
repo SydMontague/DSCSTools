@@ -1,8 +1,8 @@
 /*
  * Does nothing in release version.
  */
-this.Debug.ClearLog()
+this.Debug.ClearLog() -> void
 /*
  * Does nothing in release version.
  */
-this.Debug.Log(string msg)
+this.Debug.Log(string msg) -> void

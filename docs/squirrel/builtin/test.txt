@@ -1,1 +1,4 @@
-this.test.test(string)
+/*
+ * Does nothing
+ */
+this.test.test(string) -> void

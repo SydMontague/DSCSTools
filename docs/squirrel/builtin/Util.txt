@@ -2,9 +2,9 @@
  * Calculates the seconds in a given number of frames.
  * This is equivalent to dividing the input by 30.
  */
-this.Util.SecondFromFrame(float)
+this.Util.SecondFromFrame(float) -> float
 /*
  * Calculates the frames in a given number of seconds.
  * This is equivalent to multiplying the input by 30.
  */
-this.Util.FrameFromSecond(float)
+this.Util.FrameFromSecond(float) -> float
