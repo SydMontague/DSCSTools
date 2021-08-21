@@ -1,90 +1,137 @@
-this.Field.AddGuestFormal(int, int)
-this.Field.AddPartyFormal(int)
-this.Field.BackgroundMovieListAdd(string, bool, string, float)
-this.Field.BackgroundMovieListGetPlayIndex()
-this.Field.BackgroundMovieListGetSize()
-this.Field.BackgroundMovieListPlay(int)
-this.Field.BackgroundMovieListSetLoop(int, bool)
-this.Field.BackgroundMovieListSetSE(int, int, string, bool, int)
-this.Field.ChangeField(string map, int area, string loc, int rotation)
-this.Field.ChangeScene(int, int)
-this.Field.CheckArea(int)
-this.Field.CloseUI(bool)
-this.Field.ColOff(string)
-this.Field.ColOn(string)
-this.Field.DeleteNpc(int)
-this.Field.EffectVisible(string, bool)
-this.Field.ExecuteHitTestEventCollision(string)
-this.Field.IconOffID(string, int)
-this.Field.IconOnID(string, int, float, float)
-this.Field.IsEndAccessMode()
-this.Field.IsEndAnimation(string)
-this.Field.IsEndCJEffect()
-this.Field.IsEndEffect(string)
-this.Field.IsEndElevator(string)
-this.Field.IsEndFirewallEffect(()
-this.Field.IsEndLoadNpc()
-this.Field.IsEndNpcAnime(int)
-this.Field.IsEndNpcMove(int)
-this.Field.IsEndSaveUI()
-this.Field.IsEndWarp()
-this.Field.IsHitEvent()
-this.Field.IsMovePlayer()
-this.Field.IsReadyBackgroundMovie()
-this.Field.IsScriptCameraEnd()
-this.Field.IsStealthHide()
-this.Field.LaboToField()
-this.Field.LoadNpc(int, string, float, float, float, float)
-this.Field.MoveNpcLocator(int, string)
-this.Field.MoveOffPlayer()
-this.Field.MoveOnPlayer()
-this.Field.MovePlayer(string)
-this.Field.NpcCompleteDrawMemory(string)
-this.Field.NpcLoadSkip(int...)
-this.Field.PlayAnimation(string, string, float, bool)
-this.Field.PlayBGM(string track, float fadeTime)
-this.Field.PlayBGM_CustomSound(string track, fadeTime)
-this.Field.PlayEffect(string, int, bool, bool)
-this.Field.PlayEffectReverse(string, int, int)
-this.Field.PlayEffectSmooth(string, int, bool, int)
-this.Field.PlaySE(string, bool)
-this.Field.PlayerIconVisible(bool)
-this.Field.RemoveGuest(int)
-this.Field.ResetStealthHide()
-this.Field.SEObjectMute(int, bool)
-this.Field.SaveUI(string mapName, int area)
-this.Field.ScriptCamera(string, int, bool)
-this.Field.ScriptCameraStill(bool)
-this.Field.SetAPVisible(string, bool)
-this.Field.SetBGSkip(bool)
-this.Field.SetDigimonVisible(bool)
-this.Field.SetEdenLogOut(int, int, string, int)
-this.Field.SetEffect(string, string, float, float, float, bool)
-this.Field.SetEffectAnime(string, int, int, int)
-this.Field.SetEffectIsCheckRenderAfter(string, bool)
-this.Field.SetEnableCheckObject(bool)
-this.Field.SetEnableDigimonDraw(bool)
-this.Field.SetEnableHackingSkillMenu(bool)
-this.Field.SetEnablePasteColorEffect(bool)
-this.Field.SetEnableSecurityEffect(bool)
-this.Field.SetExecSkip(bool)
-this.Field.SetGimmickAnime(string, int)
-this.Field.SetGimmickVisible(string, int)
-this.Field.SetNpcAnime(int, string, float, bool)
-this.Field.SetNpcIcon(string, int)
-this.Field.SetNpcKeywordID(string, int)
-this.Field.SetNpcVisible(string npcId, bool)
-this.Field.SetPlayer(string)
-this.Field.SetPlayerRotation(float)
-this.Field.SetPlayerVisible(bool)
-this.Field.SetTBoxVisible(int, bool)
-this.Field.SetVisible(bool)
-this.Field.SetWarpEffectOff()
-this.Field.StartAccessMode(string)
-this.Field.StartCJEffect()
-this.Field.StartElevator(string objName, float height, float speed, bool)
-this.Field.StartFirewallEffect()
-this.Field.StartGimmickAnime(string)
-this.Field.TownSelect(int)
-this.Field.WarpIn(string, int, bool, bool, bool)
-this.Field.WarpOut(string, int, bool, bool, bool)
+/*
+ * Does nothing
+ */
+this.Field.AddGuest(int, int) -> void
+this.Field.AddGuestFormal(int, int) -> void
+this.Field.AddItem(int, int, int) -> bool
+/*
+ * Does nothing
+ */
+this.Field.AddParty(int) -> void
+this.Field.AddPartyFormal(int) -> void
+this.Field.BackgroundMovieListAdd(string, bool, string, float) -> void
+this.Field.BackgroundMovieListGetPlayIndex -> int
+this.Field.BackgroundMovieListGetSize() -> int
+this.Field.BackgroundMovieListPlay(int) -> void
+this.Field.BackgroundMovieListSetLoop(int, bool) -> void
+this.Field.BackgroundMovieListSetSE(int, int, string, bool, int) -> void
+this.Field.ChangeField(string map, int area, string loc, int rotation) -> void
+this.Field.ChangeScene(int, int) -> void
+this.Field.CheckArea(int) -> bool
+this.Field.CheckItem(int, int) -> int
+this.Field.CloseUI(bool -> void
+this.Field.ColOff(string) -> void
+this.Field.ColOn(string) -> void
+this.Field.ColMove(string, float, float, float, float) -> void
+this.Field.DeleteNpc(int) -> void
+this.Field.DrawInfo() -> void
+this.Field.DrawMap() -> void
+this.Field.EffectOff(string) -> void
+this.Field.EffectVisible(string, bool) -> void
+this.Field.EndAnimation(string) -> void
+this.Field.EndChapter() -> void
+this.Field.Ending() -> void
+this.Field.ExecuteHitTestEventCollision(string) -> bool
+this.Field.GetArea() -> int
+this.Field.GetGuestFormal(int) -> int
+this.Field.IconOffID(string, int) -> void
+this.Field.IconOff(string, string) -> void
+this.Field.IconOnID(string, int, float, float) -> void
+this.Field.IconOn(string, string, float, float) -> void
+this.Field.IsBGSkip() -> bool
+this.Field.IsEffectDistance(string) -> bool
+this.Field.IsEndAccessMode() -> bool
+this.Field.IsEndAnimation(string) -> bool
+this.Field.IsEndCJEffect() -> bool
+this.Field.IsEndEffect(string) -> bool
+this.Field.IsEndElevator(string) -> bool
+this.Field.IsEndFirewallEffect() -> bool
+this.Field.IsEndLoadNpc() -> bool
+this.Field.IsEndNpcAnime(int) -> bool
+this.Field.IsEndNpcMove(int) -> bool
+this.Field.IsEndSaveUI() -> bool
+this.Field.IsEndScriptNpcMove(int) -> bool
+this.Field.IsEndWarp() -> bool
+this.Field.IsExecSkip() -> bool
+this.Field.IsHacking(int) -> bool
+this.Field.IsHitEvent() -> bool
+this.Field.IsMovePlayer() -> bool
+this.Field.IsReadyBackgroundMovie() -> bool
+this.Field.IsScriptCameraEnd() -> bool
+this.Field.IsStealthHide() -> bool
+this.Field.LaboToField() -> void
+this.Field.LoadNpc(int, string, float, float, float, float) -> void
+this.Field.MapMarkerOn(string, int) -> void
+this.Field.MapMarkerOff(string) -> void
+this.Field.MoveNpcLocator(int, string) -> void
+this.Field.MoveNpcPosition(int, float, float, float) -> void
+this.Field.MoveOffPlayer() -> void
+this.Field.MoveOnPlayer() -> void
+this.Field.MovePlayer(string) -> void
+this.Field.MoveScriptNpc(int, float, float, float) -> void
+this.Field.NpcCompleteDrawMemory(string) -> void
+this.Field.NpcLoadSkip(int, int, int, int, int, int, int, int) -> void
+this.Field.PlayAnimation(string, string, float, bool) -> void
+this.Field.PlayBackgroundMovie(string, bool) -> void
+this.Field.PlayBGM(string track, float fadeTime) -> void
+this.Field.PlayBGM_CustomSound(string track, fadeTime) -> void
+this.Field.PlayEffect(string, int, bool, bool) -> void
+this.Field.PlayEffectReverse(string, int, int) -> bool
+this.Field.PlayEffectSmooth(string, int, bool, int) -> bool
+this.Field.PlaySE(string, bool) -> void
+this.Field.PlayerIconVisible(bool) -> void
+this.Field.RemoveGuest(int) -> void
+this.Field.RemoveParty(int) -> void
+this.Field.ResetStealthHide() -> void
+this.Field.ResetNpcIcon(string) -> void
+this.Field.SEObjectMute(int, bool) -> void
+this.Field.SaveUI(string mapName, int area) -> void
+this.Field.ScriptCamera(string, float, bool) -> void
+this.Field.ScriptCameraStill(bool) -> void
+this.Field.ScriptCameraCancel() -> void
+this.Field.SetAPVisible(string, bool) -> void
+this.Field.SetBGSkip(bool) -> void
+this.Field.SetBackgroundMovieNext(string) -> void
+this.Field.SetDigimonVisible(bool) -> void
+this.Field.SetEdenLogOut(int, int, string, int) -> void
+this.Field.SetEffect(string, string, float, float, bool) -> void
+this.Field.SetEffectAnime(string, int, int, int) -> void
+this.Field.SeteffectDistanceOn(string, bool) -> void
+this.Field.SetEffectIcon(string, int, float, float) -> void
+this.Field.SetEffectIsCheckRenderAfter(string, bool) -> void
+this.Field.SetEnableCheckObject(bool) -> void
+this.Field.SetEnableDigimonDraw(bool) -> void
+this.Field.SetEnableHackingSkillMenu(bool) -> void
+this.Field.SetEnablePasteColorEffect(bool) -> void
+this.Field.SetEnableSecurityEffect(bool) -> void
+this.Field.SetExecSkip(bool) -> void
+this.Field.SetGimmickAnime(string, float) -> void
+this.Field.SetGimmickVisible(string, bool) -> void
+this.Field.SetNpcAnime(int, string, float, bool) -> void
+this.Field.SetNpcIcon(string, int) -> void
+/*
+ * Does nothing
+ */
+this.Field.SetNpcKeywordID(string, int) -> void
+this.Field.SetNpcVisible(string npcId, bool) -> void
+this.Field.SetNpcRotation(string npcId, float) -> void
+this.Field.SetPlayer(string) -> void
+this.Field.SetPlayerRotation(float) -> void
+this.Field.SetPlayerVisible(bool) -> void
+this.Field.SetTBoxVisible(int, bool) -> void
+this.Field.SetVisible(bool) -> void
+this.Field.SetWarpEffectOff() -> void
+this.Field.SetWalkPlayer(bool) -> void
+this.Field.SpeedUp(bool) -> void
+this.Field.StartAccessMode() -> void
+this.Field.StartChapter(int, int, bool) -> void
+this.Field.StartCJEffect() -> void
+this.Field.StartElevator(string objName, float height, float speed, bool) -> void
+this.Field.StartFirewallEffect() -> void
+this.Field.StartGimmickAnime(string) -> void
+this.Field.StopSE(float) -> void
+this.Field.StopBackgroundMovie() -> void
+this.Field.TownSelect(int) -> void
+this.Field.UseItem(int, int, int) -> bool
+this.Field.WarpIn(string, int, bool, bool, bool) -> void
+this.Field.WarpOut(string, int, bool, bool, bool) -> void

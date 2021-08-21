@@ -1,14 +1,16 @@
-this.Domination.CameraSet(string, int)
-this.Domination.ChangeHackersBattleData(int, int, int, int, string)
-this.Domination.CharaEffectEnd()
-this.Domination.CharaEffectPlay(int, int, int, string)
-this.Domination.Encount(int)
-this.Domination.GetPlayer()
-this.Domination.GetRootRandom(bool)
-this.Domination.GetScore(int)
-this.Domination.GetTotalScore(int)
-this.Domination.SearchPlayer(int)
-this.Domination.SearchRootPlayer(int)
-this.Domination.SearchRootScore(int)
-this.Domination.SearchScore(int)
-this.Domination.SetRoot(int)
+this.Domination.CameraSet(string, int) -> void
+this.Domination.ChangeHackersBattleData(int, int, int, int, string) -> void
+this.Domination.CharaEffectEnd() -> bool
+this.Domination.CharaEffectPlay(int, int, int, string) -> void
+this.Domination.Encount(int) -> void
+this.Domination.GetPlayer() -> int
+this.Domination.GetRootRandom(bool) -> int
+this.Domination.GetScore(int) -> int
+this.Domination.GetTotalScore(int) -> int
+this.Domination.SearchPlayer(int) -> int
+this.Domination.SearchRootPlayer(int) -> int
+this.Domination.SearchRootScore(int) -> int
+this.Domination.SearchScore(int) -> int
+this.Domination.SetRoot(int) -> void
+this.Domination.ForceEnd() -> void
+this.Domination.SetBGM(string, string) -> void

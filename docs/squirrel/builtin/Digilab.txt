@@ -1,2 +1,2 @@
-this.Digilab.OpenDigibank()
-this.Digilab.OpenMirrorDungeonSelect()
+this.Digilab.OpenDigibank() -> void
+this.Digilab.OpenMirrorDungeonSelect() -> void

@@ -1,2 +1,2 @@
-this.Digiline.Send(int)
-this.Digiline.SetEnable(bool)
+this.Digiline.Send(int) -> void
+this.Digiline.SetEnable(bool) -> void

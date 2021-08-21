@@ -1,14 +1,14 @@
-this.Medal.AllSell()
-this.Medal.CloseList()
-this.Medal.GetEstimateSellPrice()
-this.Medal.GetLastItemID()
-this.Medal.GetLastMedalName()
-this.Medal.GetLastMedalNo()
-this.Medal.GetLastSellPrice()
-this.Medal.GetSellKindNum()
-this.Medal.IsCompleteCollection(int collectionId)
-this.Medal.IsEndList()
-this.Medal.IsLastHaveMedal()
-this.Medal.OpenList()
-this.Medal.PlayGasha(int)
-this.Medal.SellID(int)
+this.Medal.AllSell() -> void
+this.Medal.CloseList() -> void
+this.Medal.GetEstimateSellPrice() -> int
+this.Medal.GetLastItemID() -> int
+this.Medal.GetLastMedalName() -> string
+this.Medal.GetLastMedalNo() -> int
+this.Medal.GetLastSellPrice() -> int
+this.Medal.GetSellKindNum() -> int
+this.Medal.IsCompleteCollection(int collectionId) -> bool
+this.Medal.IsEndList() -> bool
+this.Medal.IsLastHaveMedal() -> bool
+this.Medal.OpenList() -> void
+this.Medal.PlayGasha(int) -> void
+this.Medal.SellID(int) -> bool

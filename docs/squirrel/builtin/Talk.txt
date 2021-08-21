@@ -1,78 +1,91 @@
-this.Talk.AttachAccessory(int, string, string, int)
-this.Talk.ChangeCommunicationTextureModel(string)
-this.Talk.ChangeTextureModel(int, string)
-this.Talk.Close()
-this.Talk.CloseCutin()
-this.Talk.CommunicationClose()
-this.Talk.CommunicationMovePosition(int, float, int)
-this.Talk.DetachAccessory(int, int)
-this.Talk.End()
-this.Talk.Exit()
-this.Talk.GetResultSelectedNum()
-this.Talk.HideEffect(int)
-this.Talk.HideEmotionIcon(int)
-this.Talk.HideModel(int, int, float)
-this.Talk.HideName(int)
-this.Talk.IsClose()
-this.Talk.IsCloseCutin()
-this.Talk.IsCommunicationClose()
-this.Talk.IsEffect(effectId) // never used, type unknown
-this.Talk.IsEndLoadCutin()
-this.Talk.IsEndLoadEffect()
-this.Talk.IsEndLoadModel()
-this.Talk.IsExit()
-this.Talk.IsLoadCommunication()
-this.Talk.IsNext()
-this.Talk.IsOpenCutin()
-this.Talk.IsOpenTalkCommunication()
-this.Talk.IsWait()
-this.Talk.Load(string textFile)
-this.Talk.LoadAccessory(string, string)
-this.Talk.LoadAnimation(int, string)
-this.Talk.LoadCommunication(int, int)
-this.Talk.LoadCommunicationTexture(string)
-this.Talk.LoadCommunication_Ani(string)
-this.Talk.LoadCutinTexture(string)
-this.Talk.LoadEffect(int, string)
-this.Talk.LoadModel(int, string model, int)
-this.Talk.LoadModel(int, string model)
-this.Talk.LoadModelTexture(int, string)
-this.Talk.Message(int)
-this.Talk.MessageComic(int, int)
-this.Talk.MessageSel(int, int)
-this.Talk.MessageTalk(int)
-this.Talk.MessageTalkSel(int, int)
-this.Talk.MessageTalk_Auto(int)
-this.Talk.Message_Auto(int)
-this.Talk.Message_C(int)
-this.Talk.Message_C_Auto(int)
-this.Talk.MovePosition(int, int, float, int)
-this.Talk.OpenCutin()
-this.Talk.PlayAlpha(int, float, int, int)
-this.Talk.PlayAnimation(int, string, float, bool)
-this.Talk.PlayAnimationSlotB(int, string, bool)
-this.Talk.PlayAnimationSlotC(int, string, bool)
-this.Talk.PlayCommunication_Ani(string, float, bool)
-this.Talk.PlayCommunication_AniSlotB(string, bool)
-this.Talk.ResultSelectedNum()
-this.Talk.SetCamera(string)
-this.Talk.SetCameraAnimationTime(int, int)
-this.Talk.SetCutinPriority(int)
-this.Talk.SetCutinTexture(string)
-this.Talk.SetEnableResetSelectCursor(bool)
-this.Talk.SetLastTalkerManageID(int)
-this.Talk.SetLight(string)
-this.Talk.SetLoopFrameModel(int, string, int, int)
-this.Talk.SetMode(int)
-this.Talk.SetNumber(int value)
-this.Talk.SetOutlineModel(int, int)
-this.Talk.SetPriority(int, int)
-this.Talk.SetString(string value)
-this.Talk.SetWait(int, int)
-this.Talk.ShowCommunication(string)
-this.Talk.ShowEffect(int, float, float, float, int, int)
-this.Talk.ShowEmotionIcon(int, int)
-this.Talk.ShowModel(int, int, int, int)
-this.Talk.ShowName(int, int)
-this.Talk.StartFrameModel(int, string, int)
-this.Talk.TalkCommunication(position, dispModel, animation) // types unknown, never used
+this.Talk.AttachAccessory(int, string, string, int) -> void
+this.Talk.ChangeCommunicationTextureModel(string) -> void
+this.Talk.ChangeTextureModel(int, string) -> void
+this.Talk.Close() -> void
+this.Talk.CloseCutin() -> void
+this.Talk.CommunicationClose() -> void
+this.Talk.CommunicationMovePosition(int, float, int) -> void
+this.Talk.DetachAccessory(int, int) -> void
+this.Talk.End() -> void
+this.Talk.Exit() -> void
+this.Talk.GetResultSelectedNum() -> int
+this.Talk.HideEffect(int) -> void
+this.Talk.HideEmotionIcon(int) -> void
+this.Talk.HideModel(int, int, float) -> void
+/*
+ * Does nothing
+ */
+this.Talk.HideName(int) -> void
+this.Talk.IsClose() -> bool
+this.Talk.IsCloseCutin() -> bool
+this.Talk.IsCommunicationClose() -> bool
+this.Talk.IsEffect(int effectId) -> bool
+this.Talk.IsEnableCameraAnimation() -> bool
+this.Talk.IsEndLoadCutin() -> bool
+this.Talk.IsEndLoadEffect() -> bool
+this.Talk.IsEndLoadModel() -> bool
+this.Talk.IsExit() -> bool
+this.Talk.IsLoadCommunication() -> bool
+this.Talk.IsNext() -> bool
+this.Talk.IsOpenCutin() -> bool
+this.Talk.IsOpenTalkCommunication() -> bool
+this.Talk.IsWait() -> bool
+this.Talk.Load(string textFile) -> void
+this.Talk.LoadAccessory(string, string) -> void
+this.Talk.LoadAnimation(int, string) -> void
+this.Talk.LoadCommunication(int, int) -> void
+this.Talk.LoadCommunicationTexture(string) -> void
+this.Talk.LoadCommunication_Ani(string) -> void
+this.Talk.LoadCutinTexture(string) -> void
+this.Talk.LoadEffect(int, string) -> void
+this.Talk.LoadModel(int, string model, int) -> void
+this.Talk.LoadModelTexture(int, string) -> void
+this.Talk.Message(int) -> void
+this.Talk.MessageComic(int, int) -> void
+this.Talk.MessageSel(int, int) -> void
+this.Talk.MessageTalk(int) -> void
+this.Talk.MessageTalkSel(int, int) -> void
+this.Talk.MessageTalk_Auto(int) -> void
+this.Talk.Message_Auto(int) -> void
+this.Talk.Message_C(int) -> void
+this.Talk.Message_C_Auto(int) -> void
+this.Talk.MovePosition(int, int, float, int) -> void
+this.Talk.OpenCutin() -> void
+this.Talk.PlayAlpha(int, float, float, float) -> void
+this.Talk.PlayAnimation(int, string, float, bool) -> void
+this.Talk.PlayAnimationSlotB(int, string, bool) -> void
+this.Talk.PlayAnimationSlotC(int, string, bool) -> void
+this.Talk.PlayCommunication_Ani(string, float, bool) -> void
+this.Talk.PlayCommunication_AniSlotB(string, bool) -> void
+this.Talk.PlayCommunication_AniSlotC(string, bool) -> void
+this.Talk.ResultSelectedNum() -> void
+this.Talk.SetCamera(string) -> void
+this.Talk.SetCameraAnimationTime(float, float)
+this.Talk.SetCutinPriority(int) -> void
+this.Talk.SetCutinTexture(string) -> void
+this.Talk.SetEnableCameraAnimation(bool) -> void
+this.Talk.SetEnableResetSelectCursor(bool) -> void
+this.Talk.SetLastTalkerManageID(int) -> void
+this.Talk.SetLight(string) -> void
+this.Talk.SetLoopFrameModel(int, string, float, float) -> void
+this.Talk.SetMode(int) -> void
+this.Talk.SetNumber(int value) -> void
+this.Talk.SetOutlineModel(int, int) -> void
+this.Talk.SetPriority(int, int) -> void
+this.Talk.SetString(string value) -> void
+this.Talk.SetWait(float) -> void
+this.Talk.ShowCommunication(string) -> void
+this.Talk.ShowEffect(int, float, float, float, int, bool) -> void
+this.Talk.ShowEmotionIcon(int, int) -> void
+this.Talk.ShowModel(int, int, int, float) -> void
+/*
+ * Does nothing
+ */
+this.Talk.ShowName(int, int) -> void
+this.Talk.StartFrameModel(int, string, float) -> void
+this.Talk.StartFrameCamera(float) -> void
+this.Talk.TalkCommunication(int position, int dispModel, string animation) -> void
+/*
+ * Identical to Exit
+ */
+this.Talk.Unload() -> void
