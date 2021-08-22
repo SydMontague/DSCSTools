@@ -29,19 +29,34 @@ namespace dscstools {
 			PyThreadState * m_thread_state;
 		};
 
-		// MDB1
-		void _py_extractMDB1(const std::string source, const std::string target) {
+		// doboz
+		void _py_dobozCompress(const std::string source, const std::string target) {
 			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
-			mdb1::extractMDB1(_source, _target);
+			mdb1::dobozCompress(_source, _target);
 		}
 
-		void _py_extractMDB1File(const std::string source, const std::string target, const std::string fileName) {
+		void _py_dobozDecompress(const std::string source, const std::string target) {
 			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
-			mdb1::extractMDB1File(_source, _target, fileName);
+			mdb1::dobozDecompress(_source, _target);
+		}
+
+		// MDB1
+		void _py_extractMDB1(const std::string source, const std::string target, const bool decompress = true) {
+			ScopedGILRelease scoped;
+			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
+			boost::filesystem::path _target = target;
+			mdb1::extractMDB1(_source, _target, decompress);
+		}
+
+		void _py_extractMDB1File(const std::string source, const std::string target, const std::string fileName, const bool decompress = true) {
+			ScopedGILRelease scoped;
+			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
+			boost::filesystem::path _target = target;
+			mdb1::extractMDB1File(_source, _target, fileName, decompress);
 		}
 
 		mdb1::ArchiveInfo _py_getArchiveInfo(const std::string source) {
@@ -134,6 +149,9 @@ namespace dscstools {
 				.add_property("DataSize", make_function([](mdb1::FileInfo& a) { return a.data.size; }, default_call_policies(), boost::mpl::vector<int, mdb1::FileInfo&>()))
 				.add_property("DataCompressedSize", make_function([](mdb1::FileInfo& a) { return a.data.compSize; }, default_call_policies(), boost::mpl::vector<int, mdb1::FileInfo&>()));
 			
+			def("dobozCompress", _py_dobozCompress);
+			def("dobozDecompress", _py_dobozDecompress);
+
 			def("extractMDB1", _py_extractMDB1);
 			def("extractMDB1File", _py_extractMDB1File);
 			def("getArchiveInfo", _py_getArchiveInfo);

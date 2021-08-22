@@ -63,6 +63,16 @@ namespace dscstools {
 		static std::ostream nullStream(nullptr);
 
 		/**
+			Decompresses a file that has been compressed using the doboz library.
+		*/
+		void SHARED_EXPORT dobozDecompress(const boost::filesystem::path source, const boost::filesystem::path target);
+
+		/**
+			Compresses a file using the doboz library.
+		*/
+		void SHARED_EXPORT dobozCompress(const boost::filesystem::path source, const boost::filesystem::path target);
+
+		/**
 			Returns the ArchiveInfo of an MDB1 archive given by sourceArchive. 
 			See the ArchiveInfo strcture. The encryption status of the archive doesn't matter.
 		*/
@@ -72,13 +82,13 @@ namespace dscstools {
 			Extracts a file with the internal path filePath from a MDB1 archive given by sourceArchive into targetPath. 
 			The encryption status of the archive doesn't matter.
 		*/
-		void SHARED_EXPORT extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, std::string fileName);
+		void SHARED_EXPORT extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, std::string fileName, const bool decompress = true);
 
 		/**
 			Extracts a MDB1 archive given by sourceArchive and extracts it into targetPath or throws an error if something went wrong. 
 			The encryption status of the archive doesn't matter.
 		*/
-		void SHARED_EXPORT extractMDB1(const boost::filesystem::path source, const boost::filesystem::path target);
+		void SHARED_EXPORT extractMDB1(const boost::filesystem::path source, const boost::filesystem::path target, const bool decompress = true);
 
 		/**
 			Packs a folder given by sourcePath into an encrypted MDB1 archive saved at targetArchive. 

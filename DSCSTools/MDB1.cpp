@@ -173,7 +173,84 @@ namespace dscstools {
 			return entries[0];
 		}
 
-		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path targetDir, FileInfo fileInfo, uint64_t offset) {
+		void dobozCompress(const boost::filesystem::path source, const boost::filesystem::path target) {
+			if (boost::filesystem::equivalent(source, target))
+				throw std::invalid_argument("Error: input and output path must be different!");
+			if (!boost::filesystem::is_regular_file(source))
+				throw std::invalid_argument("Error: input path is not a file.");
+
+			if (!boost::filesystem::exists(target)) {
+				if (target.has_parent_path())
+					boost::filesystem::create_directories(target.parent_path());
+			}
+			else if (!boost::filesystem::is_regular_file(target))
+				throw std::invalid_argument("Error: target path already exists and is not a file.");
+
+			boost::filesystem::ifstream input(source, std::ios::in | std::ios::binary);
+			boost::filesystem::ofstream output(target, std::ios::out | std::ios::binary);
+
+			input.seekg(0, std::ios::end);
+			std::streampos length = input.tellg();
+			input.seekg(0, std::ios::beg);
+
+			auto data = std::make_unique<char[]>(length);
+			input.read(data.get(), length);
+
+			doboz::Compressor comp;
+			size_t destSize;
+
+			auto outputData = std::make_unique<char[]>(comp.getMaxCompressedSize(length));
+			doboz::Result result = comp.compress(data.get(), length, outputData.get(), comp.getMaxCompressedSize(length), destSize);
+
+			if (result != doboz::RESULT_OK)
+				throw std::runtime_error("Error: something went wrong while compressing, doboz error code: " + std::to_string(result));
+
+			output.write(outputData.get(), destSize);
+		}
+
+		void dobozDecompress(const boost::filesystem::path source, const boost::filesystem::path target) {
+			if (boost::filesystem::equivalent(source, target))
+				throw std::invalid_argument("Error: input and output path must be different!");
+			if (!boost::filesystem::is_regular_file(source))
+				throw std::invalid_argument("Error: input path is not a file.");
+
+			if (!boost::filesystem::exists(target)) {
+				if (target.has_parent_path())
+					boost::filesystem::create_directories(target.parent_path());
+			}
+			else if (!boost::filesystem::is_regular_file(target))
+				throw std::invalid_argument("Error: target path already exists and is not a file.");
+
+			boost::filesystem::ifstream input(source, std::ios::in | std::ios::binary);
+			boost::filesystem::ofstream output(target, std::ios::out | std::ios::binary);
+			input.seekg(0, std::ios::end);
+			std::streampos length = input.tellg();
+			input.seekg(0, std::ios::beg);
+
+			auto data = std::make_unique<char[]>(length);
+			input.read(data.get(), length);
+
+			doboz::CompressionInfo info;
+			doboz::Decompressor decomp;
+
+			decomp.getCompressionInfo(data.get(), length, info);
+
+			if (info.compressedSize != length || info.version != 0)
+				throw std::runtime_error("Error: input file is not doboz compressed!");
+
+			auto outputData = std::make_unique<char[]>(info.uncompressedSize);
+
+			auto result = decomp.decompress(data.get(), length, outputData.get(), info.uncompressedSize);
+
+			if(result != doboz::RESULT_OK)
+				throw std::runtime_error("Error: something went wrong while decompressing, doboz error code: " + std::to_string(result));
+
+			std::cout << info.compressedSize << " " << info.uncompressedSize << " " << info.version << std::endl;
+
+			output.write(outputData.get(), info.uncompressedSize);
+		}
+
+		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path targetDir, FileInfo fileInfo, uint64_t offset, bool decompress) {
 			mdb1_ifstream input(source);
 			doboz::Decompressor decomp;
 
@@ -187,11 +264,12 @@ namespace dscstools {
 				boost::filesystem::create_directories(path.parent_path());
 			mdb1_ofstream output(path, false);
 
-			auto outputArr = std::make_unique<char[]>(data.size);
+			auto outputSize = decompress ? data.size : data.compSize;
+			auto outputArr = std::make_unique<char[]>(outputSize);
 			input.seekg(data.offset + offset);
 
-			if (data.compSize == data.size)
-				input.read(outputArr.get(), data.size);
+			if (data.compSize == data.size || !decompress)
+				input.read(outputArr.get(), outputSize);
 			else {
 				auto dataArr = std::make_unique<char[]>(data.compSize);
 				input.read(dataArr.get(), data.compSize);
@@ -201,27 +279,27 @@ namespace dscstools {
 					throw std::runtime_error("Error while decompressing. doboz error code: " + std::to_string(result));
 			}
 
-			output.write(outputArr.get(), data.size);
+			output.write(outputArr.get(), outputSize);
 
 			if (!output.good())
 				throw std::runtime_error("Error: something went wrong while writing " + path.string());
 		}
 
-		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, FileInfo fileInfo) {
-			extractMDB1File(source, target, fileInfo, getArchiveInfo(source).dataStart);
+		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, FileInfo fileInfo, const bool decompress) {
+			extractMDB1File(source, target, fileInfo, getArchiveInfo(source).dataStart, decompress);
 		}
 
-		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, std::string fileName) {
+		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, std::string fileName, const bool decompress) {
 			ArchiveInfo info = getArchiveInfo(source);
 			FileInfo fileInfo = findFileEntry(info.fileInfo, fileName);
 
 			if (fileInfo.file.compareBit == 0xFFFF || fileInfo.file.dataId == 0xFFFF)
 				throw std::invalid_argument("MDB1 File Extraction: File not found in archive");
 
-			extractMDB1File(source, target, fileInfo, info.dataStart);
+			extractMDB1File(source, target, fileInfo, info.dataStart, decompress);
 		}
 
-		void extractMDB1(const boost::filesystem::path source, const boost::filesystem::path target) {
+		void extractMDB1(const boost::filesystem::path source, const boost::filesystem::path target, bool decompress) {
 			if (boost::filesystem::exists(target) && !boost::filesystem::is_directory(target))
 				throw std::invalid_argument("Error: Target path exists and is not a directory, aborting.");
 			if (!boost::filesystem::is_regular_file(source))
@@ -231,8 +309,8 @@ namespace dscstools {
 			if (info.status == invalid)
 				throw std::invalid_argument("Error: not a MDB1 file. Value: " + std::to_string(info.magicValue));
 
-			for (FileInfo fileInfo : info.fileInfo)
-				extractMDB1File(source, target, fileInfo, info.dataStart);
+			for (FileInfo& fileInfo : info.fileInfo)
+				extractMDB1File(source, target, fileInfo, info.dataStart, decompress);
 		}
 
 		TreeNode findFirstBitMismatch(const int16_t first, const std::vector<std::string>& nodeless, const std::vector<std::string>& withNode) {
@@ -353,7 +431,6 @@ namespace dscstools {
 		}
 
 		CompressionResult getFileData(const boost::filesystem::path path, const CompressMode compress) {
-			doboz::Compressor comp;
 			boost::filesystem::ifstream input(path, std::ios::in | std::ios::binary);
 
 			input.seekg(0, std::ios::end);
@@ -370,16 +447,26 @@ namespace dscstools {
 			if (!input.good())
 				throw std::runtime_error("Error: something went wrong while reading " + path.string());
 			
-			if (length != 0 && compress >= normal) {
-				size_t destSize;
-				auto outputData = std::make_unique<char[]>(comp.getMaxCompressedSize(length));
-				doboz::Result res = comp.compress(data.get(), length, outputData.get(), comp.getMaxCompressedSize(length), destSize);
+			doboz::Decompressor decomp;
+			doboz::CompressionInfo info;
+			doboz::Result result = decomp.getCompressionInfo(data.get(), length, info);
 
-				if (res != doboz::RESULT_OK)
-					throw std::runtime_error("Error: something went wrong while compressing, doboz error code: " + std::to_string(res));
+			if (length != 0) {
+				if (result == doboz::RESULT_OK && info.uncompressedSize != 0 && info.version == 0 && info.compressedSize == length)
+					return { (uint32_t)info.uncompressedSize, (uint32_t)info.compressedSize, crc.checksum(), std::move(data) };
 
-				if (destSize + 4 < static_cast<size_t>(length))
-					return { (uint32_t)length, (uint32_t)destSize, crc.checksum(), std::move(outputData) };
+				if (compress >= normal) {
+					doboz::Compressor comp;
+					size_t destSize;
+					auto outputData = std::make_unique<char[]>(comp.getMaxCompressedSize(length));
+					doboz::Result res = comp.compress(data.get(), length, outputData.get(), comp.getMaxCompressedSize(length), destSize);
+
+					if (res != doboz::RESULT_OK)
+						throw std::runtime_error("Error: something went wrong while compressing, doboz error code: " + std::to_string(res));
+
+					if (destSize + 4 < static_cast<size_t>(length))
+						return { (uint32_t)length, (uint32_t)destSize, crc.checksum(), std::move(outputData) };
+				}
 			}
 
 			return { (uint32_t)length, (uint32_t)length, crc.checksum(), std::move(data) };
