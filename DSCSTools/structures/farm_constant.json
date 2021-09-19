@@ -19,7 +19,7 @@
     "unk17": "int",
     "unk18": "int",
     "unk19": "int",
-    "unk20": "int",
-    "unk21": "int"
+    "farmExpandItem": "int",
+    "bankExpandItem": "int"
   }
 }

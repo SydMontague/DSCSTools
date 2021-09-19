@@ -23,7 +23,7 @@
     "keisukeSkin": "string",
     "takumiSkin": "string",
     "amiSkin": "string",
-    "skinUnk1": "int",
+    "skinFlag": "int",
     "descriptionId": "int",
     "iconId": "int",
     "unk29": "int"
