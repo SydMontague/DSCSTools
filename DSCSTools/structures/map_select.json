@@ -1,11 +1,11 @@
 {
   "para": {
     "id": "int",
-    "unk1": "int",
-    "unk2": "int",
+    "earlygameMapID": "int",
+    "lategameMapID": "int",
     "unk3": "string",
-    "unk4": "int",
-    "unk5": "int",
+    "thumbnailID": "int",
+    "highlightIconID": "int",
     "unk6": "int",
     "unk7": "int",
     "unk8": "int",
