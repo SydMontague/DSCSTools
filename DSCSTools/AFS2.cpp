@@ -36,6 +36,8 @@ namespace dscstools {
 			auto offsets = std::make_unique<uint32_t[]>(header.numFiles + 1LL);
 			input.read(reinterpret_cast<char*>(offsets.get()), (header.numFiles + 1) * 4);
 
+			if (input.tellg() < header.blockSize)
+				input.seekg(header.blockSize);
 			if (input.tellg() != offsets[0])
 				throw std::invalid_argument("AFS2: Didn't reach expected end of header.");
 
@@ -89,7 +91,9 @@ namespace dscstools {
 			auto id = std::make_unique<uint16_t[]>(header.numFiles);
 			auto offsets = std::make_unique<uint32_t[]>(header.numFiles + 1);
 
-			offsets[0] = 0x10 + header.numFiles * 0x06 + (header.numFiles % 2) * 2 + 4;
+			offsets[0] = 0x10 + header.numFiles * 0x06 + 4;
+			if (offsets[0] < header.blockSize)
+				offsets[0] = header.blockSize;
 
 			for (size_t i = 0; i < files.size(); i++) {
 				output.seekp((offsets[i] + header.blockSize - 1) & -header.blockSize);
@@ -109,7 +113,7 @@ namespace dscstools {
 
 			output.seekp(0x10);
 			output.write(reinterpret_cast<char*>(id.get()), header.numFiles * 2);
-			output.seekp((header.numFiles % 2) * 2, std::ios_base::cur);
+			//output.seekp((header.numFiles % 2) * 2, std::ios_base::cur);
 			output.write(reinterpret_cast<char*>(offsets.get()), (header.numFiles + 1) * 4);
 		}
 	}
