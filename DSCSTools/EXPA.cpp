@@ -55,6 +55,24 @@ namespace dscstools {
 			char* string;
 		};
 
+		inline boost::property_tree::ptree matchStructureName(const boost::property_tree::ptree& format, const std::string& structureName, const std::string& sourceName)
+		{
+			auto formatValue = format.get_child_optional(structureName);
+			if (!formatValue) {
+				// Scan all table definitions to find a matching regex expression, if any
+				for (auto& kv : format) {
+					if (boost::regex_search(structureName, boost::regex{ kv.first })) {
+						formatValue = kv.second;
+						break;
+					}
+				}
+				if (!formatValue)
+					throw std::runtime_error("Error: no definition for table " + std::string(structureName) + " found. " + sourceName);
+			}
+
+			return formatValue.get();
+		}
+
 		uint32_t getEntrySize(const std::string &type, uint32_t currentSize) {
 			if (type == "byte")
 				return 1;
@@ -184,23 +202,11 @@ namespace dscstools {
 			}
 
 			boost::property_tree::ptree format = getStructureFile(source);
-			auto fname = source.filename().string();
+			auto filename = source.filename().string();
 
 			for (auto table : tables) {
 				uint32_t tableHeaderSize = 0x0C + table.nameSize() + (table.nameSize() + 4) % 8;
-				auto formatValue = format.get_child_optional(table.name());
-
-				if (!formatValue) {
-					// Scan all table definitions to find a matching regex expression, if any
-					for (auto& kv : format) {
-						if (boost::regex_search(fname, boost::regex{ kv.first })) {
-							formatValue = kv.second;
-							break;
-						}
-					}
-					if (!formatValue)
-						throw std::runtime_error("Error: no definition for table " + std::string(table.name()) + " found. " + source.filename().string());
-				}
+				auto& formatValue = matchStructureName(format, table.name(), filename);
 
 				boost::filesystem::path outputPath = target / source.filename() / (table.name() + std::string(".csv"));
 				if (outputPath.has_parent_path())
@@ -209,7 +215,7 @@ namespace dscstools {
 
 				// write header
 				bool first = true;
-				for (auto var : formatValue.get()) {
+				for (auto var : formatValue) {
 					if (first)
 						first = false;
 					else
@@ -224,7 +230,7 @@ namespace dscstools {
 					bool first = true;
 					char* localOffset = table.tablePtr + i * (table.entrySize() + table.entrySize() % 8) + tableHeaderSize;
 
-					for (auto var : formatValue.get()) {
+					for (auto var : formatValue) {
 						if (first)
 							first = false;
 						else
@@ -289,21 +295,8 @@ namespace dscstools {
 				auto file = dir_entry.path();
 				auto filename = file.filename().stem().string();
 
-				auto localFormatOpt = format.get_child_optional(filename);
-				if (!localFormatOpt) {
-					// Scan all table definitions to find a matching regex expression, if any
-					for (auto& kv : format) {
-						if (boost::regex_search(filename, boost::regex{ kv.first })) {
-							localFormatOpt = kv.second;
-							break;
-						}
-					}
-					if (!localFormatOpt)
-						throw std::runtime_error("No matching structure for \"" + filename + "\" was found.");
-				}
 				++numTables;
-
-				boost::property_tree::ptree localFormat = localFormatOpt.get();
+				auto& localFormat = matchStructureName(format, filename, filename);
 
 				// write EXPA Table header
 				boost::filesystem::ifstream countInput(file, std::ios::in);
