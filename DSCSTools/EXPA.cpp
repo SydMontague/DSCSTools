@@ -186,9 +186,6 @@ namespace dscstools {
 			boost::property_tree::ptree format = getStructureFile(source);
 			auto fname = source.filename().string();
 
-			//if (format.size() != tables.size())
-			//	throw std::runtime_error("Warning: number of tables doesn't match expected values. " + fname);
-
 			for (auto table : tables) {
 				uint32_t tableHeaderSize = 0x0C + table.nameSize() + (table.nameSize() + 4) % 8;
 				auto formatValue = format.get_child_optional(table.name());
@@ -458,7 +455,7 @@ namespace dscstools {
 
 			// Seek back to the 4th byte and write out the number of tables that were found
 			output.seekp(4, std::ios::beg);
-			output.write(reinterpret_cast<char*>(&numTables), 4); // Going to overwrite this later
+			output.write(reinterpret_cast<char*>(&numTables), 4);
 		}
 	}
 }
