@@ -302,7 +302,7 @@ namespace dscstools {
 						}
 					}
 					if (!localFormatOpt)
-						continue;
+						throw std::runtime_error("No matching structure for \"" + fname + "\" was found.");
 				}
 				++numTables;
 
