@@ -277,11 +277,11 @@ namespace dscstools {
 
 			boost::property_tree::ptree format = getStructureFile(source);
 
-			std::size_t numTables = 0;
 
 			// write EXPA Header
 			output.write("EXPA", 4);
-			output.write(reinterpret_cast<char*>(&numTables), 4); // Going to overwrite this later
+			std::size_t numTables = 0;
+			output.seekp(4, std::ios::cur); // Skip numTables output, we'll add it at the end
 
 			struct CHNKData {
 				std::string type;
