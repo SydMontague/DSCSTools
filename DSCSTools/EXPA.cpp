@@ -292,23 +292,21 @@ namespace dscstools {
 				auto file = dir_entry.path();
 				auto fname = file.filename().stem().string();
 
-				boost::property_tree::ptree localFormat;
-				if (format.count(fname))
-					localFormat = format.get_child(fname);
-				else {
+				auto localFormatOpt = format.get_child_optional(fname);
+				if (!localFormatOpt) {
 					// Scan all table definitions to find a matching regex expression, if any
-					bool gotDef = false;
-					for (auto kv : format) {
+					for (auto& kv : format) {
 						if (boost::regex_search(fname, boost::regex{ kv.first })) {
-							localFormat = kv.second;
-							gotDef = true;
+							localFormatOpt = kv.second;
 							break;
 						}
 					}
-					if (!gotDef)
+					if (!localFormatOpt)
 						continue;
 				}
 				++numTables;
+
+				boost::property_tree::ptree localFormat = localFormatOpt.get();
 
 				// write EXPA Table header
 				boost::filesystem::ifstream countInput(file, std::ios::in);
