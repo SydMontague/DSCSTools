@@ -55,6 +55,24 @@ namespace dscstools {
 			char* string;
 		};
 
+		inline boost::property_tree::ptree matchStructureName(const boost::property_tree::ptree& format, const std::string& structureName, const std::string& sourceName)
+		{
+			auto formatValue = format.get_child_optional(structureName);
+			if (!formatValue) {
+				// Scan all table definitions to find a matching regex expression, if any
+				for (auto& kv : format) {
+					if (boost::regex_search(structureName, boost::regex{ kv.first })) {
+						formatValue = kv.second;
+						break;
+					}
+				}
+				if (!formatValue)
+					throw std::runtime_error("Error: no definition for table " + std::string(structureName) + " found. " + sourceName);
+			}
+
+			return formatValue.get();
+		}
+
 		uint32_t getEntrySize(const std::string &type, uint32_t currentSize) {
 			if (type == "byte")
 				return 1;
@@ -184,16 +202,11 @@ namespace dscstools {
 			}
 
 			boost::property_tree::ptree format = getStructureFile(source);
-
-			if (format.size() != tables.size())
-				throw std::runtime_error("Warning: number of tables doesn't match expected values. " + source.filename().string());
+			auto filename = source.filename().string();
 
 			for (auto table : tables) {
 				uint32_t tableHeaderSize = 0x0C + table.nameSize() + (table.nameSize() + 4) % 8;
-				auto formatValue = format.get_child_optional(table.name());
-
-				if (!formatValue)
-					throw std::runtime_error("Error: no definition for table " + std::string(table.name()) + " found. " + source.filename().string());
+				auto& formatValue = matchStructureName(format, table.name(), filename);
 
 				boost::filesystem::path outputPath = target / source.filename() / (table.name() + std::string(".csv"));
 				if (outputPath.has_parent_path())
@@ -202,7 +215,7 @@ namespace dscstools {
 
 				// write header
 				bool first = true;
-				for (auto var : formatValue.get()) {
+				for (auto var : formatValue) {
 					if (first)
 						first = false;
 					else
@@ -217,7 +230,7 @@ namespace dscstools {
 					bool first = true;
 					char* localOffset = table.tablePtr + i * (table.entrySize() + table.entrySize() % 8) + tableHeaderSize;
 
-					for (auto var : formatValue.get()) {
+					for (auto var : formatValue) {
 						if (first)
 							first = false;
 						else
@@ -264,11 +277,11 @@ namespace dscstools {
 
 			boost::property_tree::ptree format = getStructureFile(source);
 
-			std::size_t numTables = format.size();
 
 			// write EXPA Header
 			output.write("EXPA", 4);
-			output.write(reinterpret_cast<char*>(&numTables), 4);
+			std::size_t numTables = 0;
+			output.seekp(4, std::ios::cur); // Skip numTables output, we'll add it at the end
 
 			struct CHNKData {
 				std::string type;
@@ -277,9 +290,13 @@ namespace dscstools {
 			};
 			std::vector<CHNKData> chnkData;
 
-			for (auto table : format) {
-				boost::filesystem::path file = source / (table.first + ".csv");
-				boost::property_tree::ptree localFormat = table.second;
+			auto files = boost::filesystem::directory_iterator(source);
+			for (auto dir_entry : files) {
+				++numTables;
+				auto file = dir_entry.path();
+				auto filename = file.filename().stem().string();
+
+				auto& localFormat = matchStructureName(format, filename, filename);
 
 				// write EXPA Table header
 				boost::filesystem::ifstream countInput(file, std::ios::in);
@@ -292,9 +309,9 @@ namespace dscstools {
 				entrySize += entrySize % 8;
 				uint32_t count = (uint32_t)std::distance(countParser.begin(), countParser.end()) - 1;
 
-				uint32_t nameSize = (uint32_t)(table.first.size() + 4) / 4 * 4;
+				uint32_t nameSize = (uint32_t)(filename.size() + 4) / 4 * 4;
 				std::vector<char> name(nameSize);
-				std::copy(table.first.begin(), table.first.end(), name.begin());
+				std::copy(filename.begin(), filename.end(), name.begin());
 				std::vector<char> padding((0x0C + nameSize) % 8, 0);
 
 				output.write(reinterpret_cast<char*>(&nameSize), 4);
@@ -398,6 +415,7 @@ namespace dscstools {
 
 			}
 
+
 			std::size_t chunkCount = chnkData.size();
 			output.write("CHNK", 4);
 			output.write(reinterpret_cast<char*>(&chunkCount), 4);
@@ -427,6 +445,10 @@ namespace dscstools {
 					}
 				}
 			}
+
+			// Seek back to the 4th byte and write out the number of tables that were found
+			output.seekp(4, std::ios::beg);
+			output.write(reinterpret_cast<char*>(&numTables), 4);
 		}
 	}
 }
