@@ -184,16 +184,26 @@ namespace dscstools {
 			}
 
 			boost::property_tree::ptree format = getStructureFile(source);
+			auto fname = source.filename().string();
 
-			if (format.size() != tables.size())
-				throw std::runtime_error("Warning: number of tables doesn't match expected values. " + source.filename().string());
+			//if (format.size() != tables.size())
+			//	throw std::runtime_error("Warning: number of tables doesn't match expected values. " + fname);
 
 			for (auto table : tables) {
 				uint32_t tableHeaderSize = 0x0C + table.nameSize() + (table.nameSize() + 4) % 8;
 				auto formatValue = format.get_child_optional(table.name());
 
-				if (!formatValue)
-					throw std::runtime_error("Error: no definition for table " + std::string(table.name()) + " found. " + source.filename().string());
+				if (!formatValue) {
+					// Scan all table definitions to find a matching regex expression, if any
+					for (auto& kv : format) {
+						if (boost::regex_search(fname, boost::regex{ kv.first })) {
+							formatValue = kv.second;
+							break;
+						}
+					}
+					if (!formatValue)
+						throw std::runtime_error("Error: no definition for table " + std::string(table.name()) + " found. " + source.filename().string());
+				}
 
 				boost::filesystem::path outputPath = target / source.filename() / (table.name() + std::string(".csv"));
 				if (outputPath.has_parent_path())
@@ -264,11 +274,11 @@ namespace dscstools {
 
 			boost::property_tree::ptree format = getStructureFile(source);
 
-			std::size_t numTables = format.size();
+			std::size_t numTables = 0;// format.size();
 
 			// write EXPA Header
 			output.write("EXPA", 4);
-			output.write(reinterpret_cast<char*>(&numTables), 4);
+			output.write(reinterpret_cast<char*>(&numTables), 4); // Going to overwrite this later
 
 			struct CHNKData {
 				std::string type;
@@ -277,9 +287,28 @@ namespace dscstools {
 			};
 			std::vector<CHNKData> chnkData;
 
-			for (auto table : format) {
-				boost::filesystem::path file = source / (table.first + ".csv");
-				boost::property_tree::ptree localFormat = table.second;
+			auto files = boost::filesystem::directory_iterator(source);
+			for (auto dir_entry : files) {
+				auto file = dir_entry.path();
+				auto fname = file.filename().stem().string();
+
+				boost::property_tree::ptree localFormat;
+				if (format.count(fname))
+					localFormat = format.get_child(fname);
+				else {
+					// Scan all table definitions to find a matching regex expression, if any
+					bool gotDef = false;
+					for (auto kv : format) {
+						if (boost::regex_search(fname, boost::regex{ kv.first })) {
+							localFormat = kv.second;
+							gotDef = true;
+							break;
+						}
+					}
+					if (!gotDef)
+						continue;
+				}
+				++numTables;
 
 				// write EXPA Table header
 				boost::filesystem::ifstream countInput(file, std::ios::in);
@@ -292,9 +321,9 @@ namespace dscstools {
 				entrySize += entrySize % 8;
 				uint32_t count = (uint32_t)std::distance(countParser.begin(), countParser.end()) - 1;
 
-				uint32_t nameSize = (uint32_t)(table.first.size() + 4) / 4 * 4;
+				uint32_t nameSize = (uint32_t)(fname.size() + 4) / 4 * 4;
 				std::vector<char> name(nameSize);
-				std::copy(table.first.begin(), table.first.end(), name.begin());
+				std::copy(fname.begin(), fname.end(), name.begin());
 				std::vector<char> padding((0x0C + nameSize) % 8, 0);
 
 				output.write(reinterpret_cast<char*>(&nameSize), 4);
@@ -398,6 +427,7 @@ namespace dscstools {
 
 			}
 
+
 			std::size_t chunkCount = chnkData.size();
 			output.write("CHNK", 4);
 			output.write(reinterpret_cast<char*>(&chunkCount), 4);
@@ -427,6 +457,10 @@ namespace dscstools {
 					}
 				}
 			}
+
+			// Seek back to the 4th byte and write out the number of tables that were found
+			output.seekp(4, std::ios::beg);
+			output.write(reinterpret_cast<char*>(&numTables), 4); // Going to overwrite this later
 		}
 	}
 }
