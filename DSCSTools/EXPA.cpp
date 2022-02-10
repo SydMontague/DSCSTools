@@ -271,7 +271,7 @@ namespace dscstools {
 
 			boost::property_tree::ptree format = getStructureFile(source);
 
-			std::size_t numTables = 0;// format.size();
+			std::size_t numTables = 0;
 
 			// write EXPA Header
 			output.write("EXPA", 4);
