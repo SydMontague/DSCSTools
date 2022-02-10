@@ -287,19 +287,19 @@ namespace dscstools {
 			auto files = boost::filesystem::directory_iterator(source);
 			for (auto dir_entry : files) {
 				auto file = dir_entry.path();
-				auto fname = file.filename().stem().string();
+				auto filename = file.filename().stem().string();
 
-				auto localFormatOpt = format.get_child_optional(fname);
+				auto localFormatOpt = format.get_child_optional(filename);
 				if (!localFormatOpt) {
 					// Scan all table definitions to find a matching regex expression, if any
 					for (auto& kv : format) {
-						if (boost::regex_search(fname, boost::regex{ kv.first })) {
+						if (boost::regex_search(filename, boost::regex{ kv.first })) {
 							localFormatOpt = kv.second;
 							break;
 						}
 					}
 					if (!localFormatOpt)
-						throw std::runtime_error("No matching structure for \"" + fname + "\" was found.");
+						throw std::runtime_error("No matching structure for \"" + filename + "\" was found.");
 				}
 				++numTables;
 
@@ -316,9 +316,9 @@ namespace dscstools {
 				entrySize += entrySize % 8;
 				uint32_t count = (uint32_t)std::distance(countParser.begin(), countParser.end()) - 1;
 
-				uint32_t nameSize = (uint32_t)(fname.size() + 4) / 4 * 4;
+				uint32_t nameSize = (uint32_t)(filename.size() + 4) / 4 * 4;
 				std::vector<char> name(nameSize);
-				std::copy(fname.begin(), fname.end(), name.begin());
+				std::copy(filename.begin(), filename.end(), name.begin());
 				std::vector<char> padding((0x0C + nameSize) % 8, 0);
 
 				output.write(reinterpret_cast<char*>(&nameSize), 4);
