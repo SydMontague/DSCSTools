@@ -292,10 +292,10 @@ namespace dscstools {
 
 			auto files = boost::filesystem::directory_iterator(source);
 			for (auto dir_entry : files) {
+				++numTables;
 				auto file = dir_entry.path();
 				auto filename = file.filename().stem().string();
 
-				++numTables;
 				auto& localFormat = matchStructureName(format, filename, filename);
 
 				// write EXPA Table header
