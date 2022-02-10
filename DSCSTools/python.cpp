@@ -65,14 +65,14 @@ namespace dscstools {
 			return mdb1::getArchiveInfo(_source);
 		}
 
-		void _py_packMDB1(const std::string source, const std::string target, const mdb1::CompressMode mode = mdb1::CompressMode::normal, const bool useStdout = true) {
+		void _py_packMDB1(const std::string source, const std::string target, const mdb1::CompressMode mode = mdb1::CompressMode::normal, bool doCrypt = true, const bool useStdout = true) {
 			ScopedGILRelease scoped;
 			boost::filesystem::path _source = boost::filesystem::exists(source) ? source : boost::filesystem::current_path().append(source);
 			boost::filesystem::path _target = target;
 			if(useStdout)
-				mdb1::packMDB1(_source, _target, mode, std::cout);
+				mdb1::packMDB1(_source, _target, mode, doCrypt, std::cout);
 			else
-				mdb1::packMDB1(_source, _target, mode);
+				mdb1::packMDB1(_source, _target, mode, doCrypt);
 		}
 
 		void _py_crypt(const std::string source, const std::string target) {

@@ -14,10 +14,11 @@ void printUse() {
 	std::cout << "	--extractFile <sourceFile> <targetFolder> <filePath> [--compressed]" << std::endl;
 	std::cout << "		Extracts a file from a given MDB1 into a folder." << std::endl;
 	std::cout << "		Optional: --compressed | don't decompress file" << std::endl;
-	std::cout << "	--pack <sourceFolder> <targetFile> [--disable-compression|--advanced-compression]" << std::endl;
-	std::cout << "		Repacks the given folder into an encrypted MDB1." << std::endl;
+	std::cout << "	--pack <sourceFolder> <targetFile> [--disable-compression|--advanced-compression] [--disable-crypt]" << std::endl;
+	std::cout << "		Repacks the given folder into an MDB1 (encrypted by default). Auto-encryption disabled for .orbis.mvgl, .nx64.mvgl, and .psp2.mvgl archives." << std::endl;
 	std::cout << "		Optional: --disable-compression. Don't use for archives >= 4GiB!" << std::endl;
 	std::cout << "		Optional: --advanced-compression. Doesn't store duplicate data." << std::endl;
+	std::cout << "		Optional: --disable-crypt. Packs into an unencrypted MDB1." << std::endl;
 	std::cout << "	--mbeextract <source> <targetFolder>" << std::endl;
 	std::cout << "		Extracts a .mbe file or a directory of them into CSV, " << std::endl;
 	std::cout << "		as long as it's structure is defined in the structure.json file." << std::endl;
@@ -67,15 +68,33 @@ int main(int argc, char** argv) {
 		}
 		else if (strncmp("--pack", argv[1], 7) == 0) {
 			dscstools::mdb1::CompressMode mode = dscstools::mdb1::CompressMode::normal;
+			bool doCrypt = true;
 
 			if (argc >= 5) {
 				if (strncmp("--disable-compression", argv[4], 22) == 0)
 					mode = dscstools::mdb1::CompressMode::none;
 				else if (strncmp("--advanced-compression", argv[4], 23) == 0)
 					mode = dscstools::mdb1::CompressMode::advanced;
+				else if (strncmp("--disable-crypt", argv[4], 15) == 0)
+					doCrypt = false;
 			}
 
-			dscstools::mdb1::packMDB1(source, target, mode, std::cout);
+			if (argc >= 6) {
+				if (strncmp("--disable-crypt", argv[5], 15) == 0)
+					doCrypt = false;
+			}
+
+			std::string filename = target.filename().string();
+			if ((filename.substr(filename.size() - 10) == "orbis.mvgl") ||
+				(filename.substr(filename.size() -  9) == "psp2.mvgl")  ||
+				(filename.substr(filename.size() -  9) == "nx64.mvgl"))
+				doCrypt = false;
+
+			if (doCrypt)
+				std::cout << "Will encrypt." << std::endl;
+			else
+				std::cout << "Will not encrypt." << std::endl;
+			dscstools::mdb1::packMDB1(source, target, mode, doCrypt, std::cout);
 			std::cout << "Done" << std::endl;
 		}
 		else if (strncmp("--crypt", argv[1], 8) == 0) {
