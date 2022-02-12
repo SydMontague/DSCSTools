@@ -472,7 +472,7 @@ namespace dscstools {
 			return { (uint32_t)length, (uint32_t)length, crc.checksum(), std::move(data) };
 		}
 
-		void packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, const CompressMode compress, std::ostream& progressStream) {
+		void packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, const CompressMode compress, bool doCrypt, std::ostream& progressStream) {
 			if (!boost::filesystem::is_directory(source))
 				throw std::invalid_argument("Error: source path is not a directory.");
 
@@ -516,7 +516,7 @@ namespace dscstools {
 			std::vector<FileNameEntry> header2(files.size() + 1);
 			std::vector<DataEntry> header3;
 
-			mdb1_ofstream output(target, true);
+			mdb1_ofstream output(target, doCrypt);
 
 			size_t dataStart = 0x14 + (1 + files.size()) * 0x08 + (1 + files.size()) * 0x40 + (files.size()) * 0x0C;
 			MDB1Header header = { MDB1_MAGIC_VALUE, (uint16_t)(files.size() + 1), (uint16_t)(files.size() + 1), (uint32_t)files.size(), (uint32_t)dataStart };

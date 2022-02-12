@@ -99,7 +99,7 @@ namespace dscstools {
 				dscstools::mdb1::CompressMode::normal -> regular compression
 				dscstools::mdb1::CompressMode::advanced -> regular compression with duplicate detection
 		*/
-		void SHARED_EXPORT packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, CompressMode compress = normal, std::ostream& progressStream = nullStream);
+		void SHARED_EXPORT packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, CompressMode compress = normal, bool doCrypt = true, std::ostream& progressStream = nullStream);
 
 		/**
 			Performs synchronous en-/decryption of the given sourceFile and saves it into targetFile.
