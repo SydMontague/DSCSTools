@@ -1,7 +1,7 @@
 {
   "para": {
     "id": "int",
-    "unk1": "string",
+    "map_model": "string",
     "unk2": "int",
     "unk3": "int",
     "unk4": "int",

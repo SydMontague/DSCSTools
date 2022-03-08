@@ -1,11 +1,11 @@
 {
   "t0101": {
     "id": "int",
-    "name1": "string",
+    "name": "string",
     "model": "string",
     "variation": "string",
     "unk3": "int",
-    "pose": "int",
+    "fn0X_anim": "int",
     "unk5": "int",
     "rotation": "float",
     "actionIcon": "int",

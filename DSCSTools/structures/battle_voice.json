@@ -1,7 +1,7 @@
 {
   "voice": {
-    "id": "int",
-    "unk1": "string",
+    "voice_id": "int",
+    "voice_name": "string",
     "unk2": "short",
     "unk3": "short",
     "unk4": "short",

@@ -2,8 +2,8 @@
   "para": {
     "id": "int",
     "unk1": "int",
-    "unk2": "string",
-    "unk4": "string",
+    "map_model_name": "string",
+    "start_point_name": "string",
     "unk6": "int",
     "unk7": "int",
     "unk8": "int",

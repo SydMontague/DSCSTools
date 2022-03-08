@@ -1,6 +1,6 @@
 {
   "BattleField": {
-    "id": "int",
+    "battlefield_id": "int",
     "unk1": "string",
     "unk2": "float",
     "unk3": "float",

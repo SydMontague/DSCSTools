@@ -23,7 +23,7 @@
     "unk14": "byte",
     "unk15": "byte",
     "unk16": "byte",
-    "unk9": "int",
-    "unk10": "string"
+    "NPC_id": "int",
+    "NPC_Variation": "string"
   }
 }
