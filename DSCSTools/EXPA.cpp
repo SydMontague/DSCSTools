@@ -360,9 +360,6 @@ namespace dscstools {
 							std::stringstream sstream;
 							sstream << "Error: structure element count differs from input element count. The wrong structure might be used?" << std::endl;
 							sstream << "Expected: " << localFormat.size() << " | Found: " << row.size() << std::endl;
-							for (auto& elem : row)
-								sstream << elem << " ";
-							sstream << std::endl;
 							throw std::runtime_error(sstream.str());
 						}
 
