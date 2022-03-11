@@ -66,7 +66,7 @@ namespace dscstools {
 			if (!formatValue) {
 				// Scan all table definitions to find a matching regex expression, if any
 				for (auto& kv : format) {
-					if (boost::regex_search(structureName, boost::regex{ kv.first })) {
+					if (boost::regex_search(structureName, boost::regex{ wrapRegex(kv.first) })) {
 						formatValue = kv.second;
 						break;
 					}
