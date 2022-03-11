@@ -1,12 +1,12 @@
 {
   "table": {
     "id": "int",
-    "unk1": "int",
-    "unk2": "string",
-    "unk3": "string",
-    "unk4": "string",
-    "unk5": "string",
-    "unk6": "string",
-    "unk7": "string"
+    "interactable": "int",
+    "goods_model": "string",
+    "goods_use_animation": "string",
+    "goods_icon_model": "string",
+    "goods_icon_stand_model": "string",
+    "chr_override_use_animation": "string",
+    "chr_use_animation": "string"
   }
 }

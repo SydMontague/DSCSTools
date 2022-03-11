@@ -1,24 +1,24 @@
 {
   "Field_List": {
-    "id": "int",
+    "field_id": "int",
     "map": "string",
-    "unkVal": "int"
+    "field_name_id": "int"
   },
   "t[0-9]+": {
-    "id": "int",
-    "unk1": "string",
+    "subarea_id": "int",
+    "map_model": "string",
     "unk2": "int",
     "unk3": "float",
     "unk4": "float",
-    "unk5": "string"
+    "map_cam_model": "string"
   },
   "d[0-9]+": {
-    "id": "int",
-    "unk1": "string",
+    "subarea_id": "int",
+    "map_model": "string",
     "unk2": "int",
     "unk3": "float",
     "unk4": "float",
-    "unk5": "string"
+    "map_cam_model": "string"
   },
   "OutLine": {
     "id": "int",

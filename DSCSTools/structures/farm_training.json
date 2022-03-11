@@ -1,22 +1,22 @@
 {
   "personality": {
     "id": "int",
-    "unk1": "float",
-    "unk2": "float",
-    "unk3": "float",
-    "unk4": "float",
-    "unk5": "float",
-    "unk6": "float"
+    "HP": "float",
+    "SP": "float",
+    "ATK": "float",
+    "DEF": "float",
+    "INT": "float",
+    "SPD": "float"
   },
   "course": {
     "id": "int",
-    "unk1": "int",
-    "unk2": "float",
-    "unk3": "float",
-    "unk4": "float",
-    "unk5": "float",
-    "unk6": "float",
-    "unk7": "float",
-    "unk8": "int"
+    "Duration": "int",
+    "HP": "float",
+    "SP": "float",
+    "ATK": "float",
+    "DEF": "float",
+    "INT": "float",
+    "SPD": "float",
+    "CAM": "int"
   }
 }

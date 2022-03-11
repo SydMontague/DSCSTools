@@ -55,13 +55,18 @@ namespace dscstools {
 			char* string;
 		};
 
+		std::string wrapRegex(const std::string& in)
+		{
+			return "^" + in + "$";
+		}
+
 		inline boost::property_tree::ptree matchStructureName(const boost::property_tree::ptree& format, const std::string& structureName, const std::string& sourceName)
 		{
 			auto formatValue = format.get_child_optional(structureName);
 			if (!formatValue) {
 				// Scan all table definitions to find a matching regex expression, if any
 				for (auto& kv : format) {
-					if (boost::regex_search(structureName, boost::regex{ kv.first })) {
+					if (boost::regex_search(structureName, boost::regex{ wrapRegex(kv.first) })) {
 						formatValue = kv.second;
 						break;
 					}
@@ -133,7 +138,6 @@ namespace dscstools {
 
 		boost::property_tree::ptree getStructureFile(boost::filesystem::path source) {
 			boost::property_tree::ptree format;
-
 			boost::property_tree::ptree structure;
 			boost::property_tree::read_json(std::string("structures/structure.json"), structure);
 
@@ -290,129 +294,154 @@ namespace dscstools {
 			};
 			std::vector<CHNKData> chnkData;
 
-			auto files = boost::filesystem::directory_iterator(source);
-			for (auto dir_entry : files) {
-				++numTables;
+			// Find all files in the directory, and assign each to the table definition they will be
+			// built to
+			std::vector<std::vector<boost::filesystem::path>> sortedFiles;
+			sortedFiles.resize(format.size());
+			for (auto& dir_entry : boost::filesystem::directory_iterator(source)) {
 				auto file = dir_entry.path();
 				auto filename = file.filename().stem().string();
-
-				auto& localFormat = matchStructureName(format, filename, filename);
-
-				// write EXPA Table header
-				boost::filesystem::ifstream countInput(file, std::ios::in);
-				aria::csv::CsvParser countParser(countInput);
-
-				uint32_t entrySize = 0;
-				for (auto entry : localFormat)
-					entrySize += getEntrySize(entry.second.data(), entrySize);
-
-				entrySize += entrySize % 8;
-				uint32_t count = (uint32_t)std::distance(countParser.begin(), countParser.end()) - 1;
-
-				uint32_t nameSize = (uint32_t)(filename.size() + 4) / 4 * 4;
-				std::vector<char> name(nameSize);
-				std::copy(filename.begin(), filename.end(), name.begin());
-				std::vector<char> padding((0x0C + nameSize) % 8, 0);
-
-				output.write(reinterpret_cast<char*>(&nameSize), 4);
-				output.write(name.data(), nameSize);
-				output.write(reinterpret_cast<char*>(&entrySize), 4);
-				output.write(reinterpret_cast<char*>(&count), 4);
-				output.write(padding.data(), (0x0C + nameSize) % 8);
-
-				// write EXPA data, cache CHNK data
-				boost::filesystem::ifstream input(file, std::ios::in);
-				aria::csv::CsvParser parser(input);
-
-				bool first = true;
-
-				for (auto &row : parser) {
-					if (localFormat.size() != row.size()) {
-						std::stringstream sstream;
-						sstream << "Error: structure element count differs from input element count. The wrong structure might be used?" << std::endl;
-						sstream << "Expected: " << localFormat.size() << " | Found: " << row.size() << std::endl;
-						throw std::runtime_error(sstream.str());
+				size_t i = 0;
+				for (auto table : format) {
+					if (boost::regex_search(filename, boost::regex{ wrapRegex(table.first) })) {
+						sortedFiles[i].push_back(file);
+						break;
 					}
+					++i;
+				}
+			}
 
-					if (first) {
-						first = false;
-						continue;
-					}
+			// Sort each list of files alphanumerically
+			// Might not be necessary, and it would be much nicer to sort naturally rather than alphanumerically
+			for (auto& filelist : sortedFiles)
+			{
+				std::sort(filelist.begin(), filelist.end());
+			}
 
-					auto itr = localFormat.begin();
+			size_t tableIterationCounter = 0;
+			for (auto& table : format) {
+				auto& localFormat = table.second;
+				auto& filelist = sortedFiles[tableIterationCounter];
+				++tableIterationCounter;
+				
+				for (auto& file : filelist) {
+					++numTables;
+					auto filename = file.filename().stem().string();
+					// write EXPA Table header
+					boost::filesystem::ifstream countInput(file, std::ios::in);
+					aria::csv::CsvParser countParser(countInput);
+
 					uint32_t entrySize = 0;
+					for (auto entry : localFormat)
+						entrySize += getEntrySize(entry.second.data(), entrySize);
 
-					for (auto &col : row) {
-						std::string type = (*itr++).second.data();
+					entrySize += entrySize % 8;
+					uint32_t count = (uint32_t)std::distance(countParser.begin(), countParser.end()) - 1;
 
-						// TODO remove boilerplate
-						if (type == "byte") {
-							int8_t value = std::stoi(col);
-							output.write(reinterpret_cast<char*>(&value), 1);
-							entrySize += 1;
+					uint32_t nameSize = (uint32_t)(filename.size() + 4) / 4 * 4;
+					std::vector<char> name(nameSize);
+					std::copy(filename.begin(), filename.end(), name.begin());
+					std::vector<char> padding((0x0C + nameSize) % 8, 0);
+
+					output.write(reinterpret_cast<char*>(&nameSize), 4);
+					output.write(name.data(), nameSize);
+					output.write(reinterpret_cast<char*>(&entrySize), 4);
+					output.write(reinterpret_cast<char*>(&count), 4);
+					output.write(padding.data(), (0x0C + nameSize) % 8);
+
+					// write EXPA data, cache CHNK data
+					boost::filesystem::ifstream input(file, std::ios::in);
+					aria::csv::CsvParser parser(input);
+
+					bool first = true;
+
+					for (auto& row : parser) {
+						if (localFormat.size() != row.size()) {
+							std::stringstream sstream;
+							sstream << "Error: structure element count differs from input element count. The wrong structure might be used?" << std::endl;
+							sstream << "Expected: " << localFormat.size() << " | Found: " << row.size() << std::endl;
+							throw std::runtime_error(sstream.str());
 						}
-						else if (type == "short") {
-							uint32_t paddingSize = entrySize % 2;
-							std::vector<char> padding(paddingSize, PADDING_BYTE);
-							output.write(padding.data(), paddingSize);
 
-							int16_t value = std::stoi(col);
-							output.write(reinterpret_cast<char*>(&value), 2);
-							entrySize += 2 + paddingSize;
+						if (first) {
+							first = false;
+							continue;
 						}
-						else if (type == "int") {
-							uint32_t paddingSize = entrySize % 4;
-							std::vector<char> padding(paddingSize, PADDING_BYTE);
-							output.write(padding.data(), paddingSize);
 
-							int32_t value = std::stoi(col);
-							output.write(reinterpret_cast<char*>(&value), 4);
-							entrySize += 4 + paddingSize;
+						auto itr = localFormat.begin();
+						uint32_t entrySize = 0;
+
+						for (auto& col : row) {
+							std::string type = (*itr++).second.data();
+
+							// TODO remove boilerplate
+							if (type == "byte") {
+								int8_t value = std::stoi(col);
+								output.write(reinterpret_cast<char*>(&value), 1);
+								entrySize += 1;
+							}
+							else if (type == "short") {
+								uint32_t paddingSize = entrySize % 2;
+								std::vector<char> padding(paddingSize, PADDING_BYTE);
+								output.write(padding.data(), paddingSize);
+
+								int16_t value = std::stoi(col);
+								output.write(reinterpret_cast<char*>(&value), 2);
+								entrySize += 2 + paddingSize;
+							}
+							else if (type == "int") {
+								uint32_t paddingSize = entrySize % 4;
+								std::vector<char> padding(paddingSize, PADDING_BYTE);
+								output.write(padding.data(), paddingSize);
+
+								int32_t value = std::stoi(col);
+								output.write(reinterpret_cast<char*>(&value), 4);
+								entrySize += 4 + paddingSize;
+							}
+							else if (type == "float") {
+								uint32_t paddingSize = entrySize % 4;
+								std::vector<char> padding(paddingSize, PADDING_BYTE);
+								output.write(padding.data(), paddingSize);
+
+								float value = std::stof(col);
+								output.write(reinterpret_cast<char*>(&value), 4);
+								entrySize += 4 + paddingSize;
+							}
+							else if (type == "string") {
+								if (!col.empty())
+									chnkData.push_back({ type, col, (uint32_t)output.tellp() + entrySize % 8 });
+
+								uint32_t paddingSize = entrySize % 8;
+								std::vector<char> padding(paddingSize, PADDING_BYTE);
+								output.write(padding.data(), paddingSize);
+
+								output.write("\0\0\0\0\0\0\0\0", 8);
+								entrySize += 8 + paddingSize;
+							}
+							else if (type == "int array") {
+								if (!col.empty())
+									chnkData.push_back({ type, col, (uint32_t)output.tellp() + 8 + entrySize % 8 });
+
+								uint32_t paddingSize = entrySize % 8;
+								std::vector<char> padding(8, PADDING_BYTE);
+								output.write(padding.data(), paddingSize);
+
+								uint32_t arraySize = (uint32_t)std::count(col.begin(), col.end(), ' ') + 1;
+								output.write(reinterpret_cast<char*>(&arraySize), 4);
+								output.write(padding.data(), 4);
+								output.write("\0\0\0\0\0\0\0\0", 8);
+
+								entrySize += 16 + paddingSize;
+							}
 						}
-						else if (type == "float") {
-							uint32_t paddingSize = entrySize % 4;
-							std::vector<char> padding(paddingSize, PADDING_BYTE);
-							output.write(padding.data(), paddingSize);
 
-							float value = std::stof(col);
-							output.write(reinterpret_cast<char*>(&value), 4);
-							entrySize += 4 + paddingSize;
+						if (entrySize % 8 != 0) {
+							std::vector<char> padding(entrySize % 8, PADDING_BYTE);
+							output.write(padding.data(), entrySize % 8);
+							entrySize += entrySize % 8;
 						}
-						else if (type == "string") {
-							if (!col.empty())
-								chnkData.push_back({ type, col, (uint32_t)output.tellp() + entrySize % 8 });
-
-							uint32_t paddingSize = entrySize % 8;
-							std::vector<char> padding(paddingSize, PADDING_BYTE);
-							output.write(padding.data(), paddingSize);
-
-							output.write("\0\0\0\0\0\0\0\0", 8);
-							entrySize += 8 + paddingSize;
-						}
-						else if (type == "int array") {
-							if (!col.empty())
-								chnkData.push_back({ type, col, (uint32_t)output.tellp() + 8 + entrySize % 8 });
-
-							uint32_t paddingSize = entrySize % 8;
-							std::vector<char> padding(8, PADDING_BYTE);
-							output.write(padding.data(), paddingSize);
-
-							uint32_t arraySize = (uint32_t)std::count(col.begin(), col.end(), ' ') + 1;
-							output.write(reinterpret_cast<char*>(&arraySize), 4);
-							output.write(padding.data(), 4);
-							output.write("\0\0\0\0\0\0\0\0", 8);
-
-							entrySize += 16 + paddingSize;
-						}
-					}
-
-					if (entrySize % 8 != 0) {
-						std::vector<char> padding(entrySize % 8, PADDING_BYTE);
-						output.write(padding.data(), entrySize % 8);
-						entrySize += entrySize % 8;
 					}
 				}
-
 			}
 
 
