@@ -55,6 +55,11 @@ namespace dscstools {
 			char* string;
 		};
 
+		std::string wrapRegex(const std::string& in)
+		{
+			return "^" + in + "$";
+		}
+
 		inline boost::property_tree::ptree matchStructureName(const boost::property_tree::ptree& format, const std::string& structureName, const std::string& sourceName)
 		{
 			auto formatValue = format.get_child_optional(structureName);
