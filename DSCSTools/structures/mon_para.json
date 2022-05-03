@@ -15,7 +15,7 @@
     "levelDEF": "int",
     "levelINT": "int",
     "levelSPD": "int",
-    "unk16": "int",
+    "battleAI": "int",
     "poisonResist": "byte",
     "panicResist": "byte",
     "paraResist": "byte",
