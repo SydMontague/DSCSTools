@@ -157,6 +157,14 @@ namespace dscstools {
 			return format;
 		}
 
+
+		std::string conversionErrorMessage(const std::string& in, const std::string& type, const std::string& mbe, const std::string& filename, const std::string& colName, size_t colCount, size_t rowCount)
+		{
+
+			std::string type_name;
+			return "Error packing " + mbe + "/" + filename + ": Value \'" + in + "\' cannot be converted to \'" + type + "\' at Row " + std::to_string(rowCount) + ", Column " + std::to_string(colCount) + " \'" + colName + "\'.";
+		}
+
 		void extractMBEFile(boost::filesystem::path source, boost::filesystem::path target) {
 			if (!boost::filesystem::exists(target)) {
 				if (target.has_parent_path())
@@ -291,6 +299,7 @@ namespace dscstools {
 				std::string type;
 				std::string data;
 				uint32_t offset;
+				std::string error_msg;
 			};
 			std::vector<CHNKData> chnkData;
 
@@ -355,7 +364,10 @@ namespace dscstools {
 
 					bool first = true;
 
+					int32_t row_counter = -1;
 					for (auto& row : parser) {
+						++row_counter;
+
 						if (localFormat.size() != row.size()) {
 							std::stringstream sstream;
 							sstream << "Error: structure element count differs from input element count. The wrong structure might be used?" << std::endl;
@@ -371,67 +383,78 @@ namespace dscstools {
 						auto itr = localFormat.begin();
 						uint32_t entrySize = 0;
 
+						int32_t col_counter = -1;
 						for (auto& col : row) {
-							std::string type = (*itr++).second.data();
+							++col_counter;
+							const auto& structEntry = (*itr++);
+							std::string colName = structEntry.first.data();
+							std::string type = structEntry.second.data();
 
-							// TODO remove boilerplate
-							if (type == "byte") {
-								int8_t value = std::stoi(col);
-								output.write(reinterpret_cast<char*>(&value), 1);
-								entrySize += 1;
+							try
+							{
+								// TODO remove boilerplate
+								if (type == "byte") {
+									int8_t value = std::stoi(col);
+									output.write(reinterpret_cast<char*>(&value), 1);
+									entrySize += 1;
+								}
+								else if (type == "short") {
+									uint32_t paddingSize = entrySize % 2;
+									std::vector<char> padding(paddingSize, PADDING_BYTE);
+									output.write(padding.data(), paddingSize);
+
+									int16_t value = std::stoi(col);
+									output.write(reinterpret_cast<char*>(&value), 2);
+									entrySize += 2 + paddingSize;
+								}
+								else if (type == "int") {
+									uint32_t paddingSize = entrySize % 4;
+									std::vector<char> padding(paddingSize, PADDING_BYTE);
+									output.write(padding.data(), paddingSize);
+
+									int32_t value = std::stoi(col);
+									output.write(reinterpret_cast<char*>(&value), 4);
+									entrySize += 4 + paddingSize;
+								}
+								else if (type == "float") {
+									uint32_t paddingSize = entrySize % 4;
+									std::vector<char> padding(paddingSize, PADDING_BYTE);
+									output.write(padding.data(), paddingSize);
+
+									float value = std::stof(col);
+									output.write(reinterpret_cast<char*>(&value), 4);
+									entrySize += 4 + paddingSize;
+								}
+								else if (type == "string") {
+									if (!col.empty())
+										chnkData.push_back({ type, col, (uint32_t)output.tellp() + entrySize % 8, "" });
+
+									uint32_t paddingSize = entrySize % 8;
+									std::vector<char> padding(paddingSize, PADDING_BYTE);
+									output.write(padding.data(), paddingSize);
+
+									output.write("\0\0\0\0\0\0\0\0", 8);
+									entrySize += 8 + paddingSize;
+								}
+								else if (type == "int array") {
+									if (!col.empty())
+										chnkData.push_back({ type, col, (uint32_t)output.tellp() + 8 + entrySize % 8, conversionErrorMessage(col, type, source.filename().string(), filename, colName, col_counter, row_counter) });
+
+									uint32_t paddingSize = entrySize % 8;
+									std::vector<char> padding(8, PADDING_BYTE);
+									output.write(padding.data(), paddingSize);
+
+									uint32_t arraySize = (uint32_t)std::count(col.begin(), col.end(), ' ') + 1;
+									output.write(reinterpret_cast<char*>(&arraySize), 4);
+									output.write(padding.data(), 4);
+									output.write("\0\0\0\0\0\0\0\0", 8);
+
+									entrySize += 16 + paddingSize;
+								}
 							}
-							else if (type == "short") {
-								uint32_t paddingSize = entrySize % 2;
-								std::vector<char> padding(paddingSize, PADDING_BYTE);
-								output.write(padding.data(), paddingSize);
-
-								int16_t value = std::stoi(col);
-								output.write(reinterpret_cast<char*>(&value), 2);
-								entrySize += 2 + paddingSize;
-							}
-							else if (type == "int") {
-								uint32_t paddingSize = entrySize % 4;
-								std::vector<char> padding(paddingSize, PADDING_BYTE);
-								output.write(padding.data(), paddingSize);
-
-								int32_t value = std::stoi(col);
-								output.write(reinterpret_cast<char*>(&value), 4);
-								entrySize += 4 + paddingSize;
-							}
-							else if (type == "float") {
-								uint32_t paddingSize = entrySize % 4;
-								std::vector<char> padding(paddingSize, PADDING_BYTE);
-								output.write(padding.data(), paddingSize);
-
-								float value = std::stof(col);
-								output.write(reinterpret_cast<char*>(&value), 4);
-								entrySize += 4 + paddingSize;
-							}
-							else if (type == "string") {
-								if (!col.empty())
-									chnkData.push_back({ type, col, (uint32_t)output.tellp() + entrySize % 8 });
-
-								uint32_t paddingSize = entrySize % 8;
-								std::vector<char> padding(paddingSize, PADDING_BYTE);
-								output.write(padding.data(), paddingSize);
-
-								output.write("\0\0\0\0\0\0\0\0", 8);
-								entrySize += 8 + paddingSize;
-							}
-							else if (type == "int array") {
-								if (!col.empty())
-									chnkData.push_back({ type, col, (uint32_t)output.tellp() + 8 + entrySize % 8 });
-
-								uint32_t paddingSize = entrySize % 8;
-								std::vector<char> padding(8, PADDING_BYTE);
-								output.write(padding.data(), paddingSize);
-
-								uint32_t arraySize = (uint32_t)std::count(col.begin(), col.end(), ' ') + 1;
-								output.write(reinterpret_cast<char*>(&arraySize), 4);
-								output.write(padding.data(), 4);
-								output.write("\0\0\0\0\0\0\0\0", 8);
-
-								entrySize += 16 + paddingSize;
+							catch (const std::invalid_argument& ex)
+							{
+								throw std::invalid_argument(conversionErrorMessage(col, type, source.filename().string(), filename, colName, col_counter, row_counter));
 							}
 						}
 
@@ -468,9 +491,16 @@ namespace dscstools {
 					output.write(reinterpret_cast<char*>(&entry.offset), 4);
 					output.write(reinterpret_cast<char*>(&size), 4);
 
-					for (auto number : numbers) {
-						int32_t val = std::stoi(number);
-						output.write(reinterpret_cast<char*>(&val), 4);
+					try
+					{
+						for (auto number : numbers) {
+							int32_t val = std::stoi(number);
+							output.write(reinterpret_cast<char*>(&val), 4);
+						}
+					}
+					catch (const std::invalid_argument& ex)
+					{
+						throw std::invalid_argument(entry.error_msg);
 					}
 				}
 			}
