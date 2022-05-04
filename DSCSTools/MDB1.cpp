@@ -276,7 +276,7 @@ namespace dscstools {
 				doboz::Result result = decomp.decompress(dataArr.get(), data.compSize, outputArr.get(), data.size);
 
 				if (result != doboz::RESULT_OK)
-					throw std::runtime_error("Error while decompressing. doboz error code: " + std::to_string(result));
+					throw std::runtime_error("Error while decompressing '" + fileInfo.name.toString() + "'. doboz error code : " + std::to_string(result));
 			}
 
 			output.write(outputArr.get(), outputSize);

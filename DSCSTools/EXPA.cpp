@@ -49,11 +49,6 @@ namespace dscstools {
 			uint32_t numEntry;
 		};
 
-		struct CHNKEntry {
-			uint32_t someValue;
-			uint32_t size;
-			char* string;
-		};
 
 		std::string wrapRegex(const std::string& in)
 		{
@@ -445,6 +440,9 @@ namespace dscstools {
 									output.write(padding.data(), paddingSize);
 
 									uint32_t arraySize = (uint32_t)std::count(col.begin(), col.end(), ' ') + 1;
+									if (col.empty())
+										arraySize = 0;
+
 									output.write(reinterpret_cast<char*>(&arraySize), 4);
 									output.write(padding.data(), 4);
 									output.write("\0\0\0\0\0\0\0\0", 8);
