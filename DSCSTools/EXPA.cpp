@@ -49,6 +49,10 @@ namespace dscstools {
 			uint32_t numEntry;
 		};
 
+		uint32_t align(uint64_t offset, uint64_t value)
+		{
+			return (value - (offset % value)) % value;
+		}
 
 		std::string wrapRegex(const std::string& in)
 		{
@@ -77,15 +81,15 @@ namespace dscstools {
 			if (type == "byte")
 				return 1;
 			if (type == "short")
-				return 2 + ((uint32_t)currentSize % 2);
+				return 2 + align(currentSize, 2);
 			if (type == "int")
-				return 4 + ((uint32_t)currentSize % 4);
+				return 4 + align(currentSize, 4);
 			if (type == "float")
-				return 4 + ((uint32_t)currentSize % 4);
+				return 4 + align(currentSize, 4);
 			else if (type == "string")
-				return 8 + ((uint32_t)currentSize % 8);
+				return 8 + align(currentSize, 8);
 			else if (type == "int array")
-				return 16 + ((uint32_t)currentSize % 8);
+				return 16 + align(currentSize, 8);
 
 			return 0;
 		}
@@ -93,36 +97,36 @@ namespace dscstools {
 		void writeEXPAEntry(std::ofstream &output, char* &ptr, const std::string &type) {
 			// TODO remove boilerplate
 			if (type == "int") {
-				ptr = ptr + ((std::size_t) ptr % 4);
+				ptr = ptr + align((std::size_t)ptr, 4);
 				output << *reinterpret_cast<int32_t*>(ptr);
 				ptr += 4;
 			}
 			else if (type == "float") {
-				ptr = ptr + ((std::size_t) ptr % 4);
+				ptr = ptr + align((std::size_t)ptr, 4);
 				output << *reinterpret_cast<float*>(ptr);
 				ptr += 4;
 			}
 			else if (type == "string") {
-				ptr = ptr + ((std::size_t) ptr % 8);
+				ptr = ptr + align((std::size_t)ptr, 8);
 				char* strPtr = *reinterpret_cast<char**>(ptr);
 				output << std::quoted(strPtr == nullptr ? "" : std::string(strPtr + 8), '\"', '\"');
 				ptr += 8;
 			}
 			else if (type == "byte") {
-				ptr = ptr + ((std::size_t) ptr % 1);
+				ptr = ptr;
 				output << (int32_t) *reinterpret_cast<int8_t*>(ptr);
 				ptr += 1;
 			}
 			else if (type == "short") {
-				ptr = ptr + ((std::size_t) ptr % 2);
+				ptr = ptr + align((std::size_t)ptr, 2);
 				output << *reinterpret_cast<int16_t*>(ptr);
 				ptr += 2;
 			}
 			else if (type == "int array") {
-				ptr = ptr + ((std::size_t) ptr % 8);
+				ptr = ptr + align((std::size_t)ptr, 8);
 				uint32_t elemCount = *reinterpret_cast<uint32_t*>(ptr);
 				ptr += 4;
-				ptr = ptr + ((std::size_t) ptr % 8);
+				ptr = ptr + align((std::size_t)ptr, 8);
 				int32_t* arrPtr = *reinterpret_cast<int32_t**>(ptr);
 
 				for (uint32_t i = 0; i < elemCount; i++)
@@ -193,7 +197,7 @@ namespace dscstools {
 				if (table.nameSize() % 8 == 0)
 					offset += 4;
 
-				offset += table.entryCount() * (table.entrySize() + table.entrySize() % 8);
+				offset += table.entryCount() * (table.entrySize() + align(table.entrySize(), 8));
 			}
 
 			CHNKHeader* chunkHeader = reinterpret_cast<CHNKHeader*>(data.get() + offset);
@@ -212,7 +216,7 @@ namespace dscstools {
 			auto filename = source.filename().string();
 
 			for (auto table : tables) {
-				uint32_t tableHeaderSize = 0x0C + table.nameSize() + (table.nameSize() + 4) % 8;
+				uint32_t tableHeaderSize = 0x0C + table.nameSize() + align(table.nameSize() + 4LL, 8);
 				auto& formatValue = matchStructureName(format, table.name(), filename);
 
 				boost::filesystem::path outputPath = target / source.filename() / (table.name() + std::string(".csv"));
@@ -235,7 +239,7 @@ namespace dscstools {
 				// write data
 				for (uint32_t i = 0; i < table.entryCount(); i++) {
 					bool first = true;
-					char* localOffset = table.tablePtr + i * (table.entrySize() + table.entrySize() % 8) + tableHeaderSize;
+					char* localOffset = table.tablePtr + i * (table.entrySize() + align(table.entrySize(), 8)) + tableHeaderSize;
 
 					for (auto var : formatValue) {
 						if (first)
@@ -339,19 +343,19 @@ namespace dscstools {
 					for (auto entry : localFormat)
 						entrySize += getEntrySize(entry.second.data(), entrySize);
 
-					entrySize += entrySize % 8;
+					entrySize += align(entrySize, 8);
 					uint32_t count = (uint32_t)std::distance(countParser.begin(), countParser.end()) - 1;
 
 					uint32_t nameSize = (uint32_t)(filename.size() + 4) / 4 * 4;
 					std::vector<char> name(nameSize);
 					std::copy(filename.begin(), filename.end(), name.begin());
-					std::vector<char> padding((0x0C + nameSize) % 8, 0);
+					std::vector<char> padding(align(0x0CLL + nameSize, 8), 0);
 
 					output.write(reinterpret_cast<char*>(&nameSize), 4);
 					output.write(name.data(), nameSize);
 					output.write(reinterpret_cast<char*>(&entrySize), 4);
 					output.write(reinterpret_cast<char*>(&count), 4);
-					output.write(padding.data(), (0x0C + nameSize) % 8);
+					output.write(padding.data(), align(0x0CLL + nameSize, 8));
 
 					// write EXPA data, cache CHNK data
 					boost::filesystem::ifstream input(file, std::ios::in);
@@ -394,7 +398,7 @@ namespace dscstools {
 									entrySize += 1;
 								}
 								else if (type == "short") {
-									uint32_t paddingSize = entrySize % 2;
+									uint32_t paddingSize = align(entrySize, 2);
 									std::vector<char> padding(paddingSize, PADDING_BYTE);
 									output.write(padding.data(), paddingSize);
 
@@ -403,7 +407,7 @@ namespace dscstools {
 									entrySize += 2 + paddingSize;
 								}
 								else if (type == "int") {
-									uint32_t paddingSize = entrySize % 4;
+									uint32_t paddingSize = align(entrySize, 4);
 									std::vector<char> padding(paddingSize, PADDING_BYTE);
 									output.write(padding.data(), paddingSize);
 
@@ -412,7 +416,7 @@ namespace dscstools {
 									entrySize += 4 + paddingSize;
 								}
 								else if (type == "float") {
-									uint32_t paddingSize = entrySize % 4;
+									uint32_t paddingSize = align(entrySize, 4);
 									std::vector<char> padding(paddingSize, PADDING_BYTE);
 									output.write(padding.data(), paddingSize);
 
@@ -422,9 +426,9 @@ namespace dscstools {
 								}
 								else if (type == "string") {
 									if (!col.empty())
-										chnkData.push_back({ type, col, (uint32_t)output.tellp() + entrySize % 8, "" });
+										chnkData.push_back({ type, col, (uint32_t)output.tellp() + align(entrySize, 8), "" });
 
-									uint32_t paddingSize = entrySize % 8;
+									uint32_t paddingSize = align(entrySize, 8);
 									std::vector<char> padding(paddingSize, PADDING_BYTE);
 									output.write(padding.data(), paddingSize);
 
@@ -433,9 +437,9 @@ namespace dscstools {
 								}
 								else if (type == "int array") {
 									if (!col.empty())
-										chnkData.push_back({ type, col, (uint32_t)output.tellp() + 8 + entrySize % 8, conversionErrorMessage(col, type, source.filename().string(), filename, colName, col_counter, row_counter) });
+										chnkData.push_back({ type, col, (uint32_t)output.tellp() + 8 + align(entrySize, 8), conversionErrorMessage(col, type, source.filename().string(), filename, colName, col_counter, row_counter) });
 
-									uint32_t paddingSize = entrySize % 8;
+									uint32_t paddingSize = align(entrySize, 8);
 									std::vector<char> padding(8, PADDING_BYTE);
 									output.write(padding.data(), paddingSize);
 
@@ -450,16 +454,16 @@ namespace dscstools {
 									entrySize += 16 + paddingSize;
 								}
 							}
-							catch (const std::invalid_argument& ex)
+							catch (const std::exception& ex)
 							{
 								throw std::invalid_argument(conversionErrorMessage(col, type, source.filename().string(), filename, colName, col_counter, row_counter));
 							}
 						}
 
-						if (entrySize % 8 != 0) {
-							std::vector<char> padding(entrySize % 8, PADDING_BYTE);
-							output.write(padding.data(), entrySize % 8);
-							entrySize += entrySize % 8;
+						if (align(entrySize, 8) != 0) {
+							std::vector<char> padding(align(entrySize, 8), PADDING_BYTE);
+							output.write(padding.data(), align(entrySize, 8));
+							entrySize += align(entrySize, 8);
 						}
 					}
 				}
@@ -496,7 +500,7 @@ namespace dscstools {
 							output.write(reinterpret_cast<char*>(&val), 4);
 						}
 					}
-					catch (const std::invalid_argument& ex)
+					catch (const std::exception& ex)
 					{
 						throw std::invalid_argument(entry.error_msg);
 					}

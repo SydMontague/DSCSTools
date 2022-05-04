@@ -15,7 +15,8 @@ void printUse() {
 	std::cout << "		Extracts a file from a given MDB1 into a folder." << std::endl;
 	std::cout << "		Optional: --compressed | don't decompress file" << std::endl;
 	std::cout << "	--pack <sourceFolder> <targetFile> [--disable-compression|--advanced-compression] [--disable-crypt]" << std::endl;
-	std::cout << "		Repacks the given folder into an MDB1 (encrypted by default). Auto-encryption disabled for .orbis.mvgl, .nx64.mvgl, and .psp2.mvgl archives." << std::endl;
+	std::cout << "		Repacks the given folder into an MDB1 (encrypted by default)." << std::endl;
+	std::cout << "		Auto - encryption disabled for.orbis.mvgl, .nx64.mvgl, and .psp2.mvgl archives." << std::endl;
 	std::cout << "		Optional: --disable-compression. Don't use for archives >= 4GiB!" << std::endl;
 	std::cout << "		Optional: --advanced-compression. Doesn't store duplicate data." << std::endl;
 	std::cout << "		Optional: --disable-crypt. Packs into an unencrypted MDB1." << std::endl;
