@@ -2,7 +2,8 @@
   "support_skill": {
     "id": "int",
     "description": "int",
-    "condition": "int",
+    "unknown": "short",
+    "cond type": "short",
     "cond Value": "short",
     "Phys Damage": "short",
     "Magic Damage": "short",
