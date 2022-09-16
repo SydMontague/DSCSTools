@@ -217,7 +217,7 @@ namespace dscstools {
 
 			for (auto table : tables) {
 				uint32_t tableHeaderSize = 0x0C + table.nameSize() + align(table.nameSize() + 4LL, 8);
-				auto& formatValue = matchStructureName(format, table.name(), filename);
+				const auto& formatValue = matchStructureName(format, table.name(), filename);
 
 				boost::filesystem::path outputPath = target / source.filename() / (table.name() + std::string(".csv"));
 				if (outputPath.has_parent_path())

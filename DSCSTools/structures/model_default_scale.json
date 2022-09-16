@@ -4,8 +4,8 @@
     "fieldGuideScale": "float",
     "battleScale": "float",
     "fieldScale": "float",
-    "Uk4": "float",
-    "Uk5": "float"
+    "conversationScale": "float",
+    "followDistanceScale": "float"
   },
   "pc": {
     "ID": "int",
