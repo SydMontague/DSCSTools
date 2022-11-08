@@ -1,8 +1,9 @@
 #pragma once
-#include <boost/filesystem.hpp>
 #include <ostream>
 #include <vector>
 #include <string>
+#include <filesystem>
+#include <algorithm>
 #include "shared_export.h"
 
 namespace dscstools {
@@ -31,7 +32,7 @@ namespace dscstools {
 
 			const std::string toPath() {
 				std::string str = toString();
-				std::replace(str.begin(), str.end(), '\\', (char)boost::filesystem::path::preferred_separator);
+				std::replace(str.begin(), str.end(), '\\', (char)std::filesystem::path::preferred_separator);
 				return str;
 			}
 		};
@@ -65,30 +66,30 @@ namespace dscstools {
 		/**
 			Decompresses a file that has been compressed using the doboz library.
 		*/
-		void SHARED_EXPORT dobozDecompress(const boost::filesystem::path source, const boost::filesystem::path target);
+		void SHARED_EXPORT dobozDecompress(const std::filesystem::path source, const std::filesystem::path target);
 
 		/**
 			Compresses a file using the doboz library.
 		*/
-		void SHARED_EXPORT dobozCompress(const boost::filesystem::path source, const boost::filesystem::path target);
+		void SHARED_EXPORT dobozCompress(const std::filesystem::path source, const std::filesystem::path target);
 
 		/**
 			Returns the ArchiveInfo of an MDB1 archive given by sourceArchive. 
 			See the ArchiveInfo strcture. The encryption status of the archive doesn't matter.
 		*/
-		ArchiveInfo SHARED_EXPORT getArchiveInfo(const boost::filesystem::path source);
+		ArchiveInfo SHARED_EXPORT getArchiveInfo(const std::filesystem::path source);
 
 		/**
 			Extracts a file with the internal path filePath from a MDB1 archive given by sourceArchive into targetPath. 
 			The encryption status of the archive doesn't matter.
 		*/
-		void SHARED_EXPORT extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, std::string fileName, const bool decompress = true);
+		void SHARED_EXPORT extractMDB1File(const std::filesystem::path source, const std::filesystem::path target, std::string fileName, const bool decompress = true);
 
 		/**
 			Extracts a MDB1 archive given by sourceArchive and extracts it into targetPath or throws an error if something went wrong. 
 			The encryption status of the archive doesn't matter.
 		*/
-		void SHARED_EXPORT extractMDB1(const boost::filesystem::path source, const boost::filesystem::path target, const bool decompress = true);
+		void SHARED_EXPORT extractMDB1(const std::filesystem::path source, const std::filesystem::path target, const bool decompress = true);
 
 		/**
 			Packs a folder given by sourcePath into an encrypted MDB1 archive saved at targetArchive. 
@@ -99,11 +100,11 @@ namespace dscstools {
 				dscstools::mdb1::CompressMode::normal -> regular compression
 				dscstools::mdb1::CompressMode::advanced -> regular compression with duplicate detection
 		*/
-		void SHARED_EXPORT packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, CompressMode compress = normal, bool doCrypt = true, std::ostream& progressStream = nullStream);
+		void SHARED_EXPORT packMDB1(const std::filesystem::path source, const std::filesystem::path target, CompressMode compress = normal, bool doCrypt = true, std::ostream& progressStream = nullStream);
 
 		/**
 			Performs synchronous en-/decryption of the given sourceFile and saves it into targetFile.
 		*/
-		void SHARED_EXPORT cryptFile(const boost::filesystem::path source, const boost::filesystem::path target);
+		void SHARED_EXPORT cryptFile(const std::filesystem::path source, const std::filesystem::path target);
 	}
 }

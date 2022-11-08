@@ -24,7 +24,7 @@ else()
     add_library (DSCSTools STATIC ${SOURCE_FILES})
 endif()
 
-target_link_libraries(DSCSTools PUBLIC doboz ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+target_link_libraries(DSCSTools PUBLIC doboz Boost::property_tree Boost::multiprecision Boost::crc Boost::asio Boost::regex Boost::system Boost::date_time Boost::mpl Boost::python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR} ${PYTHON_LIBRARIES})
 
 # Install into /target/ folder
 install (TARGETS DSCSTools DESTINATION ${CMAKE_BINARY_DIR}/target)

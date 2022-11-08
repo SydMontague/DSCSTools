@@ -3,6 +3,8 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
+#include <vector>
 #include <stdint.h>
 
 namespace dscstools {
@@ -16,13 +18,13 @@ namespace dscstools {
 			int32_t blockSize;
 		};
 
-		void extractAFS2(const boost::filesystem::path source, const boost::filesystem::path target) {
-			if (boost::filesystem::exists(target) && !boost::filesystem::is_directory(target))
+		void extractAFS2(const std::filesystem::path source, const std::filesystem::path target) {
+			if (std::filesystem::exists(target) && !std::filesystem::is_directory(target))
 				throw std::invalid_argument("Error: Target path exists and is not a directory, aborting.");
-			if (!boost::filesystem::is_regular_file(source))
+			if (!std::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: Source path doesn't point to a file, aborting.");
 
-			boost::filesystem::ifstream input(source, std::ios::in | std::ios::binary);
+			std::ifstream input(source, std::ios::in | std::ios::binary);
 
 			AFS2Header header;
 			input.read((char*)&header, 0x10);
@@ -42,7 +44,7 @@ namespace dscstools {
 				throw std::invalid_argument("AFS2: Didn't reach expected end of header.");
 
 			if(target.has_parent_path())
-				boost::filesystem::create_directories(target);
+				std::filesystem::create_directories(target);
 
 			for (size_t i = 0; i < header.numFiles; i++) {
 				input.seekg((std::streampos) ((uint32_t)input.tellg() + header.blockSize - 1) & -header.blockSize);
@@ -54,30 +56,30 @@ namespace dscstools {
 				std::stringstream sstream;
 				sstream << std::setw(6) << std::setfill('0') << std::hex << i << ".hca";
 
-				boost::filesystem::path path(target / sstream.str());
-				boost::filesystem::ofstream output(path, std::ios::out | std::ios::binary);
+				std::filesystem::path path(target / sstream.str());
+				std::ofstream output(path, std::ios::out | std::ios::binary);
 
 				output.write(data.get(), size);
 			}
 		}
 
-		void packAFS2(const boost::filesystem::path source, const boost::filesystem::path target) {
-			if (!boost::filesystem::is_directory(source)) 
+		void packAFS2(const std::filesystem::path source, const std::filesystem::path target) {
+			if (!std::filesystem::is_directory(source)) 
 				throw std::invalid_argument("Error: source path is not a directory.");
 
-			if (!boost::filesystem::exists(target)) {
+			if (!std::filesystem::exists(target)) {
 				if (target.has_parent_path())
-					boost::filesystem::create_directories(target.parent_path());
+					std::filesystem::create_directories(target.parent_path());
 			}
-			else if (!boost::filesystem::is_regular_file(target))
+			else if (!std::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 
-			boost::filesystem::ofstream output(target, std::ios::out | std::ios::binary);
+			std::ofstream output(target, std::ios::out | std::ios::binary);
 
-			std::vector<boost::filesystem::path> files;
+			std::vector<std::filesystem::path> files;
 
-			for (auto i : boost::filesystem::directory_iterator(source))
-				if (boost::filesystem::is_regular_file(i))
+			for (auto i : std::filesystem::directory_iterator(source))
+				if (std::filesystem::is_regular_file(i))
 					files.push_back(i);
 
 			AFS2Header header;
@@ -98,7 +100,7 @@ namespace dscstools {
 			for (size_t i = 0; i < files.size(); i++) {
 				output.seekp((offsets[i] + header.blockSize - 1) & -header.blockSize);
 
-				boost::filesystem::ifstream input(files[i], std::ios::in | std::ios::binary);
+				std::ifstream input(files[i], std::ios::in | std::ios::binary);
 				input.seekg(0, std::ios::end);
 				std::streamoff length = input.tellg();
 				input.seekg(0, std::ios::beg);

@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <cstring>
 
 #include "MDB1.h"
 #include "SaveFile.h"
@@ -48,11 +49,11 @@ int main(int argc, char** argv) {
 		printUse();
 		return 0;
 	}
-	boost::filesystem::path source = boost::filesystem::exists(argv[2]) ? argv[2] : boost::filesystem::current_path().append(argv[2]);
-	boost::filesystem::path target = argv[3];
+	std::filesystem::path source = std::filesystem::exists(argv[2]) ? argv[2] : std::filesystem::current_path().append(argv[2]);
+	std::filesystem::path target = argv[3];
 	
 	if(!target.has_root_directory())
-		target = boost::filesystem::current_path().append(argv[3]);
+		target = std::filesystem::current_path().append(argv[3]);
 	
 	try {
 		if (strncmp("--extractFile", argv[1], 14) == 0 && argc >= 5) {
