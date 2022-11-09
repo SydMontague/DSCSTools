@@ -26,7 +26,7 @@ namespace dscstools {
 			const std::string toString() {
 				std::string str(name);
 				str.append(".");
-				str.append(extension, 4);
+				str.append(extension, extension[3] == ' ' ? 3 : 4);
 				return str;
 			}
 
