@@ -9,12 +9,12 @@ Evo Conditions - Types (condType):
 7 - SPD
 8 - ABI
 9 - CAM
-10 - Unused (similar to 15?)
+10 - Flag or Story Cleared (NG+?)
 11 - Item Held
 12 - CAM 100% is your friend
 13 - Mode Change
-14 - Unused
-15 - Cleared X (uses condUnk as value)
+14 - DLC Flag
+15 - Cleared X (uses condUnk as value, might not work properly?)
 
 Evo Conditions - Unk (condUnk):
 0 - None

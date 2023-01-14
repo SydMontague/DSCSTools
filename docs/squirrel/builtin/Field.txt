@@ -39,6 +39,7 @@ this.Field.IconOff(string, string) -> void
 this.Field.IconOnID(string, int, float, float) -> void
 this.Field.IconOn(string, string, float, float) -> void
 this.Field.IsBGSkip() -> bool
+this.Field.NpcLoadSkip(int, int, int, int, int, int, int, int) -> void
 this.Field.IsEffectDistance(string) -> bool
 this.Field.IsEndAccessMode() -> bool
 this.Field.IsEndAnimation(string) -> bool

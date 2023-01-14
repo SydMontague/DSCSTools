@@ -3,7 +3,7 @@
     "id": "int",
     "memoryUse": "int",
     "growthType": "int",
-    "unk3": "int",
+    "level": "int",
     "baseHP": "int",
     "baseSP": "int",
     "baseATK": "int",

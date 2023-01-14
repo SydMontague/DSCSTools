@@ -7,7 +7,7 @@ this.Keyword.GetMessageID(int keyId, int index, int messageType, int useResult, 
 this.Keyword.GetMessageType(int keyId, int msgId) -> int
 this.Keyword.GetProgress(int) -> int
 this.Keyword.GetResultUseWindow() -> int
-this.Keyword.GetTalkDataName() ?
+this.Keyword.GetTalkDataName() -> string
 this.Keyword.IsCompleted(int) -> bool
 this.Keyword.IsEndCloseUseWindow() -> bool
 this.Keyword.IsEventHappen(int) -> bool
