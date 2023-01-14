@@ -12,3 +12,5 @@ install_manifest.txt
 /DSCSTools/DSCSTools
 /DSCSTools/DSCSTools.exe
 /target/
+/build/
+.vscode/

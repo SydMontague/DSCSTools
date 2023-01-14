@@ -1,5 +1,5 @@
 
-#include "EXPA.h"
+#include "include/EXPA.h"
 #include <stdint.h>
 #include <fstream>
 #include <iostream>
@@ -135,7 +135,7 @@ namespace dscstools {
 			}
 		}
 
-		boost::property_tree::ptree getStructureFile(boost::filesystem::path source) {
+		boost::property_tree::ptree getStructureFile(std::filesystem::path source) {
 			boost::property_tree::ptree format;
 			boost::property_tree::ptree structure;
 			boost::property_tree::read_json(std::string("structures/structure.json"), structure);
@@ -164,15 +164,15 @@ namespace dscstools {
 			return "Error packing " + mbe + "/" + filename + ": Value \'" + in + "\' cannot be converted to \'" + type + "\' at Row " + std::to_string(rowCount) + ", Column " + std::to_string(colCount) + " \'" + colName + "\'.";
 		}
 
-		void extractMBEFile(boost::filesystem::path source, boost::filesystem::path target) {
-			if (!boost::filesystem::exists(target)) {
+		void extractMBEFile(std::filesystem::path source, std::filesystem::path target) {
+			if (!std::filesystem::exists(target)) {
 				if (target.has_parent_path())
-					boost::filesystem::create_directories(target);
+					std::filesystem::create_directories(target);
 			}
-			else if (!boost::filesystem::is_directory(target))
+			else if (!std::filesystem::is_directory(target))
 				throw std::invalid_argument("Error: target path is not a directory.");
 
-			boost::filesystem::ifstream input(source, std::ios::in | std::ios::binary);
+			std::ifstream input(source, std::ios::in | std::ios::binary);
 			input.seekg(0, std::ios::end);
 			std::streamoff length = input.tellg();
 			input.seekg(0, std::ios::beg);
@@ -217,12 +217,12 @@ namespace dscstools {
 
 			for (auto table : tables) {
 				uint32_t tableHeaderSize = 0x0C + table.nameSize() + align(table.nameSize() + 4LL, 8);
-				auto& formatValue = matchStructureName(format, table.name(), filename);
+				const auto& formatValue = matchStructureName(format, table.name(), filename);
 
-				boost::filesystem::path outputPath = target / source.filename() / (table.name() + std::string(".csv"));
+				std::filesystem::path outputPath = target / source.filename() / (table.name() + std::string(".csv"));
 				if (outputPath.has_parent_path())
-					boost::filesystem::create_directories(outputPath.parent_path());
-				boost::filesystem::ofstream output(outputPath, std::ios::out);
+					std::filesystem::create_directories(outputPath.parent_path());
+				std::ofstream output(outputPath, std::ios::out);
 
 				// write header
 				bool first = true;
@@ -254,37 +254,37 @@ namespace dscstools {
 			}
 		}
 
-		void extractMBE(boost::filesystem::path source, boost::filesystem::path target) {
-			if (!boost::filesystem::exists(source))
+		void extractMBE(std::filesystem::path source, std::filesystem::path target) {
+			if (!std::filesystem::exists(source))
 				throw std::invalid_argument("Error: input path does not exist.");
-			if (boost::filesystem::equivalent(source, target))
+			if (std::filesystem::equivalent(source, target))
 				throw std::invalid_argument("Error: input and output path must be different!");
 
-			if (boost::filesystem::is_directory(source))
-				for (auto file : boost::filesystem::directory_iterator(source))
+			if (std::filesystem::is_directory(source))
+				for (auto file : std::filesystem::directory_iterator(source))
 					extractMBEFile(file, target);
-			else if (boost::filesystem::is_regular_file(source))
+			else if (std::filesystem::is_regular_file(source))
 				extractMBEFile(source, target);
 			else
 				throw std::invalid_argument("Error: input is neither directory nor file.");
 		}
 
 		// folder input, file output
-		void packMBE(boost::filesystem::path source, boost::filesystem::path target) {
-			if (!boost::filesystem::exists(source))
+		void packMBE(std::filesystem::path source, std::filesystem::path target) {
+			if (!std::filesystem::exists(source))
 				throw std::invalid_argument("Error: input path does not exist.");
-			if (boost::filesystem::equivalent(source, target))
+			if (std::filesystem::equivalent(source, target))
 				throw std::invalid_argument("Error: input and output path must be different!");
-			if (!boost::filesystem::is_directory(source))
+			if (!std::filesystem::is_directory(source))
 				throw std::invalid_argument("Error: input path is not a directory.");
-			if (!boost::filesystem::exists(target)) {
+			if (!std::filesystem::exists(target)) {
 				if(target.has_parent_path())
-					boost::filesystem::create_directories(target.parent_path());
+					std::filesystem::create_directories(target.parent_path());
 			}
-			else if (!boost::filesystem::is_regular_file(target))
+			else if (!std::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 
-			boost::filesystem::ofstream output(target, std::ios::out | std::ios::binary);
+			std::ofstream output(target, std::ios::out | std::ios::binary);
 
 			boost::property_tree::ptree format = getStructureFile(source);
 
@@ -304,9 +304,9 @@ namespace dscstools {
 
 			// Find all files in the directory, and assign each to the table definition they will be
 			// built to
-			std::vector<std::vector<boost::filesystem::path>> sortedFiles;
+			std::vector<std::vector<std::filesystem::path>> sortedFiles;
 			sortedFiles.resize(format.size());
-			for (auto& dir_entry : boost::filesystem::directory_iterator(source)) {
+			for (auto& dir_entry : std::filesystem::directory_iterator(source)) {
 				auto file = dir_entry.path();
 				auto filename = file.filename().stem().string();
 				size_t i = 0;
@@ -336,7 +336,7 @@ namespace dscstools {
 					++numTables;
 					auto filename = file.filename().stem().string();
 					// write EXPA Table header
-					boost::filesystem::ifstream countInput(file, std::ios::in);
+					std::ifstream countInput(file, std::ios::in);
 					aria::csv::CsvParser countParser(countInput);
 
 					uint32_t entrySize = 0;
@@ -358,7 +358,7 @@ namespace dscstools {
 					output.write(padding.data(), align(0x0CLL + nameSize, 8));
 
 					// write EXPA data, cache CHNK data
-					boost::filesystem::ifstream input(file, std::ios::in);
+					std::ifstream input(file, std::ios::in);
 					aria::csv::CsvParser parser(input);
 
 					bool first = true;

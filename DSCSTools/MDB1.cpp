@@ -1,10 +1,12 @@
-#include "MDB1.h"
+#include "include/MDB1.h"
 #include <map>
 #include <future>
 #include <iostream>
 #include <deque>
 #include <exception>
 #include <array>
+#include <fstream>
+#include <algorithm>
 
 #include <boost/asio.hpp>
 #include <boost/crc.hpp>
@@ -54,12 +56,12 @@ namespace dscstools {
 			std::unique_ptr<char[]> data;
 		};
 
-		class mdb1_ifstream : public boost::filesystem::ifstream {
+		class mdb1_ifstream : public std::ifstream {
 		private:
 			bool doCrypt = false;
 		public:
-			mdb1_ifstream(const boost::filesystem::path path, bool doCrypt) : doCrypt(doCrypt), boost::filesystem::ifstream(path, std::ios::in | std::ios::binary) {}
-			mdb1_ifstream(const boost::filesystem::path path) : boost::filesystem::ifstream(path, std::ios::in | std::ios::binary) {
+			mdb1_ifstream(const std::filesystem::path path, bool doCrypt) : doCrypt(doCrypt), std::ifstream(path, std::ios::in | std::ios::binary) {}
+			mdb1_ifstream(const std::filesystem::path path) : std::ifstream(path, std::ios::in | std::ios::binary) {
 				uint32_t val = 0;
 				read(reinterpret_cast<char*>(&val), 4);
 				doCrypt = val == MDB1_CRYPTED_MAGIC_VALUE;
@@ -68,30 +70,30 @@ namespace dscstools {
 
 			std::istream& read(char* dst, std::streamsize count) {
 				std::streampos offset = tellg();
-				boost::filesystem::ifstream::read(dst, count);
+				std::ifstream::read(dst, count);
 				if (doCrypt)
 					cryptArray(dst, count, offset);
 				return *this;
 			}
 		};
 
-		class mdb1_ofstream : public boost::filesystem::ofstream {
-			using boost::filesystem::ofstream::ofstream;
+		class mdb1_ofstream : public std::ofstream {
+			using std::ofstream::ofstream;
 		private:
 			bool doCrypt = false;
 		public:
-			mdb1_ofstream(const boost::filesystem::path path, bool doCrypt = false) : doCrypt(doCrypt), boost::filesystem::ofstream(path, std::ios::out | std::ios::binary) {}
+			mdb1_ofstream(const std::filesystem::path path, bool doCrypt = false) : doCrypt(doCrypt), std::ofstream(path, std::ios::out | std::ios::binary) {}
 
 			std::ostream& write(char* dst, std::streamsize count) {
 				if (doCrypt)
 					cryptArray(dst, count, tellp());
-				boost::filesystem::ofstream::write(dst, count);
+				std::ofstream::write(dst, count);
 				return *this;
 			}
 		};
 
-		ArchiveInfo getArchiveInfo(const boost::filesystem::path source) {
-			if (!boost::filesystem::is_regular_file(source))
+		ArchiveInfo getArchiveInfo(const std::filesystem::path source) {
+			if (!std::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: Source path doesn't point to a file, aborting.");
 
 			ArchiveInfo info;
@@ -173,21 +175,21 @@ namespace dscstools {
 			return entries[0];
 		}
 
-		void dobozCompress(const boost::filesystem::path source, const boost::filesystem::path target) {
-			if (boost::filesystem::equivalent(source, target))
+		void dobozCompress(const std::filesystem::path source, const std::filesystem::path target) {
+			if (std::filesystem::equivalent(source, target))
 				throw std::invalid_argument("Error: input and output path must be different!");
-			if (!boost::filesystem::is_regular_file(source))
+			if (!std::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: input path is not a file.");
 
-			if (!boost::filesystem::exists(target)) {
+			if (!std::filesystem::exists(target)) {
 				if (target.has_parent_path())
-					boost::filesystem::create_directories(target.parent_path());
+					std::filesystem::create_directories(target.parent_path());
 			}
-			else if (!boost::filesystem::is_regular_file(target))
+			else if (!std::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 
-			boost::filesystem::ifstream input(source, std::ios::in | std::ios::binary);
-			boost::filesystem::ofstream output(target, std::ios::out | std::ios::binary);
+			std::ifstream input(source, std::ios::in | std::ios::binary);
+			std::ofstream output(target, std::ios::out | std::ios::binary);
 
 			input.seekg(0, std::ios::end);
 			std::streampos length = input.tellg();
@@ -208,21 +210,21 @@ namespace dscstools {
 			output.write(outputData.get(), destSize);
 		}
 
-		void dobozDecompress(const boost::filesystem::path source, const boost::filesystem::path target) {
-			if (boost::filesystem::equivalent(source, target))
+		void dobozDecompress(const std::filesystem::path source, const std::filesystem::path target) {
+			if (std::filesystem::equivalent(source, target))
 				throw std::invalid_argument("Error: input and output path must be different!");
-			if (!boost::filesystem::is_regular_file(source))
+			if (!std::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: input path is not a file.");
 
-			if (!boost::filesystem::exists(target)) {
+			if (!std::filesystem::exists(target)) {
 				if (target.has_parent_path())
-					boost::filesystem::create_directories(target.parent_path());
+					std::filesystem::create_directories(target.parent_path());
 			}
-			else if (!boost::filesystem::is_regular_file(target))
+			else if (!std::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 
-			boost::filesystem::ifstream input(source, std::ios::in | std::ios::binary);
-			boost::filesystem::ofstream output(target, std::ios::out | std::ios::binary);
+			std::ifstream input(source, std::ios::in | std::ios::binary);
+			std::ofstream output(target, std::ios::out | std::ios::binary);
 			input.seekg(0, std::ios::end);
 			std::streampos length = input.tellg();
 			input.seekg(0, std::ios::beg);
@@ -250,7 +252,7 @@ namespace dscstools {
 			output.write(outputData.get(), info.uncompressedSize);
 		}
 
-		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path targetDir, FileInfo fileInfo, uint64_t offset, bool decompress) {
+		void extractMDB1File(const std::filesystem::path source, const std::filesystem::path targetDir, FileInfo fileInfo, uint64_t offset, bool decompress) {
 			mdb1_ifstream input(source);
 			doboz::Decompressor decomp;
 
@@ -259,9 +261,9 @@ namespace dscstools {
 
 			DataEntry data = fileInfo.data;
 
-			boost::filesystem::path path(targetDir / fileInfo.name.toPath());
+			std::filesystem::path path(targetDir / fileInfo.name.toPath());
 			if (path.has_parent_path())
-				boost::filesystem::create_directories(path.parent_path());
+				std::filesystem::create_directories(path.parent_path());
 			mdb1_ofstream output(path, false);
 
 			auto outputSize = decompress ? data.size : data.compSize;
@@ -285,11 +287,11 @@ namespace dscstools {
 				throw std::runtime_error("Error: something went wrong while writing " + path.string());
 		}
 
-		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, FileInfo fileInfo, const bool decompress) {
+		void extractMDB1File(const std::filesystem::path source, const std::filesystem::path target, FileInfo fileInfo, const bool decompress) {
 			extractMDB1File(source, target, fileInfo, getArchiveInfo(source).dataStart, decompress);
 		}
 
-		void extractMDB1File(const boost::filesystem::path source, const boost::filesystem::path target, std::string fileName, const bool decompress) {
+		void extractMDB1File(const std::filesystem::path source, const std::filesystem::path target, std::string fileName, const bool decompress) {
 			ArchiveInfo info = getArchiveInfo(source);
 			FileInfo fileInfo = findFileEntry(info.fileInfo, fileName);
 
@@ -299,10 +301,10 @@ namespace dscstools {
 			extractMDB1File(source, target, fileInfo, info.dataStart, decompress);
 		}
 
-		void extractMDB1(const boost::filesystem::path source, const boost::filesystem::path target, bool decompress) {
-			if (boost::filesystem::exists(target) && !boost::filesystem::is_directory(target))
+		void extractMDB1(const std::filesystem::path source, const std::filesystem::path target, bool decompress) {
+			if (std::filesystem::exists(target) && !std::filesystem::is_directory(target))
 				throw std::invalid_argument("Error: Target path exists and is not a directory, aborting.");
-			if (!boost::filesystem::is_regular_file(source))
+			if (!std::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: Source path doesn't point to a file, aborting.");
 
 			ArchiveInfo info = getArchiveInfo(source);
@@ -343,15 +345,15 @@ namespace dscstools {
 			return { -1, 0xFFFF, 0, "" };
 		}
 
-		std::vector<TreeNode> generateTree(const boost::filesystem::path path) {
+		std::vector<TreeNode> generateTree(const std::filesystem::path path) {
 			std::vector<std::string> fileNames;
 
-			boost::filesystem::recursive_directory_iterator itr(path);
+			std::filesystem::recursive_directory_iterator itr(path);
 
 			for (auto i : itr) {
-				if (boost::filesystem::is_regular_file(i)) {
+				if (std::filesystem::is_regular_file(i)) {
 					std::string ext = i.path().extension().string().substr(1, 5);
-					std::string filePath = boost::filesystem::relative(i.path(), path).replace_extension("").string();
+					std::string filePath = std::filesystem::relative(i.path(), path).replace_extension("").string();
 
 					fileNames.push_back(buildMDB1Path(filePath, ext));
 				}
@@ -430,8 +432,8 @@ namespace dscstools {
 			return nodes;
 		}
 
-		CompressionResult getFileData(const boost::filesystem::path path, const CompressMode compress) {
-			boost::filesystem::ifstream input(path, std::ios::in | std::ios::binary);
+		CompressionResult getFileData(const std::filesystem::path path, const CompressMode compress) {
+			std::ifstream input(path, std::ios::in | std::ios::binary);
 
 			input.seekg(0, std::ios::end);
 			std::streampos length = input.tellg();
@@ -472,23 +474,23 @@ namespace dscstools {
 			return { (uint32_t)length, (uint32_t)length, crc.checksum(), std::move(data) };
 		}
 
-		void packMDB1(const boost::filesystem::path source, const boost::filesystem::path target, const CompressMode compress, bool doCrypt, std::ostream& progressStream) {
-			if (!boost::filesystem::is_directory(source))
+		void packMDB1(const std::filesystem::path source, const std::filesystem::path target, const CompressMode compress, bool doCrypt, std::ostream& progressStream) {
+			if (!std::filesystem::is_directory(source))
 				throw std::invalid_argument("Error: source path is not a directory.");
 
-			if (!boost::filesystem::exists(target)) {
+			if (!std::filesystem::exists(target)) {
 				if (target.has_parent_path())
-					boost::filesystem::create_directories(target.parent_path());
+					std::filesystem::create_directories(target.parent_path());
 			}
-			else if (!boost::filesystem::is_regular_file(target))
+			else if (!std::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 
 			progressStream << "Generating file tree..." << std::endl;
-			std::vector<boost::filesystem::path> files;
+			std::vector<std::filesystem::path> files;
 			std::vector<TreeNode> nodes = generateTree(source);
 
-			for (auto i : boost::filesystem::recursive_directory_iterator(source))
-				if (boost::filesystem::is_regular_file(i))
+			for (auto i : std::filesystem::recursive_directory_iterator(source))
+				if (std::filesystem::is_regular_file(i))
 					files.push_back(i);
 
 			std::sort(files.begin(), files.end());
@@ -543,7 +545,7 @@ namespace dscstools {
 					ext = ext.append(" ");
 
 				// strncpy weirdness intended
-				std::string filePath = boost::filesystem::relative(file, source).replace_extension("").string();
+				std::string filePath = std::filesystem::relative(file, source).replace_extension("").string();
 				std::replace(filePath.begin(), filePath.end(), '/', '\\');
 
 				strncpy(entry2.extension, ext.c_str(), 4);
@@ -601,17 +603,17 @@ namespace dscstools {
 				throw std::runtime_error("Error: something went wrong with the output stream.");
 		}
 
-		void cryptFile(const boost::filesystem::path source, const boost::filesystem::path target) {
-			if (boost::filesystem::equivalent(source, target))
+		void cryptFile(const std::filesystem::path source, const std::filesystem::path target) {
+			if (std::filesystem::equivalent(source, target))
 				throw std::invalid_argument("Error: input and output path must be different!");
-			if (!boost::filesystem::is_regular_file(source))
+			if (!std::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: input path is not a file.");
 
-			if (!boost::filesystem::exists(target)) {
+			if (!std::filesystem::exists(target)) {
 				if (target.has_parent_path())
-					boost::filesystem::create_directories(target.parent_path());
+					std::filesystem::create_directories(target.parent_path());
 			}
-			else if (!boost::filesystem::is_regular_file(target))
+			else if (!std::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path already exists and is not a file.");
 
 			mdb1_ifstream input(source, false);

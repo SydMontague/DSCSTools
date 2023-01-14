@@ -1,9 +1,10 @@
-#include "SaveFile.h"
+#include "include/SaveFile.h"
 #include <boost/multiprecision/cpp_int.hpp>
+#include <fstream>
 
 namespace dscstools {
 	namespace savefile {
-		std::pair<std::array<char, 11>, uint64_t> calculateFileKey(boost::filesystem::path filename) {
+		std::pair<std::array<char, 11>, uint64_t> calculateFileKey(std::filesystem::path filename) {
 			uint64_t staticKey = 0x1415926535897932;
 			uint64_t dynamicKey;
 
@@ -31,20 +32,20 @@ namespace dscstools {
 			return std::make_pair(key1, val);
 		}
 
-		void decryptSaveFile(boost::filesystem::path source, boost::filesystem::path target) {
-			if (boost::filesystem::equivalent(source, target)) 
+		void decryptSaveFile(std::filesystem::path source, std::filesystem::path target) {
+			if (std::filesystem::equivalent(source, target)) 
 				throw std::invalid_argument("Error: input and output path must be different!");
-			if (!boost::filesystem::is_regular_file(source))
+			if (!std::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: source path is not a regular file.");
-			if (!boost::filesystem::exists(target)) {
+			if (!std::filesystem::exists(target)) {
 				if (target.has_parent_path())
-					boost::filesystem::create_directories(target.parent_path());
+					std::filesystem::create_directories(target.parent_path());
 			}
-			else if (!boost::filesystem::is_regular_file(target))
+			else if (!std::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path is not a regular file.");
 
-			boost::filesystem::ifstream input(source, std::ios::in | std::ios::binary);
-			boost::filesystem::ofstream output(target, std::ios::out | std::ios::binary);
+			std::ifstream input(source, std::ios::in | std::ios::binary);
+			std::ofstream output(target, std::ios::out | std::ios::binary);
 
 			auto fileKey = calculateFileKey(source.filename());
 			std::array<char, 11> key1 = fileKey.first;
@@ -122,20 +123,20 @@ namespace dscstools {
 			output.write(buffer.get(), size);
 		}
 
-		void encryptSaveFile(boost::filesystem::path source, boost::filesystem::path target) {
-			if (boost::filesystem::equivalent(source, target))
+		void encryptSaveFile(std::filesystem::path source, std::filesystem::path target) {
+			if (std::filesystem::equivalent(source, target))
 				throw std::invalid_argument("Error: input and output path must be different!");
-			if (!boost::filesystem::is_regular_file(source))
+			if (!std::filesystem::is_regular_file(source))
 				throw std::invalid_argument("Error: source path is not a regular file.");
-			if (!boost::filesystem::exists(target)) {
+			if (!std::filesystem::exists(target)) {
 				if (target.has_parent_path())
-					boost::filesystem::create_directories(target.parent_path());
+					std::filesystem::create_directories(target.parent_path());
 			}
-			else if (!boost::filesystem::is_regular_file(target))
+			else if (!std::filesystem::is_regular_file(target))
 				throw std::invalid_argument("Error: target path is not a regular file.");
 
-			boost::filesystem::ifstream input(source, std::ios::in | std::ios::binary);
-			boost::filesystem::ofstream output(target, std::ios::out | std::ios::binary);
+			std::ifstream input(source, std::ios::in | std::ios::binary);
+			std::ofstream output(target, std::ios::out | std::ios::binary);
 
 			auto fileKey = calculateFileKey(source.filename());
 			std::array<char, 11> key1 = fileKey.first;

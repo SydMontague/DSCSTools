@@ -1,32 +1,30 @@
-﻿cmake_minimum_required (VERSION 3.8)
+﻿# specify no SHARED/STATIC, so BUILD_SHARED_LIBS gets used
+add_library (DSCSTools)
 
-include_directories(include)
+target_sources(DSCSTools
+	PRIVATE
+	MDB1.cpp
+	EXPA.cpp
+	SaveFile.cpp
+	AFS2.cpp
+)
 
-SET(SOURCE_FILES
-		MDB1.cpp
-		include/MDB1.h
-		EXPA.cpp
-		include/EXPA.h
-		SaveFile.cpp
-		include/SaveFile.h
-		AFS2.cpp
-		include/AFS2.h
-        python.cpp
-		)
-        
-set(CMAKE_SHARED_LIBRARY_PREFIX "")
-set(CMAKE_STATIC_LIBRARY_PREFIX "")
+target_include_directories(DSCSTools 
+	PUBLIC
+	$<INSTALL_INTERFACE:include>    
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+)
 
-# Add source to this project's executable.
-if(BUILD_SHARED)
-    add_library (DSCSTools SHARED ${SOURCE_FILES})
-else()
-    add_library (DSCSTools STATIC ${SOURCE_FILES})
-endif()
-
-target_link_libraries(DSCSTools PUBLIC doboz ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+target_link_libraries(DSCSTools PUBLIC doboz Boost::property_tree Boost::multiprecision Boost::crc Boost::regex Boost::asio)
 
 # Install into /target/ folder
-install (TARGETS DSCSTools DESTINATION ${CMAKE_BINARY_DIR}/target)
+install (TARGETS DSCSTools 
+			LIBRARY DESTINATION ${CMAKE_BINARY_DIR}/target
+			RUNTIME DESTINATION ${CMAKE_BINARY_DIR}/target
+			ARCHIVE DESTINATION ${CMAKE_BINARY_DIR}/target
+		)
 install (DIRECTORY structures/ DESTINATION ${CMAKE_BINARY_DIR}/target/structures)
 install (DIRECTORY include/ DESTINATION ${CMAKE_BINARY_DIR}/target/include)
+
+# Ugly hack to make sure install works
+file(TOUCH ${CMAKE_BINARY_DIR}/_deps/boost-build/cmake_install.cmake)
