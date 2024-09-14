@@ -14,3 +14,4 @@ install_manifest.txt
 /target/
 /build/
 .vscode/
+.cache/

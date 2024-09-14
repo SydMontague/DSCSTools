@@ -13,7 +13,7 @@ namespace dscstools {
 		enum ArchiveStatus { encrypted, decrypted, invalid };
 
 		struct FileEntry {
-			int16_t compareBit;
+			uint16_t compareBit;
 			uint16_t dataId;
 			uint16_t left;
 			uint16_t right;

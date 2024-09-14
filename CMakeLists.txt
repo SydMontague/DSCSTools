@@ -5,7 +5,7 @@ project ("DSCSTools"
             DESCRIPTION "Tools for Digimon Story Cyber Sleuth"
             HOMEPAGE_URL "https://github.com/SydMontague/DSCSTools")
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 include(cmake/CPM.cmake)
 
@@ -28,9 +28,9 @@ endif()
 
 CPMAddPackage(
   NAME Boost
-  VERSION 1.80.0
+  VERSION 1.86.0
   GITHUB_REPOSITORY "boostorg/boost"
-  GIT_TAG "boost-1.80.0"
+  GIT_TAG "boost-1.86.0"
 )
 
 # Include sub-projects.

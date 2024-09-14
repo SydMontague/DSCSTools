@@ -43,7 +43,7 @@ namespace dscstools {
 		};
 
 		struct TreeNode {
-			int16_t compareBit;
+			uint16_t compareBit;
 			uint16_t left = 0;
 			uint16_t right = 0;
 			std::string name;
@@ -315,11 +315,11 @@ namespace dscstools {
 				extractMDB1File(source, target, fileInfo, info.dataStart, decompress);
 		}
 
-		TreeNode findFirstBitMismatch(const int16_t first, const std::vector<std::string>& nodeless, const std::vector<std::string>& withNode) {
+		TreeNode findFirstBitMismatch(const uint16_t first, const std::vector<std::string>& nodeless, const std::vector<std::string>& withNode) {
 			if (withNode.size() == 0)
 				return { first, 0, 0, nodeless[0] };
 
-			for (int16_t i = first; i < 512; i++) {
+			for (uint16_t i = first; i < 512; i++) {
 				bool set = false;
 				bool unset = false;
 
@@ -342,7 +342,7 @@ namespace dscstools {
 					return { i, 0, 0, *itr };
 			}
 
-			return { -1, 0xFFFF, 0, "" };
+			return { 0xFFFF, 0xFFFF, 0, "" };
 		}
 
 		std::vector<TreeNode> generateTree(const std::filesystem::path path) {
@@ -367,14 +367,14 @@ namespace dscstools {
 
 			struct QueueEntry {
 				uint16_t parentNode;
-				int16_t val1;
+				uint16_t val1;
 				std::vector<std::string> list;
 				std::vector<std::string> nodeList;
 				bool left;
 			};
 
-			std::vector<TreeNode> nodes = { { (int16_t)0xFFFF, 0, 0, "" } };
-			std::deque<QueueEntry> queue = { { 0, -1, fileNames, std::vector<std::string>(), false } };
+			std::vector<TreeNode> nodes = { { 0xFFFF, 0, 0, "" } };
+			std::deque<QueueEntry> queue = { { 0, 0xFFFF, fileNames, std::vector<std::string>(), false } };
 
 			while (!queue.empty()) {
 				QueueEntry entry = queue.front();
@@ -455,7 +455,7 @@ namespace dscstools {
 
 			if (length != 0) {
 				if (result == doboz::RESULT_OK && info.uncompressedSize != 0 && info.version == 0 && info.compressedSize == length)
-					return { (uint32_t)info.uncompressedSize, (uint32_t)info.compressedSize, crc.checksum(), std::move(data) };
+					return { (uint32_t)info.uncompressedSize, (uint32_t)info.compressedSize, static_cast<uint32_t>(crc.checksum()), std::move(data) };
 
 				if (compress >= normal) {
 					doboz::Compressor comp;
@@ -467,11 +467,11 @@ namespace dscstools {
 						throw std::runtime_error("Error: something went wrong while compressing, doboz error code: " + std::to_string(res));
 
 					if (destSize + 4 < static_cast<size_t>(length))
-						return { (uint32_t)length, (uint32_t)destSize, crc.checksum(), std::move(outputData) };
+						return { (uint32_t)length, (uint32_t)destSize, static_cast<uint32_t>(crc.checksum()), std::move(outputData) };
 				}
 			}
 
-			return { (uint32_t)length, (uint32_t)length, crc.checksum(), std::move(data) };
+			return { (uint32_t)length, (uint32_t)length, static_cast<uint32_t>(crc.checksum()), std::move(data) };
 		}
 
 		void packMDB1(const std::filesystem::path source, const std::filesystem::path target, const CompressMode compress, bool doCrypt, std::ostream& progressStream) {
@@ -523,7 +523,7 @@ namespace dscstools {
 			size_t dataStart = 0x14 + (1 + files.size()) * 0x08 + (1 + files.size()) * 0x40 + (files.size()) * 0x0C;
 			MDB1Header header = { MDB1_MAGIC_VALUE, (uint16_t)(files.size() + 1), (uint16_t)(files.size() + 1), (uint32_t)files.size(), (uint32_t)dataStart };
 
-			header1[0] = { (int16_t)0xFFFF, 0xFFFF, 0, 1 };
+			header1[0] = { 0xFFFF, 0xFFFF, 0, 1 };
 			header2[0] = FileNameEntry();
 
 			uint32_t fileCount = 0;
